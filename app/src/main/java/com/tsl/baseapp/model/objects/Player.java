@@ -5,6 +5,8 @@ package com.tsl.baseapp.model.objects;
  */
 public class Player {
 
+    //pojo getters and setters
+
     public String mName;
     public String mPosition;
     public String mTeam;

@@ -1,8 +1,8 @@
 package com.tsl.baseapp.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,8 +42,7 @@ public class MainActivity extends AppCompatActivity implements Controller.Player
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                startActivity(intent);
+                Snackbar.make(view, "Coming Soon" , Snackbar.LENGTH_LONG);
             }
         });
     }
