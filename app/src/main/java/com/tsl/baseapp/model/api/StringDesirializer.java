@@ -1,4 +1,4 @@
-package com.tsl.baseapp.model.api;
+package com.tsl.baseapp.Model.Api;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

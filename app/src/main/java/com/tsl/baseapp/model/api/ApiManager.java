@@ -1,7 +1,7 @@
-package com.tsl.baseapp.model.api;
+package com.tsl.baseapp.Model.Api;
 
 import com.google.gson.GsonBuilder;
-import com.tsl.baseapp.model.utilities.Constants;
+import com.tsl.baseapp.Model.Utilities.Constants;
 
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
@@ -11,21 +11,21 @@ import retrofit.converter.GsonConverter;
  */
 public class ApiManager {
 
-    private PlayersApi mPlayersApi;
+    private AppApi mAppApi;
 
-    public PlayersApi getPlayersApi(){
+    public AppApi getAppApi(){
 
-        if (mPlayersApi == null){
+        if (mAppApi == null){
             GsonBuilder gson = new GsonBuilder();
             gson.registerTypeAdapter(String.class, new StringDesirializer());
 
-            mPlayersApi = new RestAdapter.Builder()
+            mAppApi = new RestAdapter.Builder()
                     .setEndpoint(Constants.BASE_URL)
                     .setConverter(new GsonConverter(gson.create()))
                     .build()
-                    .create(PlayersApi.class);
+                    .create(AppApi.class);
         }
 
-        return mPlayersApi;
+        return mAppApi;
     }
 }
