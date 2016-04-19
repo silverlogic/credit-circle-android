@@ -7,7 +7,8 @@ import android.content.Context;
  */
 public class Constants {
 
-    public static final String BASE_URL = "http://api.staging.fundthis.com/v1/";
+    public static final String PRODUCTION_URL = "https://api.kazuwifi.com/api/v2/";
+    public static final String STAGING_URL = "http://api.staging.kazuwifi.com/api/v2/";
 
     public static final String getToken(Context ctx){
         String token = "Token " + SaveSharedPreference.getUserName(ctx);

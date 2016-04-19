@@ -16,6 +16,7 @@ public class SaveSharedPreference {
     static final String LOG_IN_STATUS= "isLoggedIn";
     static final String CURRENT_USER = "user";
     static final String PASSWORD= "password";
+    static final String PUSH_TOKEN = "pushToken";
 
     static SharedPreferences getSharedPreferences(Context ctx) {
         return PreferenceManager.getDefaultSharedPreferences(ctx);
@@ -71,6 +72,18 @@ public class SaveSharedPreference {
 
     public static String getCurrentPassword(Context ctx){
         return getSharedPreferences(ctx).getString(PASSWORD, "");
+    }
+
+    public static void setPushToken(Context ctx, String token)
+    {
+        SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+        editor.putString(PUSH_TOKEN, token);
+        editor.commit();
+    }
+
+    public static String getPushToken(Context ctx)
+    {
+        return getSharedPreferences(ctx).getString(PUSH_TOKEN, "");
     }
 
 }
