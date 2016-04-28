@@ -14,9 +14,8 @@ import android.widget.Toast;
 
 import com.tsl.baseapp.Controller.CurrentUserController;
 import com.tsl.baseapp.Controller.SignUpLoginController;
-import com.tsl.baseapp.Model.Objects.User;
-import com.tsl.baseapp.Model.Utilities.Constants;
-import com.tsl.baseapp.Model.Utilities.SaveSharedPreference;
+import com.tsl.baseapp.model.Objects.user.User;
+import com.tsl.baseapp.model.Utilities.SaveSharedPreference;
 import com.tsl.baseapp.R;
 
 import butterknife.Bind;
@@ -91,7 +90,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpLoginCont
         String confirm_pass= _password_confirm.getText().toString();
 
         User mUser = new User(email, password, confirm_pass, first_name, last_name);
-        mSignUpLoginController.signUp(mUser);
+        //mSignUpLoginController.signUp(mUser);
 
     }
 
@@ -164,7 +163,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpLoginCont
     public void onLoginComplete(String token) {
         token = token.replace("\"", "");
         SaveSharedPreference.setToken(this, token);
-        mCurrentUserController.getCurrentUser(Constants.getToken(this));
+        //mCurrentUserController.getCurrentUser(Constants.getToken(this));
     }
 
     @Override

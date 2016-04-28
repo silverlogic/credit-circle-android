@@ -12,9 +12,8 @@ import com.pkmmte.view.CircularImageView;
 import com.rey.material.widget.Button;
 import com.squareup.picasso.Picasso;
 import com.tsl.baseapp.Controller.SignUpLoginController;
-import com.tsl.baseapp.Model.Objects.User;
-import com.tsl.baseapp.Model.Utilities.Constants;
-import com.tsl.baseapp.Model.Utilities.SaveSharedPreference;
+import com.tsl.baseapp.model.Objects.user.User;
+import com.tsl.baseapp.model.Utilities.SaveSharedPreference;
 import com.tsl.baseapp.R;
 
 import butterknife.Bind;
@@ -118,7 +117,8 @@ public class EditProfileActivity extends AppCompatActivity implements SignUpLogi
                     mUser.setTagline(newTagline);
 
                     SaveSharedPreference.setCurrentUser(mUser, EditProfileActivity.this);
-                    mController.updateUser(mUser, Constants.getToken(EditProfileActivity.this));
+                            //TODO
+                   // mController.updateUser(mUser, Constants.getToken(EditProfileActivity.this));
                 }
 
             }

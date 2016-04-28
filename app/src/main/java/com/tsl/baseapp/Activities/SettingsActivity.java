@@ -21,9 +21,9 @@ import com.facebook.login.LoginManager;
 import com.jaredrummler.android.device.DeviceName;
 import com.tsl.baseapp.BuildConfig;
 import com.tsl.baseapp.Controller.SignUpLoginController;
-import com.tsl.baseapp.Model.Objects.User;
-import com.tsl.baseapp.Model.Utilities.Constants;
-import com.tsl.baseapp.Model.Utilities.SaveSharedPreference;
+import com.tsl.baseapp.login.LoginActivity;
+import com.tsl.baseapp.model.Objects.user.User;
+import com.tsl.baseapp.model.Utilities.SaveSharedPreference;
 import com.tsl.baseapp.R;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -210,7 +210,7 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                     else {
                         User mUser = new User(pass, passNew, passConfirm);
-                        mController.changePassword(Constants.getToken(getActivity()), mUser);
+                        //mController.changePassword(Constants.getToken(getActivity()), mUser);
                         progressDialog = new ProgressDialog(getActivity(),
                                 R.style.AppTheme_Dark_Dialog);
                         progressDialog.setIndeterminate(true);

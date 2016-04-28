@@ -1,4 +1,4 @@
-package com.tsl.baseapp.Model.Utilities;
+package com.tsl.baseapp.model.Utilities;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

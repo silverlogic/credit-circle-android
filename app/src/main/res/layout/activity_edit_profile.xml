@@ -19,7 +19,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/edit_image"
-        android:src="@drawable/ic_action_user_grey"
+        android:src="@drawable/ic_person_outline"
         app:border="true"
         app:border_color="#EEEEEE"
         app:border_width="4dp"

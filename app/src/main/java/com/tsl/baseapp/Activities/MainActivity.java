@@ -18,10 +18,9 @@ import com.crashlytics.android.Crashlytics;
 import com.facebook.FacebookSdk;
 import com.rey.material.widget.ProgressView;
 import com.tsl.baseapp.Controller.Controller;
-import com.tsl.baseapp.Model.Adapters.ProjectsAdapter;
-import com.tsl.baseapp.Model.Objects.Project;
-import com.tsl.baseapp.Model.Utilities.Constants;
-import com.tsl.baseapp.Model.Utilities.EndlessRecyclerOnScrollListener;
+import com.tsl.baseapp.model.Adapters.ProjectsAdapter;
+import com.tsl.baseapp.model.Objects.project.Project;
+import com.tsl.baseapp.model.Utilities.EndlessRecyclerOnScrollListener;
 import com.tsl.baseapp.R;
 
 import net.danlew.android.joda.JodaTimeAndroid;
@@ -65,13 +64,13 @@ public class MainActivity extends AppCompatActivity implements Controller.Projec
         mProjectsAdapter = new ProjectsAdapter(mProjectList, this);
         mController = new Controller(MainActivity.this);
         addList();
-        mController.startFetchingProjects(Constants.isUser(this), 1);
+        //mController.startFetchingProjects(Constants.isUser(this), 1);
 
         projectsPaging = new EndlessRecyclerOnScrollListener(lm, mProjectsAdapter) {
             @Override
             public void onLoadMore(int current_page) {
                 Log.d("PAGE:: ", String.valueOf(current_page));
-                mController.startFetchingProjects(Constants.isUser(MainActivity.this), current_page);
+                //mController.startFetchingProjects(Constants.isUser(MainActivity.this), current_page);
                 mProjectsAdapter.notifyDataSetChanged();
             }
         };
@@ -99,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements Controller.Projec
             public void onRefresh() {
                 mProjectsAdapter.removeProjects();
                 mProjectsAdapter.notifyDataSetChanged();
-                mController.startFetchingProjects(Constants.isUser(MainActivity.this), 1);
+                //mController.startFetchingProjects(Constants.isUser(MainActivity.this), 1);
             }
         });
 

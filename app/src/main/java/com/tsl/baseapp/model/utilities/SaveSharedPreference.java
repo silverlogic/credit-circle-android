@@ -1,11 +1,11 @@
-package com.tsl.baseapp.Model.Utilities;
+package com.tsl.baseapp.model.Utilities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
-import com.tsl.baseapp.Model.Objects.User;
+import com.tsl.baseapp.model.Objects.user.User;
 
 /**
  * Created by Kevin on 10/7/15.

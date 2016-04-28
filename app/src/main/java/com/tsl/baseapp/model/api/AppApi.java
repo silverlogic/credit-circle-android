@@ -1,15 +1,16 @@
-package com.tsl.baseapp.Model.Api;
+package com.tsl.baseapp.model.Api;
 
-import com.tsl.baseapp.Model.Objects.Token;
-import com.tsl.baseapp.Model.Objects.User;
+import com.tsl.baseapp.model.Objects.token.Token;
+import com.tsl.baseapp.model.Objects.user.User;
 
-import retrofit.Callback;
-import retrofit.http.Body;
-import retrofit.http.GET;
-import retrofit.http.Header;
-import retrofit.http.PATCH;
-import retrofit.http.POST;
-import retrofit.http.Query;
+import retrofit2.Callback;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.PATCH;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
+
 
 /**
  * Created by Kevin on 9/17/15.
@@ -17,30 +18,30 @@ import retrofit.http.Query;
 public interface AppApi {
 
 
-    @GET("/projects")
+    @GET("projects")
     void getProjects(@Header("Authorization") String token,
                      @Query("page") int page,
                      Callback<String> projects);
 
-    @POST("/auth/register/")
+    @POST("auth/register/")
     void registerUser(@Body User user, Callback<String> callback);
 
-    @POST("/auth/login/")
+    @POST("auth/login/")
     void loginUser(@Body User user, Callback<Token> callback);
 
-    @POST("/social-auth-with-token/")
+    @POST("social-auth-with-token/")
     void socialLogin(@Body User user, Callback<Token> token);
 
-    @GET("/user/")
+    @GET("user/")
     void getCurrentUser(@Header("Authorization") String token,
                         Callback<String> currentUser);
 
-    @PATCH("/user/")
+    @PATCH("user/")
     void updateUser(@Header("Authorization") String token,
                     @Body User user,
                     Callback<String> updateUser);
 
-    @POST("/auth/change-password/")
+    @POST("auth/change-password/")
     void changePassword(@Header("Authorization") String token,
                         @Body User user,
                         Callback<String> changePass);

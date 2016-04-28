@@ -1,4 +1,4 @@
-package com.tsl.baseapp.Model.Adapters;
+package com.tsl.baseapp.model.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.tsl.baseapp.Model.Objects.Project;
-import com.tsl.baseapp.Model.Utilities.Constants;
+import com.tsl.baseapp.model.Objects.project.Project;
+import com.tsl.baseapp.model.Utilities.Constants;
 import com.tsl.baseapp.R;
 
 import org.joda.time.DateTime;

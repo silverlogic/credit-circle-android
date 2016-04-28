@@ -18,4 +18,19 @@
     <string name="title_activity_web_view">WebViewActivity</string>
     <string name="title_activity_edit_profile">Edit Profile</string>
     <string name="title_activity_sign_up">Sign Up</string>
+
+    <string name="login">Log in</string>
+    <string name="successful">Successful</string>
+    <string name="loading">Loading</string>
+    <string name="valid_email_error">Enter a valid email address</string>
+    <string name="enter_password">Enter a password</string>
+    <string name="login_failed">Login Failed</string>
+    <string name="api_error">Cannot connect to API</string>
+    <string name="no_internet">You do not have an internet connection</string>
+    <string name="ok">OK</string>
+    <string name="gcm_defaultSenderId">620355883507</string>
+
+    <string name="no_account_yet">No account yet? Create one</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>
