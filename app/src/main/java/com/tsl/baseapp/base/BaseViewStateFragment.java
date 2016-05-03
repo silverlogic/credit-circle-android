@@ -13,6 +13,8 @@ import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.hannesdorfmann.mosby.mvp.viewstate.MvpViewStateFragment;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
 import icepick.Icepick;
 
@@ -47,11 +49,13 @@ public abstract class BaseViewStateFragment<V extends MvpView, P extends MvpPres
         injectDependencies();
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
     }
 
     @Override public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+        EventBus.getDefault().register(this);
     }
 
 

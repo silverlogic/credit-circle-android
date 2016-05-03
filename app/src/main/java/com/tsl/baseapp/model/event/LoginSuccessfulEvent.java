@@ -4,6 +4,7 @@ package com.tsl.baseapp.model.event;
  * Created by kevinlavi on 4/26/16.
  */
 
+import com.tsl.baseapp.model.Objects.token.Token;
 import com.tsl.baseapp.model.Objects.user.User;
 
 /**
@@ -13,13 +14,13 @@ import com.tsl.baseapp.model.Objects.user.User;
  */
 public class LoginSuccessfulEvent {
 
-    private User mUser;
+    private String mToken;
 
-    public LoginSuccessfulEvent(User user) {
-        mUser = user;
+    public LoginSuccessfulEvent(String token) {
+        mToken = token;
     }
 
-    public User getAccount() {
-        return mUser;
+    public String getToken() {
+        return mToken;
     }
 }

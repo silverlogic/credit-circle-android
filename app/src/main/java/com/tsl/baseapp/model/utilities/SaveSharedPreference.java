@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
+import com.tsl.baseapp.BaseApplication;
 import com.tsl.baseapp.model.Objects.user.User;
 
 /**

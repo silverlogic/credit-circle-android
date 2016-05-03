@@ -1,6 +1,7 @@
-package com.tsl.baseapp.model.Api;
+package com.tsl.baseapp.api;
 
 import com.tsl.baseapp.BuildConfig;
+import com.tsl.baseapp.model.Api.AppApi;
 import com.tsl.baseapp.model.Utilities.Constants;
 
 import java.util.concurrent.TimeUnit;
@@ -12,14 +13,15 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by Kevin on 9/17/15.
+ * Created by kevinlavi on 5/3/16.
  */
-public class ApiManager {
+public class BaseApiManager {
 
-    private AppApi mAppApi;
+    private BaseApi mAppApi;
     private String BASE_URL;
 
-    public AppApi getAppApi(){
+
+    public BaseApi getAppApi(){
 
         if (BuildConfig.IS_RELEASE){
             BASE_URL = Constants.PRODUCTION_URL;
@@ -39,14 +41,13 @@ public class ApiManager {
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(interceptor);
 
-
             mAppApi = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
                     .client(builder.build())
                     .build()
-                    .create(AppApi.class);
+                    .create(BaseApi.class);
         }
 
         return mAppApi;

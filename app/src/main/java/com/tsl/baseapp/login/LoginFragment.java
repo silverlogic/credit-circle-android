@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cesarferreira.painlessprefs.PainlessPrefs;
 import com.facebook.login.widget.LoginButton;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 import com.hkm.ui.processbutton.iml.ActionProcessButton;
@@ -18,10 +19,15 @@ import com.tsl.baseapp.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.model.Objects.user.AuthCredentials;
+import com.tsl.baseapp.model.Utilities.Constants;
 import com.tsl.baseapp.model.Utilities.KeyboardUtils;
+import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import timber.log.Timber;
 
 /**
  */
@@ -56,6 +62,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         mLoginButton.setMode(ActionProcessButton.Mode.ENDLESS);
         mLoginButton.setOnClickNormalState(new View.OnClickListener() {
             @Override
@@ -124,7 +131,10 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
         Toast.makeText(getActivity(), "SUCCESS", Toast.LENGTH_LONG).show();
         //getActivity().finish();
     }
-
+    @Subscribe
+    public void onEvent(LoginSuccessfulEvent event){
+        PainlessPrefs.getInstance(getActivity().getApplicationContext()).save(Constants.TOKEN, event.getToken());
+    }
 
     public boolean validate() {
         boolean valid = true;

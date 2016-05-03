@@ -10,11 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.cesarferreira.painlessprefs.PainlessPrefs;
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
 import com.tsl.baseapp.R;
+import com.tsl.baseapp.model.Utilities.Constants;
+import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.ButterKnife;
 import icepick.Icepick;
+import timber.log.Timber;
 
 /**
  * Base Fragment for this app that uses Butterknife, Icepick and dependency injection
