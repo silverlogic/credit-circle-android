@@ -68,7 +68,7 @@
             app:pb_colorNormal="@color/accent"
             app:pb_colorPressed="@color/colorAccent"
             app:pb_textComplete="@string/successful"
-            app:pb_textProgress="@string/loading" />
+            app:pb_textProgress="@string/logging_in" />
 
         <com.facebook.login.widget.LoginButton
             android:background="@color/com_facebook_blue"

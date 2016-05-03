@@ -1,11 +1,14 @@
-package com.tsl.baseapp.login;
+package com.tsl.baseapp.signup;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
 import com.tsl.baseapp.model.Objects.token.Token;
 import com.tsl.baseapp.model.Objects.user.AuthCredentials;
+import com.tsl.baseapp.model.Objects.user.SignUpCredentials;
+import com.tsl.baseapp.model.Objects.user.User;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
+import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -18,19 +21,19 @@ import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
- * Created by kevinlavi on 4/26/16.
+ * Created by kevinlavi on 5/3/16.
  */
-public class LoginPresenter extends MvpBasePresenter<LoginView> {
+public class SignUpPresenter extends MvpBasePresenter<SignUpView> {
 
-    private Subscription loginSubscriber;
+    private Subscription signUpSubscriber;
     private EventBus eventBus;
 
     @Inject
-    public LoginPresenter(EventBus eventBus) {
+    public SignUpPresenter(EventBus eventBus) {
         this.eventBus = eventBus;
     }
 
-    public void doLogin(AuthCredentials credentials) {
+    public void doSignUp(SignUpCredentials credentials) {
 
         if (isViewAttached()) {
             getView().showLoading();
@@ -39,14 +42,14 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
         // Kind of "callback"
         cancelSubscription();
         BaseApi api = new BaseApiManager().getAppApi();
-        loginSubscriber = api.loginUser(credentials)
+        signUpSubscriber = api.signUpUser(credentials)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<Token>() {
+                .subscribe(new Subscriber<User>() {
                     @Override
                     public void onCompleted() {
                         if (isViewAttached()) {
-                            getView().loginSuccessful();
+                            getView().signUpSuccessful();
                         }
                     }
 
@@ -59,9 +62,8 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
                     }
 
                     @Override
-                    public void onNext(Token token) {
-                        String t = token.getToken();
-                        eventBus.post(new LoginSuccessfulEvent(t));
+                    public void onNext(User user) {
+                        eventBus.post(new SignUpSuccessfulEvent(user));
                     }
                 });
     }
@@ -70,8 +72,8 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
      * Cancels any previous callback
      */
     private void cancelSubscription() {
-        if (loginSubscriber != null && !loginSubscriber.isUnsubscribed()) {
-            loginSubscriber.unsubscribe();
+        if (signUpSubscriber != null && !signUpSubscriber.isUnsubscribed()) {
+            signUpSubscriber.unsubscribe();
         }
     }
 
@@ -82,7 +84,7 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
         }
     }
 
-    @Override public void attachView(LoginView view) {
+    @Override public void attachView(SignUpView view) {
         super.attachView(view);
     }
 }

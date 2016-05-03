@@ -1,51 +1,81 @@
 package com.tsl.baseapp.model.Objects.user;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 /**
- * Created by Kevin on 10/15/15.
+ * Created by kevinlavi on 5/3/16.
  */
 public class User {
-
-    private String username;
-    private String email;
-    private String password;
-    private String confirm_password;
-    public String first_name;
-    private String last_name;
+    @SerializedName("id")
     private int id;
-    private String slug;
+
+    @SerializedName("first_name")
+    private String first_name;
+
+    @SerializedName("last_name")
+    private String last_name;
+
+    @SerializedName("email")
+    private String email;
+
+    @SerializedName("facebook")
     private String facebook;
-    private String instagram;
+
+    @SerializedName("linkedin")
     private String linkedin;
+
+    @SerializedName("instagram")
+    private String instagram;
+
+    @SerializedName("slug")
+    private String slug;
+
+    @SerializedName("tagline")
     private String tagline;
-    private String img_url;
-    private String old_password;
-    private String new_password;
-    private String confirm_new_password;
-    private String access_token;
-    private String backend;
 
-    public String getBackend() {
-        return backend;
+    @SerializedName("shipping_address")
+    private String shipping_address;
+
+    @SerializedName("billing_address")
+    private String billing_address;
+
+    @SerializedName("website")
+    private String website;
+
+    @SerializedName("credits")
+    private double credits;
+
+    @SerializedName("referral_code")
+    private String referral_code;
+
+    @SerializedName("new_email")
+    private String new_email;
+
+    @SerializedName("is_new_email_confirmed")
+    private Boolean is_new_email_confirmed;
+
+    @SerializedName("newsletter")
+    private Boolean newsletter;
+
+    @SerializedName("avatar")
+    private UserImages userImages;
+
+    public int getId() {
+        return id;
     }
 
-    public void setBackend(String backend) {
-        this.backend = backend;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getAccess_token() {
-        return access_token;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAccess_token(String access_token) {
-        this.access_token = access_token;
-    }
-
-    public String getImg_url() {
-        return img_url;
-    }
-
-    public void setImg_url(String img_url) {
-        this.img_url = img_url;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirst_name() {
@@ -64,28 +94,12 @@ public class User {
         this.last_name = last_name;
     }
 
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
-
     public String getFacebook() {
         return facebook;
     }
 
     public void setFacebook(String facebook) {
         this.facebook = facebook;
-    }
-
-    public String getInstagram() {
-        return instagram;
-    }
-
-    public void setInstagram(String instagram) {
-        this.instagram = instagram;
     }
 
     public String getLinkedin() {
@@ -96,6 +110,22 @@ public class User {
         this.linkedin = linkedin;
     }
 
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
     public String getTagline() {
         return tagline;
     }
@@ -104,50 +134,75 @@ public class User {
         this.tagline = tagline;
     }
 
-    public int getId() {
-        return id;
+    public String getShipping_address() {
+        return shipping_address;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setShipping_address(String shipping_address) {
+        this.shipping_address = shipping_address;
     }
 
-    public String getEmail() {
-        return username;
+    public String getBilling_address() {
+        return billing_address;
     }
 
-    public void setEmail(String email) {
-        this.username = email;
+    public void setBilling_address(String billing_address) {
+        this.billing_address = billing_address;
     }
 
-    public String getPassword() {
-        return password;
+    public String getWebsite() {
+        return website;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
-    public User(){}
-
-    public User(String email, String password, String confirm_password, String first_name, String last_name){
-        this.email = email;
-        this.password = password;
-        this.confirm_password = confirm_password;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.username = email;
+    public double getCredits() {
+        return credits;
     }
 
-    public User(String old_password, String new_password, String confirm_new_password){
-        this.old_password = old_password;
-        this.new_password = new_password;
-        this.confirm_new_password = confirm_new_password;
+    public void setCredits(double credits) {
+        this.credits = credits;
     }
 
-    public User(String access_token, String backend){
-        this.access_token = access_token;
-        this.backend = backend;
+    public String getReferral_code() {
+        return referral_code;
     }
 
+    public void setReferral_code(String referral_code) {
+        this.referral_code = referral_code;
+    }
+
+    public String getNew_email() {
+        return new_email;
+    }
+
+    public void setNew_email(String new_email) {
+        this.new_email = new_email;
+    }
+
+    public Boolean getIs_new_email_confirmed() {
+        return is_new_email_confirmed;
+    }
+
+    public void setIs_new_email_confirmed(Boolean is_new_email_confirmed) {
+        this.is_new_email_confirmed = is_new_email_confirmed;
+    }
+
+    public Boolean getNewsletter() {
+        return newsletter;
+    }
+
+    public void setNewsletter(Boolean newsletter) {
+        this.newsletter = newsletter;
+    }
+
+    public UserImages getUserImages() {
+        return userImages;
+    }
+
+    public void setUserImages(UserImages userImages) {
+        this.userImages = userImages;
+    }
 }

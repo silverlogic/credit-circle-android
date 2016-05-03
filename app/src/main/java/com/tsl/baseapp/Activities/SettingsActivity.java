@@ -22,7 +22,7 @@ import com.jaredrummler.android.device.DeviceName;
 import com.tsl.baseapp.BuildConfig;
 import com.tsl.baseapp.Controller.SignUpLoginController;
 import com.tsl.baseapp.login.LoginActivity;
-import com.tsl.baseapp.model.Objects.user.User;
+import com.tsl.baseapp.model.Objects.user.User2;
 import com.tsl.baseapp.model.Utilities.SaveSharedPreference;
 import com.tsl.baseapp.R;
 
@@ -130,10 +130,10 @@ public class SettingsActivity extends AppCompatActivity {
                         sendFeedback(guest, guest, guest);
                     }
                     else {
-                        User mUser = SaveSharedPreference.getCurrentUser(getActivity());
-                        String name = mUser.getFirst_name() + " " + mUser.getLast_name();
-                        String email = mUser.getEmail();
-                        String userId = String.valueOf(mUser.getId());
+                        User2 mUser2 = SaveSharedPreference.getCurrentUser(getActivity());
+                        String name = mUser2.getFirst_name() + " " + mUser2.getLast_name();
+                        String email = mUser2.getEmail();
+                        String userId = String.valueOf(mUser2.getId());
                         sendFeedback(name, email, userId);
                     }
                     return false;
@@ -209,8 +209,8 @@ public class SettingsActivity extends AppCompatActivity {
                         confirmPass.setError("Field cannot be empty");
                     }
                     else {
-                        User mUser = new User(pass, passNew, passConfirm);
-                        //mController.changePassword(Constants.getToken(getActivity()), mUser);
+                        User2 mUser2 = new User2(pass, passNew, passConfirm);
+                        //mController.changePassword(Constants.getToken(getActivity()), mUser2);
                         progressDialog = new ProgressDialog(getActivity(),
                                 R.style.AppTheme_Dark_Dialog);
                         progressDialog.setIndeterminate(true);

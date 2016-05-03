@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.cesarferreira.painlessprefs.PainlessPrefs;
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.model.Utilities.Constants;

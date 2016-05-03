@@ -12,7 +12,7 @@ import com.pkmmte.view.CircularImageView;
 import com.rey.material.widget.Button;
 import com.squareup.picasso.Picasso;
 import com.tsl.baseapp.Controller.SignUpLoginController;
-import com.tsl.baseapp.model.Objects.user.User;
+import com.tsl.baseapp.model.Objects.user.User2;
 import com.tsl.baseapp.model.Utilities.SaveSharedPreference;
 import com.tsl.baseapp.R;
 
@@ -51,17 +51,17 @@ public class EditProfileActivity extends AppCompatActivity implements SignUpLogi
 
         mController = new SignUpLoginController(this, this);
 
-        final User mUser = SaveSharedPreference.getCurrentUser(this);
+        final User2 mUser2 = SaveSharedPreference.getCurrentUser(this);
 
-        Picasso.with(this).load(mUser.getImg_url()).placeholder(R.drawable.ic_person_outline).into(mEditImage);
+        Picasso.with(this).load(mUser2.getImg_url()).placeholder(R.drawable.ic_person_outline).into(mEditImage);
 
-        mEditEmail.setText(mUser.getEmail());
-        mEditFirstName.setText(mUser.getFirst_name());
-        mEditLastName.setText(mUser.getLast_name());
-        mEditFacebookUrl.setText(mUser.getFacebook());
-        mEditInstagramUrl.setText(mUser.getInstagram());
-        mEditLinkedinUrl.setText(mUser.getLinkedin());
-        mEditTagline.setText(mUser.getTagline());
+        mEditEmail.setText(mUser2.getEmail());
+        mEditFirstName.setText(mUser2.getFirst_name());
+        mEditLastName.setText(mUser2.getLast_name());
+        mEditFacebookUrl.setText(mUser2.getFacebook());
+        mEditInstagramUrl.setText(mUser2.getInstagram());
+        mEditLinkedinUrl.setText(mUser2.getLinkedin());
+        mEditTagline.setText(mUser2.getTagline());
 
 
         mConfirmChangesButton.setOnClickListener(new View.OnClickListener() {
@@ -108,17 +108,17 @@ public class EditProfileActivity extends AppCompatActivity implements SignUpLogi
                 }
                 if (isValidated){
 
-                    mUser.setEmail(newEmail);
-                    mUser.setFirst_name(newFirstName);
-                    mUser.setLast_name(newLastName);
-                    mUser.setFacebook(newFacebookUrl);
-                    mUser.setInstagram(newInstagramUrl);
-                    mUser.setLinkedin(newLinkedinUrl);
-                    mUser.setTagline(newTagline);
+                    mUser2.setEmail(newEmail);
+                    mUser2.setFirst_name(newFirstName);
+                    mUser2.setLast_name(newLastName);
+                    mUser2.setFacebook(newFacebookUrl);
+                    mUser2.setInstagram(newInstagramUrl);
+                    mUser2.setLinkedin(newLinkedinUrl);
+                    mUser2.setTagline(newTagline);
 
-                    SaveSharedPreference.setCurrentUser(mUser, EditProfileActivity.this);
+                    SaveSharedPreference.setCurrentUser(mUser2, EditProfileActivity.this);
                             //TODO
-                   // mController.updateUser(mUser, Constants.getToken(EditProfileActivity.this));
+                   // mController.updateUser(mUser2, Constants.getToken(EditProfileActivity.this));
                 }
 
             }

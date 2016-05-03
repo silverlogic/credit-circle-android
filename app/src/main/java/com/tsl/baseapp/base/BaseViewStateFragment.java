@@ -55,7 +55,7 @@ public abstract class BaseViewStateFragment<V extends MvpView, P extends MvpPres
     @Override public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-        EventBus.getDefault().register(this);
+        EventBus.getDefault().unregister(this);
     }
 
 

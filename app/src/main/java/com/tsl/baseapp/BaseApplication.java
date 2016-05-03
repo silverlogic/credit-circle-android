@@ -3,6 +3,7 @@ package com.tsl.baseapp;
 import android.app.Application;
 import android.content.Context;
 
+import com.orhanobut.hawk.Hawk;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 import com.tsl.baseapp.dagger.BaseAppComponent;

@@ -1,5 +1,7 @@
 package com.tsl.baseapp.login;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,11 +12,11 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.cesarferreira.painlessprefs.PainlessPrefs;
 import com.facebook.login.widget.LoginButton;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 import com.hkm.ui.processbutton.iml.ActionProcessButton;
+import com.orhanobut.hawk.Hawk;
+import com.tsl.baseapp.Activities.MainActivity;
 import com.tsl.baseapp.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
@@ -22,6 +24,7 @@ import com.tsl.baseapp.model.Objects.user.AuthCredentials;
 import com.tsl.baseapp.model.Utilities.Constants;
 import com.tsl.baseapp.model.Utilities.KeyboardUtils;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
+import com.tsl.baseapp.signup.SignUpActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -47,6 +50,8 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     ViewGroup mLoginForm;
 
     private LoginComponent loginComponent;
+    private LoginViewState vs;
+    private Context mContext;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,6 +75,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
                 login();
             }
         }).build();
+        mContext = getContext();
     }
 
     @Override
@@ -79,6 +85,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
 
     @Override
     public void onNewViewStateInstance() {
+        vs = (LoginViewState) viewState;
         showLoginForm();
     }
 
@@ -89,7 +96,6 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
 
     @Override
     public void showLoginForm() {
-        LoginViewState vs = (LoginViewState) viewState;
         vs.setShowLoginForm();
         changeFbButton();
         setFormEnabled(true);
@@ -98,7 +104,6 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
 
     @Override
     public void showError() {
-        LoginViewState vs = (LoginViewState) viewState;
         vs.setShowError();
 
         setFormEnabled(true);
@@ -109,7 +114,6 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
 
     @Override
     public void showLoading() {
-        LoginViewState vs = (LoginViewState) viewState;
         vs.setShowLoading();
 
         setFormEnabled(false);
@@ -133,30 +137,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     }
     @Subscribe
     public void onEvent(LoginSuccessfulEvent event){
-        PainlessPrefs.getInstance(getActivity().getApplicationContext()).save(Constants.TOKEN, event.getToken());
-    }
-
-    public boolean validate() {
-        boolean valid = true;
-
-        String email = mInputEmail.getText().toString();
-        String password = mInputPassword.getText().toString();
-
-        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            mInputEmail.setError(getString(R.string.valid_email_error));
-            valid = false;
-        } else {
-            mInputEmail.setError(null);
-        }
-
-        if (password.isEmpty()) {
-            mInputPassword.setError(getString(R.string.enter_password));
-            valid = false;
-        } else {
-            mInputPassword.setError(null);
-        }
-
-        return valid;
+        Hawk.put(Constants.TOKEN, event.getToken());
     }
 
     @Override
@@ -169,8 +150,10 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     private void login(){
         String username = mInputEmail.getText().toString();
         String pass = mInputPassword.getText().toString();
+        LoginValidation validation = new LoginValidation();
+        boolean valid = validation.validate(mInputEmail, mInputPassword, mContext);
 
-        if (!validate()) {
+        if (!valid) {
             return;
         }
 
@@ -181,6 +164,13 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
 
         // Start login
         presenter.doLogin(new AuthCredentials(username, pass));
+    }
+
+    @OnClick(R.id.link_signup)
+    public void signUpActivity(){
+        Intent intent = new Intent(getActivity(), SignUpActivity.class);
+        startActivity(intent);
+        getActivity().overridePendingTransition(0, 0);
     }
 
     private void changeFbButton() {

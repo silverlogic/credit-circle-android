@@ -24,3 +24,5 @@
     @icepick.* <fields>;
 }
 #------------------------------
+
+-keepattributes EnclosingMethod
