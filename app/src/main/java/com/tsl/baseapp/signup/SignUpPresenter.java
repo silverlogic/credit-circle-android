@@ -7,7 +7,6 @@ import com.tsl.baseapp.model.Objects.token.Token;
 import com.tsl.baseapp.model.Objects.user.AuthCredentials;
 import com.tsl.baseapp.model.Objects.user.SignUpCredentials;
 import com.tsl.baseapp.model.Objects.user.User;
-import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
 import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
 
 import org.greenrobot.eventbus.EventBus;

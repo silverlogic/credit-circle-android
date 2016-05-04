@@ -5,6 +5,7 @@ import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
 import com.tsl.baseapp.model.Objects.token.Token;
 import com.tsl.baseapp.model.Objects.user.AuthCredentials;
+import com.tsl.baseapp.model.Objects.user.User;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -38,7 +39,7 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
 
         // Kind of "callback"
         cancelSubscription();
-        BaseApi api = new BaseApiManager().getAppApi();
+        final BaseApi api = new BaseApiManager().getAppApi();
         loginSubscriber = api.loginUser(credentials)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -59,9 +60,32 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
                     }
 
                     @Override
-                    public void onNext(Token token) {
-                        String t = token.getToken();
-                        eventBus.post(new LoginSuccessfulEvent(t));
+                    public void onNext(final Token t) {
+                        final String token = "Token " + t.getToken();
+                        api.getUser(token)
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribeOn(Schedulers.io())
+                                .subscribe(new Subscriber<User>() {
+                                    @Override
+                                    public void onCompleted() {
+                                        if (isViewAttached()) {
+                                            getView().loginSuccessful();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        if (isViewAttached()) {
+                                            Timber.d(e.getMessage());
+                                            getView().showError();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onNext(User user) {
+                                        eventBus.post(new LoginSuccessfulEvent(token, user));
+                                    }
+                                });
                     }
                 });
     }

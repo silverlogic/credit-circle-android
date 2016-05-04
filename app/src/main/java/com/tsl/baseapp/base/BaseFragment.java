@@ -11,12 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
-import com.tsl.baseapp.R;
-import com.tsl.baseapp.model.Utilities.Constants;
-import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.ButterKnife;
 import icepick.Icepick;

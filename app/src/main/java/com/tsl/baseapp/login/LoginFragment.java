@@ -24,6 +24,7 @@ import com.tsl.baseapp.model.Objects.user.AuthCredentials;
 import com.tsl.baseapp.model.Utilities.Constants;
 import com.tsl.baseapp.model.Utilities.KeyboardUtils;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
+import com.tsl.baseapp.settings.SettingsActivity;
 import com.tsl.baseapp.signup.SignUpActivity;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -132,12 +133,16 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     @Override
     public void loginSuccessful() {
         mLoginButton.setProgress(100); // We are done
-        Toast.makeText(getActivity(), "SUCCESS", Toast.LENGTH_LONG).show();
-        //getActivity().finish();
+        Intent intent = new Intent(getActivity(), SettingsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        getActivity().overridePendingTransition(0, 0);
+        getActivity().finish();
     }
     @Subscribe
     public void onEvent(LoginSuccessfulEvent event){
         Hawk.put(Constants.TOKEN, event.getToken());
+        Hawk.put(Constants.USER, event.getUser());
     }
 
     @Override

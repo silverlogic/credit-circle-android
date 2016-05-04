@@ -26,7 +26,7 @@ import com.tsl.baseapp.model.Objects.user.User2;
 import com.tsl.baseapp.model.Utilities.SaveSharedPreference;
 import com.tsl.baseapp.R;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity2 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.prefs);
+            addPreferencesFromResource(R.xml.prefs2);
 
             mController = new SignUpLoginController(this, getActivity());
 
@@ -76,7 +76,7 @@ public class SettingsActivity extends AppCompatActivity {
                         loginDialog();
                     }
                     else {
-                        startActivity(new Intent(SettingsActivity.this, EditProfileActivity.class));
+                        startActivity(new Intent(SettingsActivity2.this, EditProfileActivity.class));
                         overridePendingTransition(0, 0);
                     }
 
@@ -183,7 +183,7 @@ public class SettingsActivity extends AppCompatActivity {
             //noinspection ConstantConditions
             oldPass = (EditText) dialog.getCustomView().findViewById(R.id.old_password);
             newPass = (EditText) dialog.getCustomView().findViewById(R.id.new_password);
-            confirmPass = (EditText) dialog.getCustomView().findViewById(R.id.confirm_password);
+            confirmPass = (EditText) dialog.getCustomView().findViewById(R.id.confirm_new_password);
             oldPass.addTextChangedListener(textWatcher);
 
             dialog.show();

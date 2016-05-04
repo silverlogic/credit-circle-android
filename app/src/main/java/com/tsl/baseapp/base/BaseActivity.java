@@ -8,6 +8,8 @@ import com.facebook.FacebookSdk;
 import com.orhanobut.hawk.Hawk;
 import com.orhanobut.hawk.HawkBuilder;
 import com.orhanobut.hawk.LogLevel;
+import com.tsl.baseapp.model.Objects.user.User;
+import com.tsl.baseapp.model.Utilities.Constants;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 

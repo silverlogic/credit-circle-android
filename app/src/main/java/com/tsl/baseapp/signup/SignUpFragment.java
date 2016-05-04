@@ -26,8 +26,8 @@ import com.tsl.baseapp.model.Objects.user.SignUpCredentials;
 import com.tsl.baseapp.model.Objects.user.User;
 import com.tsl.baseapp.model.Utilities.Constants;
 import com.tsl.baseapp.model.Utilities.KeyboardUtils;
-import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
 import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
+import com.tsl.baseapp.settings.SettingsActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -126,8 +126,11 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
     @Override
     public void signUpSuccessful() {
         mSignUpButton.setProgress(100); // We are done
-        Toast.makeText(getActivity(), "SUCCESS", Toast.LENGTH_LONG).show();
-        //getActivity().finish();
+        Intent intent = new Intent(getActivity(), SettingsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        getActivity().overridePendingTransition(0, 0);
+        getActivity().finish();
     }
 
     @Subscribe
