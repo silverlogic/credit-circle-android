@@ -63,7 +63,7 @@ public class SettingsActivity extends BaseActivity {
         @Override
         public boolean onPreferenceClick(Preference preference) {
             if (preference == mAbout){
-                Toast.makeText(getActivity(), "ABOUT", Toast.LENGTH_SHORT).show();
+                about();
             }
             if (preference == mTerms){
                 policy();
@@ -92,6 +92,12 @@ public class SettingsActivity extends BaseActivity {
             mFeedback.setOnPreferenceClickListener(this);
             mChangePassword.setOnPreferenceClickListener(this);
             mLogout.setOnPreferenceClickListener(this);
+        }
+
+        private void about(){
+            Intent intent = new Intent(getActivity(), AboutActivity.class);
+            this.startActivity(intent);
+            getActivity().overridePendingTransition(0, 0);
         }
 
         private void policy(){

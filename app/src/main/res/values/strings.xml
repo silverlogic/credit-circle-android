@@ -69,4 +69,9 @@
     <string name="logged_out">Logged Out</string>
     <string name="no">No</string>
 
+    <!-- About page -->
+    <string name="website_url">tsl.io</string>
+    <string name="facebook_link">TheSilverLogic</string>
+    <string name="twitter_link">thesilverlogic</string>
+    <string name="instagram_link">thesilverlogic/</string>
 </resources>

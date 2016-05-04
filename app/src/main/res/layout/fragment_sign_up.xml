@@ -15,7 +15,7 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
-        <ImageView android:src="@drawable/ic_person_outline"
+        <ImageView android:src="@drawable/baseapp_logo"
             android:layout_width="wrap_content"
             android:layout_height="72dp"
             android:layout_marginBottom="24dp"
@@ -108,8 +108,8 @@
             android:textSize="18sp"
             android:textAllCaps="false"
             app:pb_colorComplete="@color/colorPrimary"
-            app:pb_colorNormal="@color/accent"
-            app:pb_colorPressed="@color/colorAccent"
+            app:pb_colorNormal="@color/colorAccent"
+            app:pb_colorPressed="@color/accent"
             app:pb_textComplete="@string/successful"
             app:pb_textProgress="@string/creating_account" />
 
