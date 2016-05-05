@@ -19,4 +19,10 @@ public class SignUpActivity extends BaseActivity {
                     .commit();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
+    }
 }

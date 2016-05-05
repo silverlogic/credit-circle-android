@@ -1,11 +1,15 @@
 package com.tsl.baseapp.api;
 
+import com.tsl.baseapp.model.Objects.project.Project;
+import com.tsl.baseapp.model.Objects.project.ProjectsResults;
 import com.tsl.baseapp.model.Objects.token.Token;
 import com.tsl.baseapp.model.Objects.user.AuthCredentials;
 import com.tsl.baseapp.model.Objects.user.ChangePasswordCredentials;
 import com.tsl.baseapp.model.Objects.user.SignUpCredentials;
 import com.tsl.baseapp.model.Objects.user.User;
 import com.tsl.baseapp.model.Utilities.Constants;
+
+import java.util.List;
 
 import clojure.lang.Cons;
 import retrofit2.http.Body;
@@ -31,4 +35,7 @@ public interface BaseApi {
 
     @POST("v1/auth/change-password/")
     Observable<Void> changePassword(@Header(Constants.AUTHORIZATION) String token, @Body ChangePasswordCredentials creds);
+
+    @GET("v1/projects/")
+    Observable<ProjectsResults> getProjects(@Header(Constants.AUTHORIZATION) String token);
 }

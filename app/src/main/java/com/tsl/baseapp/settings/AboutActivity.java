@@ -39,4 +39,10 @@ public class AboutActivity extends BaseActivity {
 
         setContentView(aboutPage);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
+    }
 }

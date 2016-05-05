@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.pkmmte.view.CircularImageView;
 import com.rey.material.widget.Button;
 import com.squareup.picasso.Picasso;
-import com.tsl.baseapp.Controller.SignUpLoginController;
 import com.tsl.baseapp.model.Objects.user.User2;
 import com.tsl.baseapp.model.Utilities.SaveSharedPreference;
 import com.tsl.baseapp.R;
@@ -19,152 +18,151 @@ import com.tsl.baseapp.R;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class EditProfileActivity extends AppCompatActivity implements SignUpLoginController.SignUpLoginCallBackListener {
+public class EditProfileActivity extends AppCompatActivity{
 
-
-    @Bind(R.id.edit_image)
-    CircularImageView mEditImage;
-    @Bind(R.id.edit_email)
-    EditText mEditEmail;
-    @Bind(R.id.edit_first_name)
-    EditText mEditFirstName;
-    @Bind(R.id.edit_last_name)
-    EditText mEditLastName;
-    @Bind(R.id.edit_facebook_url)
-    EditText mEditFacebookUrl;
-    @Bind(R.id.edit_instagram_url)
-    EditText mEditInstagramUrl;
-    @Bind(R.id.edit_linkedin_url)
-    EditText mEditLinkedinUrl;
-    @Bind(R.id.edit_tagline)
-    EditText mEditTagline;
-    @Bind(R.id.confirm_changes_button)
-    Button mConfirmChangesButton;
-
-    private SignUpLoginController mController;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
-        ButterKnife.bind(this);
-
-        mController = new SignUpLoginController(this, this);
-
-        final User2 mUser2 = SaveSharedPreference.getCurrentUser(this);
-
-        Picasso.with(this).load(mUser2.getImg_url()).placeholder(R.drawable.ic_person_outline).into(mEditImage);
-
-        mEditEmail.setText(mUser2.getEmail());
-        mEditFirstName.setText(mUser2.getFirst_name());
-        mEditLastName.setText(mUser2.getLast_name());
-        mEditFacebookUrl.setText(mUser2.getFacebook());
-        mEditInstagramUrl.setText(mUser2.getInstagram());
-        mEditLinkedinUrl.setText(mUser2.getLinkedin());
-        mEditTagline.setText(mUser2.getTagline());
-
-
-        mConfirmChangesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String newEmail = mEditEmail.getText().toString();
-                String newFirstName = mEditFirstName.getText().toString();
-                String newLastName = mEditLastName.getText().toString();
-                String newFacebookUrl = mEditFacebookUrl.getText().toString();
-                String newInstagramUrl = mEditInstagramUrl.getText().toString();
-                String newLinkedinUrl = mEditLinkedinUrl.getText().toString();
-                String newTagline = mEditTagline.getText().toString();
-
-                boolean isValidated = true;
-
-                if (newFirstName.isEmpty()){
-                    mEditFirstName.setError("First name must not be empty");
-                    isValidated = false;
-                }
-
-                if(newLastName.isEmpty()){
-                    mEditLastName.setError("Last name must not be empty");
-                    isValidated = false;
-                }
-
-                if (newEmail.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(newEmail).matches()){
-                    mEditEmail.setError("Enter a valid email address");
-                    isValidated = false;
-                }
-
-                if (!newFacebookUrl.isEmpty() && !URLUtil.isHttpsUrl(newFacebookUrl)){
-                    mEditFacebookUrl.setError("Enter a valid https url");
-                    isValidated = false;
-                }
-
-                if (!newInstagramUrl.isEmpty() && !URLUtil.isHttpsUrl(newInstagramUrl)){
-                    mEditInstagramUrl.setError("Enter a valid https url");
-                    isValidated = false;
-                }
-
-                if (!newLinkedinUrl.isEmpty() && !URLUtil.isHttpsUrl(newLinkedinUrl)){
-                    mEditLinkedinUrl.setError("Enter a valid https url");
-                    isValidated = false;
-                }
-                if (isValidated){
-
-                    mUser2.setEmail(newEmail);
-                    mUser2.setFirst_name(newFirstName);
-                    mUser2.setLast_name(newLastName);
-                    mUser2.setFacebook(newFacebookUrl);
-                    mUser2.setInstagram(newInstagramUrl);
-                    mUser2.setLinkedin(newLinkedinUrl);
-                    mUser2.setTagline(newTagline);
-
-                    SaveSharedPreference.setCurrentUser(mUser2, EditProfileActivity.this);
-                            //TODO
-                   // mController.updateUser(mUser2, Constants.getToken(EditProfileActivity.this));
-                }
-
-            }
-        });
-    }
-
-    @Override
-    public void onLoginComplete(String token) {
-
-    }
-
-    @Override
-    public void onLoginFailure() {
-
-    }
-
-    @Override
-    public void onSignUpComplete() {
-        Toast.makeText(this, "Profile updated!", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(EditProfileActivity.this, MainActivity.class));
-        overridePendingTransition(0, 0);
-    }
-
-    @Override
-    public void onSignUpFailed() {
-
-    }
-
-    @Override
-    public void onPassChanged() {
-
-    }
-
-    @Override
-    public void onPassFailed() {
-
-    }
-
-    @Override
-    public void onFacebookLoggedIn(String token) {
-
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(0, 0);
-    }
+//
+//    @Bind(R.id.edit_image)
+//    CircularImageView mEditImage;
+//    @Bind(R.id.edit_email)
+//    EditText mEditEmail;
+//    @Bind(R.id.edit_first_name)
+//    EditText mEditFirstName;
+//    @Bind(R.id.edit_last_name)
+//    EditText mEditLastName;
+//    @Bind(R.id.edit_facebook_url)
+//    EditText mEditFacebookUrl;
+//    @Bind(R.id.edit_instagram_url)
+//    EditText mEditInstagramUrl;
+//    @Bind(R.id.edit_linkedin_url)
+//    EditText mEditLinkedinUrl;
+//    @Bind(R.id.edit_tagline)
+//    EditText mEditTagline;
+//    @Bind(R.id.confirm_changes_button)
+//    Button mConfirmChangesButton;
+//
+//    private SignUpLoginController mController;
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_edit_profile);
+//        ButterKnife.bind(this);
+//
+//        mController = new SignUpLoginController(this, this);
+//
+//        final User2 mUser2 = SaveSharedPreference.getCurrentUser(this);
+//
+//        Picasso.with(this).load(mUser2.getImg_url()).placeholder(R.drawable.ic_person_outline).into(mEditImage);
+//
+//        mEditEmail.setText(mUser2.getEmail());
+//        mEditFirstName.setText(mUser2.getFirst_name());
+//        mEditLastName.setText(mUser2.getLast_name());
+//        mEditFacebookUrl.setText(mUser2.getFacebook());
+//        mEditInstagramUrl.setText(mUser2.getInstagram());
+//        mEditLinkedinUrl.setText(mUser2.getLinkedin());
+//        mEditTagline.setText(mUser2.getTagline());
+//
+//
+//        mConfirmChangesButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String newEmail = mEditEmail.getText().toString();
+//                String newFirstName = mEditFirstName.getText().toString();
+//                String newLastName = mEditLastName.getText().toString();
+//                String newFacebookUrl = mEditFacebookUrl.getText().toString();
+//                String newInstagramUrl = mEditInstagramUrl.getText().toString();
+//                String newLinkedinUrl = mEditLinkedinUrl.getText().toString();
+//                String newTagline = mEditTagline.getText().toString();
+//
+//                boolean isValidated = true;
+//
+//                if (newFirstName.isEmpty()){
+//                    mEditFirstName.setError("First name must not be empty");
+//                    isValidated = false;
+//                }
+//
+//                if(newLastName.isEmpty()){
+//                    mEditLastName.setError("Last name must not be empty");
+//                    isValidated = false;
+//                }
+//
+//                if (newEmail.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(newEmail).matches()){
+//                    mEditEmail.setError("Enter a valid email address");
+//                    isValidated = false;
+//                }
+//
+//                if (!newFacebookUrl.isEmpty() && !URLUtil.isHttpsUrl(newFacebookUrl)){
+//                    mEditFacebookUrl.setError("Enter a valid https url");
+//                    isValidated = false;
+//                }
+//
+//                if (!newInstagramUrl.isEmpty() && !URLUtil.isHttpsUrl(newInstagramUrl)){
+//                    mEditInstagramUrl.setError("Enter a valid https url");
+//                    isValidated = false;
+//                }
+//
+//                if (!newLinkedinUrl.isEmpty() && !URLUtil.isHttpsUrl(newLinkedinUrl)){
+//                    mEditLinkedinUrl.setError("Enter a valid https url");
+//                    isValidated = false;
+//                }
+//                if (isValidated){
+//
+//                    mUser2.setEmail(newEmail);
+//                    mUser2.setFirst_name(newFirstName);
+//                    mUser2.setLast_name(newLastName);
+//                    mUser2.setFacebook(newFacebookUrl);
+//                    mUser2.setInstagram(newInstagramUrl);
+//                    mUser2.setLinkedin(newLinkedinUrl);
+//                    mUser2.setTagline(newTagline);
+//
+//                    SaveSharedPreference.setCurrentUser(mUser2, EditProfileActivity.this);
+//                            //TODO
+//                   // mController.updateUser(mUser2, Constants.getToken(EditProfileActivity.this));
+//                }
+//
+//            }
+//        });
+//    }
+//
+//    @Override
+//    public void onLoginComplete(String token) {
+//
+//    }
+//
+//    @Override
+//    public void onLoginFailure() {
+//
+//    }
+//
+//    @Override
+//    public void onSignUpComplete() {
+//        Toast.makeText(this, "Profile updated!", Toast.LENGTH_SHORT).show();
+//        overridePendingTransition(0, 0);
+//    }
+//
+//    @Override
+//    public void onSignUpFailed() {
+//
+//    }
+//
+//    @Override
+//    public void onPassChanged() {
+//
+//    }
+//
+//    @Override
+//    public void onPassFailed() {
+//
+//    }
+//
+//    @Override
+//    public void onFacebookLoggedIn(String token) {
+//
+//    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        overridePendingTransition(0, 0);
+//    }
 }

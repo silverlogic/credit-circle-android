@@ -16,10 +16,10 @@ import com.facebook.login.widget.LoginButton;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 import com.hkm.ui.processbutton.iml.ActionProcessButton;
 import com.orhanobut.hawk.Hawk;
-import com.tsl.baseapp.Activities.MainActivity;
 import com.tsl.baseapp.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
+import com.tsl.baseapp.feed.FeedActivity;
 import com.tsl.baseapp.model.Objects.user.AuthCredentials;
 import com.tsl.baseapp.model.Utilities.Constants;
 import com.tsl.baseapp.model.Utilities.KeyboardUtils;
@@ -133,7 +133,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     @Override
     public void loginSuccessful() {
         mLoginButton.setProgress(100); // We are done
-        Intent intent = new Intent(getActivity(), SettingsActivity.class);
+        Intent intent = new Intent(getActivity(), FeedActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         getActivity().overridePendingTransition(0, 0);

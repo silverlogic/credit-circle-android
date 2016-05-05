@@ -1,7 +1,6 @@
 package com.tsl.baseapp.api;
 
 import com.tsl.baseapp.BuildConfig;
-import com.tsl.baseapp.model.Api.AppApi;
 import com.tsl.baseapp.model.Utilities.Constants;
 
 import java.util.concurrent.TimeUnit;

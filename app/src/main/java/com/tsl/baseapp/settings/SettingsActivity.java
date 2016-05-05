@@ -29,20 +29,10 @@ public class SettingsActivity extends BaseActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //TODO Remove and add to main Activity as launcher
-        User user = Hawk.get(Constants.USER);
-        if (user == null){
-            Intent intent = new Intent(this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            overridePendingTransition(0, 0);
-            finish();
-        } else {
-            if (savedInstanceState == null) {
-                getFragmentManager().beginTransaction()
-                        .add(android.R.id.content, new SettingsFragment())
-                        .commit();
-            }
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .add(android.R.id.content, new SettingsFragment())
+                    .commit();
         }
     }
 
@@ -131,5 +121,11 @@ public class SettingsActivity extends BaseActivity {
             LogOutDialog dialog = new LogOutDialog();
             dialog.logout(getActivity());
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
     }
 }
