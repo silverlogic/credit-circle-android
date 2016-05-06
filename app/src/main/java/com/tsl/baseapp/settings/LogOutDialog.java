@@ -3,7 +3,6 @@ package com.tsl.baseapp.settings;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -13,7 +12,6 @@ import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.login.LoginActivity;
 import com.tsl.baseapp.model.Utilities.Constants;
-import com.tsl.baseapp.model.Utilities.SaveSharedPreference;
 
 /**
  * Created by kevinlavi on 5/4/16.

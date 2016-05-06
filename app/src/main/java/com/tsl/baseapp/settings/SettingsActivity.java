@@ -6,26 +6,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.view.View;
-import android.widget.Toast;
 
 import com.orhanobut.hawk.Hawk;
-import com.tsl.baseapp.BuildConfig;
 import com.tsl.baseapp.R;
-import com.tsl.baseapp.base.BaseActivity;
-import com.tsl.baseapp.login.LoginActivity;
+import com.tsl.baseapp.base.BaseAppActivity;
 import com.tsl.baseapp.model.Objects.user.User;
 import com.tsl.baseapp.model.Utilities.Constants;
-import com.tsl.baseapp.model.Utilities.SaveSharedPreference;
 import com.tsl.baseapp.webview.WebViewActivity;
-
-import rx.Subscription;
-import timber.log.Timber;
 
 /**
  * Created by kevinlavi on 5/4/16.
  */
-public class SettingsActivity extends BaseActivity {
+public class SettingsActivity extends BaseAppActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

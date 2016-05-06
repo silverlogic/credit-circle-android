@@ -1,13 +1,11 @@
 package com.tsl.baseapp.login;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.facebook.login.LoginFragment;
 import com.tsl.baseapp.R;
-import com.tsl.baseapp.base.BaseActivity;
+import com.tsl.baseapp.base.BaseAppActivity;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseAppActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

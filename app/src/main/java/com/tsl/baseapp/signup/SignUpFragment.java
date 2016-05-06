@@ -5,11 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Patterns;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,13 +13,11 @@ import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 import com.hkm.ui.processbutton.iml.ActionProcessButton;
 
 import com.orhanobut.hawk.Hawk;
-import com.tsl.baseapp.BaseApplication;
+import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.login.LoginActivity;
-import com.tsl.baseapp.login.LoginViewState;
 import com.tsl.baseapp.model.Objects.user.SignUpCredentials;
-import com.tsl.baseapp.model.Objects.user.User;
 import com.tsl.baseapp.model.Utilities.Constants;
 import com.tsl.baseapp.model.Utilities.KeyboardUtils;
 import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
@@ -33,7 +27,6 @@ import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import timber.log.Timber;
 
 public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPresenter> implements SignUpView {
 

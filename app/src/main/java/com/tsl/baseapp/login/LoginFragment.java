@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -16,7 +14,7 @@ import com.facebook.login.widget.LoginButton;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 import com.hkm.ui.processbutton.iml.ActionProcessButton;
 import com.orhanobut.hawk.Hawk;
-import com.tsl.baseapp.BaseApplication;
+import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.feed.FeedActivity;
@@ -24,14 +22,12 @@ import com.tsl.baseapp.model.Objects.user.AuthCredentials;
 import com.tsl.baseapp.model.Utilities.Constants;
 import com.tsl.baseapp.model.Utilities.KeyboardUtils;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
-import com.tsl.baseapp.settings.SettingsActivity;
 import com.tsl.baseapp.signup.SignUpActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import timber.log.Timber;
 
 /**
  */

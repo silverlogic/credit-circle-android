@@ -12,7 +12,7 @@ import android.view.View;
 
 
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
-import com.tsl.baseapp.BaseApplication;
+import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.model.Objects.project.Project;
@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
-import timber.log.Timber;
 
 /**
  * A simple {@link Fragment} subclass.

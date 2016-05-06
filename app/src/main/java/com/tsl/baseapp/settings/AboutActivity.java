@@ -1,17 +1,16 @@
 package com.tsl.baseapp.settings;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 import com.tsl.baseapp.BuildConfig;
 import com.tsl.baseapp.R;
-import com.tsl.baseapp.base.BaseActivity;
+import com.tsl.baseapp.base.BaseAppActivity;
 
 import mehdi.sakout.aboutpage.AboutPage;
 import mehdi.sakout.aboutpage.Element;
 
-public class AboutActivity extends BaseActivity {
+public class AboutActivity extends BaseAppActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

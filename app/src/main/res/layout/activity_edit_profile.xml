@@ -14,16 +14,12 @@
         android:layout_height="match_parent">
 
 
-    <com.pkmmte.view.CircularImageView
+    <ImageView
         android:layout_marginTop="8dp"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/edit_image"
-        android:src="@drawable/ic_person_outline"
-        app:border="true"
-        app:border_color="#EEEEEE"
-        app:border_width="4dp"
-        app:shadow="true"
+        android:src="@drawable/baseapp_logo"
         android:layout_gravity="center_horizontal"/>
 
     <!-- Email -->

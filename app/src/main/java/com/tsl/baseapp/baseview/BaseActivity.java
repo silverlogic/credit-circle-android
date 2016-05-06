@@ -1,27 +1,21 @@
-package com.tsl.baseapp.signup;
+package com.tsl.baseapp.baseview;
 
 import android.os.Bundle;
 
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseAppActivity;
 
-public class SignUpActivity extends BaseAppActivity {
+public class BaseActivity extends BaseAppActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_base);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainer, new com.tsl.baseapp.signup.SignUpFragment())
+                    .replace(R.id.fragmentContainer, new BaseFragment())
                     .commit();
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(0, 0);
     }
 }
