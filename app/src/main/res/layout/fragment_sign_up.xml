@@ -109,7 +109,7 @@
             android:textAllCaps="false"
             app:pb_colorComplete="@color/colorPrimary"
             app:pb_colorNormal="@color/colorAccent"
-            app:pb_colorPressed="@color/accent"
+            app:pb_colorPressed="@color/colorAccent"
             app:pb_textComplete="@string/successful"
             app:pb_textProgress="@string/creating_account" />
 
