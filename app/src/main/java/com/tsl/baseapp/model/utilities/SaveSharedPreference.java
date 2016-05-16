@@ -5,8 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
-import com.tsl.baseapp.BaseApplication;
-import com.tsl.baseapp.model.Objects.user.User;
+import com.tsl.baseapp.model.Objects.user.User2;
 
 /**
  * Created by Kevin on 10/7/15.
@@ -49,20 +48,20 @@ public class SaveSharedPreference {
         return preferences.getBoolean(LOG_IN_STATUS, false);
     }
 
-    public static void setCurrentUser(User user, Context ctx){
+    public static void setCurrentUser(User2 user2, Context ctx){
         SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
         Gson gson = new Gson();
-        String json = gson.toJson(user); // myObject - instance of MyObject
+        String json = gson.toJson(user2); // myObject - instance of MyObject
         editor.putString(CURRENT_USER, json);
         editor.commit();
     }
 
-    public static User getCurrentUser(Context ctx){
+    public static User2 getCurrentUser(Context ctx){
         Gson gson = new Gson();
         String json = getSharedPreferences(ctx).getString(CURRENT_USER, "");
-        User mUser = gson.fromJson(json, User.class);
+        User2 mUser2 = gson.fromJson(json, User2.class);
 
-        return mUser;
+        return mUser2;
     }
 
     public static void setCurrentPassword(Context ctx, String pass){
