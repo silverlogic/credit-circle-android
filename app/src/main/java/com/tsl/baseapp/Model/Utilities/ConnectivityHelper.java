@@ -1,4 +1,4 @@
-package com.tsl.baseapp.Model.Utilities;
+package com.tsl.baseapp.model.Utilities;
 
 /**
  * Created by kevinlavi on 2/24/16.
@@ -9,7 +9,7 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.R;
+import com.tsl.baseapp.R;
 
 
 public class ConnectivityHelper {

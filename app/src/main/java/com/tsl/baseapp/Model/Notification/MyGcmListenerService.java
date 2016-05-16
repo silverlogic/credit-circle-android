@@ -1,4 +1,4 @@
-package com.tsl.baseapp.Model.Notification;
+package com.tsl.baseapp.model.Notification;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,9 +9,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
-import com.R;
+
 import com.google.android.gms.gcm.GcmListenerService;
 import com.tsl.baseapp.Activities.MainActivity;
+import com.tsl.baseapp.R;
 
 /**
  * Created by kevinlavi on 3/3/16.
@@ -61,7 +62,7 @@ public class MyGcmListenerService extends GcmListenerService {
 
             Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                    .setSmallIcon(R.drawable.icon_notification)
+                    .setSmallIcon(R.drawable.ic_person_outline)
                     .setColor(getResources().getColor(R.color.colorPrimary))
                     .setContentTitle(getString(R.string.app_name))
                     .setContentText(message)

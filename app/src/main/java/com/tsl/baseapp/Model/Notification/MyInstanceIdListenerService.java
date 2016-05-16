@@ -1,4 +1,4 @@
-package com.tsl.baseapp.Model.Notification;
+package com.tsl.baseapp.model.Notification;
 
 import android.content.Intent;
 

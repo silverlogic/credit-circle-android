@@ -1,4 +1,4 @@
-package com.tsl.baseapp.Model.Notification;
+package com.tsl.baseapp.model.Notification;
 
 
 import android.app.IntentService;
@@ -11,8 +11,9 @@ import android.util.Log;
 import com.google.android.gms.gcm.GcmPubSub;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
-import com.tsl.baseapp.Model.Utilities.Constants;
-import com.tsl.baseapp.Model.Utilities.SaveSharedPreference;
+import com.tsl.baseapp.R;
+import com.tsl.baseapp.model.Utilities.Constants;
+import com.tsl.baseapp.model.Utilities.SaveSharedPreference;
 
 import java.io.IOException;
 

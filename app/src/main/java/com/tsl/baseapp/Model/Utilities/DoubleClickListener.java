@@ -1,4 +1,4 @@
-package com.tsl.baseapp.Model.Utilities;
+package com.tsl.baseapp.model.Utilities;
 
 import android.view.View;
 

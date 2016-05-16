@@ -18,4 +18,63 @@
     <string name="title_activity_web_view">WebViewActivity</string>
     <string name="title_activity_edit_profile">Edit Profile</string>
     <string name="title_activity_sign_up">Sign Up</string>
+
+    <string name="login">Log in</string>
+    <string name="signup">Sign Up</string>
+    <string name="successful">Success!</string>
+    <string name="loading">Loading</string>
+    <string name="logging_in">Logging in...</string>
+    <string name="creating_account">Creating Account...</string>
+    <string name="valid_email_error">Enter a valid email address</string>
+    <string name="enter_password">Enter a password</string>
+    <string name="login_failed">Login Failed</string>
+    <string name="sign_up_failed">Sign Up Failed</string>
+    <string name="api_error">Cannot connect to API</string>
+    <string name="no_internet">You do not have an internet connection</string>
+    <string name="ok">OK</string>
+    <string name="gcm_defaultSenderId">620355883507</string>
+
+    <string name="no_account_yet">No account yet? Create one</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="enter_first_name">Enter a first name</string>
+    <string name="enter_last_name">Enter a last name</string>
+    <string name="enter_valid_emil">Enter a valid email address</string>
+    <string name="passwords_must_match">Passwords must match</string>
+
+    <!-- Settings screen -->
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="terms_of_services">Terms of Services</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="logout">Log Out</string>
+    <string name="terms_link">http://www.kazuwifi.com/kzu-terms-conditions</string>
+    <string name="send_mail">Send mail...</string>
+    <string name="no_email_clients_installed">There are no email clients installed.</string>
+    <string name="submit">Submit</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="change_password_error">Old password does not match current password</string>
+    <string name="change_password_success">Password changed!</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="new_password_error">New passwords must match</string>
+    <string name="old_pass_must_match_current">Old password must match current password</string>
+    <string name="field_cannot_be_empty">Field cannot be empty</string>
+    <string name="changing_password">Changing Password...</string>
+    <string name="log_out">Log out</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="logged_out">Logged Out</string>
+    <string name="no">No</string>
+
+    <!-- About page -->
+    <string name="website_url">tsl.io</string>
+    <string name="facebook_link">TheSilverLogic</string>
+    <string name="twitter_link">thesilverlogic</string>
+    <string name="instagram_link">thesilverlogic/</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
