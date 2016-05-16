@@ -9,8 +9,8 @@ import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseAppActivity;
 import com.tsl.baseapp.login.LoginActivity;
-import com.tsl.baseapp.model.Objects.user.User;
-import com.tsl.baseapp.model.Utilities.Constants;
+import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.settings.SettingsActivity;
 
 public class FeedActivity extends BaseAppActivity {

@@ -5,9 +5,6 @@ import android.os.Bundle;
 
 import com.crashlytics.android.Crashlytics;
 import com.facebook.FacebookSdk;
-import com.orhanobut.hawk.Hawk;
-import com.orhanobut.hawk.HawkBuilder;
-import com.orhanobut.hawk.LogLevel;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -27,11 +24,6 @@ public class BaseAppActivity extends AppCompatActivity {
         injectDependencies();
         super.onCreate(savedInstanceState);
         Icepick.restoreInstanceState(this, savedInstanceState);
-        Hawk.init(this)
-                .setEncryptionMethod(HawkBuilder.EncryptionMethod.MEDIUM)
-                .setStorage(HawkBuilder.newSharedPrefStorage(this))
-                .setLogLevel(LogLevel.FULL)
-                .build();
     }
 
     @Override

@@ -1,10 +1,9 @@
-package com.tsl.baseapp.model.Utilities;
+package com.tsl.baseapp.utils;
 
 import android.content.Context;
 import android.widget.Toast;
 
 import com.orhanobut.hawk.Hawk;
-import com.tsl.baseapp.model.Objects.user.User;
 
 /**
  * Created by Kevin on 9/17/15.

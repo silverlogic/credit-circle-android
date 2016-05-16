@@ -13,9 +13,8 @@ import com.afollestad.materialdialogs.internal.MDButton;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
-import com.tsl.baseapp.model.Objects.user.ChangePasswordCredentials;
-import com.tsl.baseapp.model.Objects.user.User;
-import com.tsl.baseapp.model.Utilities.Constants;
+import com.tsl.baseapp.model.objects.user.ChangePasswordCredentials;
+import com.tsl.baseapp.utils.Constants;
 
 import butterknife.Bind;
 import rx.Subscriber;

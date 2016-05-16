@@ -10,7 +10,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.tsl.baseapp.R;
-import com.tsl.baseapp.model.Utilities.Constants;
+import com.tsl.baseapp.utils.Constants;
 
 
 public class WebViewActivity extends AppCompatActivity {

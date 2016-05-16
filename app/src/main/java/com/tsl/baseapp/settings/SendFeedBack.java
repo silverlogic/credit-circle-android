@@ -7,7 +7,7 @@ import android.widget.Toast;
 import com.jaredrummler.android.device.DeviceName;
 import com.tsl.baseapp.BuildConfig;
 import com.tsl.baseapp.R;
-import com.tsl.baseapp.model.Objects.user.User;
+import com.tsl.baseapp.model.objects.user.User;
 
 import java.text.DateFormat;
 import java.util.Date;

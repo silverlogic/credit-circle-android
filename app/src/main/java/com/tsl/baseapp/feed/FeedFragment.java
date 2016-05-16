@@ -15,7 +15,7 @@ import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
-import com.tsl.baseapp.model.Objects.project.Project;
+import com.tsl.baseapp.model.objects.project.Project;
 import com.tsl.baseapp.model.event.ProjectsEvent;
 
 import org.greenrobot.eventbus.Subscribe;

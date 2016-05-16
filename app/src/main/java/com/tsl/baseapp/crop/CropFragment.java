@@ -2,7 +2,6 @@ package com.tsl.baseapp.crop;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,7 +16,7 @@ import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.base.BaseViewStateFragment;
-import com.tsl.baseapp.model.Utilities.Constants;
+import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.model.event.CropEvent;
 
 import org.greenrobot.eventbus.Subscribe;
