@@ -1,7 +1,6 @@
-package com.tsl.baseapp.model.Objects.project;
+package com.tsl.baseapp.model.objects.project;
 
 import com.google.gson.annotations.SerializedName;
-import com.tsl.baseapp.model.Objects.user.UserImages;
 
 import java.util.List;
 

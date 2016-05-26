@@ -39,8 +39,5 @@ public class BaseAppActivity extends AppCompatActivity {
     }
 
     protected void injectDependencies() {
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        Fabric.with(this, new Crashlytics());
-        JodaTimeAndroid.init(this);
     }
 }
