@@ -1,4 +1,4 @@
-package com.tsl.baseapp.model.Objects.user;
+package com.tsl.baseapp.model.objects.user;
 
 /**
  * Created by kevinlavi on 4/26/16.

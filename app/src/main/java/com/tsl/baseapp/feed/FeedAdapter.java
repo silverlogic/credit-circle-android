@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.tsl.baseapp.R;
-import com.tsl.baseapp.model.Objects.project.Project;
+import com.tsl.baseapp.model.objects.project.Project;
 
 import java.util.ArrayList;
 import java.util.List;

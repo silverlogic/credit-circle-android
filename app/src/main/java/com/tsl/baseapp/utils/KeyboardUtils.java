@@ -1,11 +1,10 @@
-package com.tsl.baseapp.model.Utilities;
+package com.tsl.baseapp.utils;
 
 /**
  * Created by kevinlavi on 4/26/16.
  */
 import android.view.View;
 import android.content.Context;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 public class KeyboardUtils {

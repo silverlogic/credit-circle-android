@@ -1,8 +1,6 @@
-package com.tsl.baseapp.model.Objects.user;
+package com.tsl.baseapp.model.objects.user;
 
 import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
 
 /**
  * Created by kevinlavi on 5/3/16.

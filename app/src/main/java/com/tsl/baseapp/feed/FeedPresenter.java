@@ -4,9 +4,9 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
-import com.tsl.baseapp.model.Objects.project.Project;
-import com.tsl.baseapp.model.Objects.project.ProjectsResults;
-import com.tsl.baseapp.model.Utilities.Constants;
+import com.tsl.baseapp.model.objects.project.Project;
+import com.tsl.baseapp.model.objects.project.ProjectsResults;
+import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.model.event.ProjectsEvent;
 
 import org.greenrobot.eventbus.EventBus;

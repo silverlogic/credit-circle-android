@@ -1,6 +1,6 @@
 package com.tsl.baseapp.model.event;
 
-import com.tsl.baseapp.model.Objects.user.User;
+import com.tsl.baseapp.model.objects.user.User;
 
 /**
  * Created by kevinlavi on 5/3/16.

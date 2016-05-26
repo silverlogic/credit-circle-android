@@ -1,7 +1,6 @@
 package com.tsl.baseapp.model.event;
 
-import com.tsl.baseapp.model.Objects.project.Project;
-import com.tsl.baseapp.model.Objects.user.User;
+import com.tsl.baseapp.model.objects.project.Project;
 
 import java.util.List;
 

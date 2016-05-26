@@ -18,9 +18,9 @@ import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.feed.FeedActivity;
-import com.tsl.baseapp.model.Objects.user.AuthCredentials;
-import com.tsl.baseapp.model.Utilities.Constants;
-import com.tsl.baseapp.model.Utilities.KeyboardUtils;
+import com.tsl.baseapp.model.objects.user.AuthCredentials;
+import com.tsl.baseapp.utils.Constants;
+import com.tsl.baseapp.utils.KeyboardUtils;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
 import com.tsl.baseapp.signup.SignUpActivity;
 

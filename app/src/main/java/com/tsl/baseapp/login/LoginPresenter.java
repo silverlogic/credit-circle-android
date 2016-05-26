@@ -3,9 +3,9 @@ package com.tsl.baseapp.login;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
-import com.tsl.baseapp.model.Objects.token.Token;
-import com.tsl.baseapp.model.Objects.user.AuthCredentials;
-import com.tsl.baseapp.model.Objects.user.User;
+import com.tsl.baseapp.model.objects.token.Token;
+import com.tsl.baseapp.model.objects.user.AuthCredentials;
+import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
 
 import org.greenrobot.eventbus.EventBus;

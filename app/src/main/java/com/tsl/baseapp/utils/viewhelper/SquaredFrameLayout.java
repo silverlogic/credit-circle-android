@@ -1,4 +1,4 @@
-package com.tsl.baseapp.model.ViewHelper;
+package com.tsl.baseapp.utils.viewhelper;
 
 import android.annotation.TargetApi;
 import android.content.Context;

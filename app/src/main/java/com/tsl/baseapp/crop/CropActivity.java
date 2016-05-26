@@ -10,7 +10,7 @@ public class CropActivity extends BaseAppActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crop);
+        setContentView(R.layout.activity_base);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()

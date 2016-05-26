@@ -1,4 +1,4 @@
-package com.tsl.baseapp.model.Utilities;
+package com.tsl.baseapp.utils;
 
 import android.content.Context;
 import android.view.GestureDetector;

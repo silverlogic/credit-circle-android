@@ -1,4 +1,4 @@
-package com.tsl.baseapp.model.Objects.user;
+package com.tsl.baseapp.model.objects.user;
 
 import com.google.gson.annotations.SerializedName;
 

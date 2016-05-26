@@ -1,20 +1,15 @@
 package com.tsl.baseapp.api;
 
-import com.tsl.baseapp.model.Objects.project.Project;
-import com.tsl.baseapp.model.Objects.project.ProjectsResults;
-import com.tsl.baseapp.model.Objects.token.Token;
-import com.tsl.baseapp.model.Objects.user.AuthCredentials;
-import com.tsl.baseapp.model.Objects.user.ChangePasswordCredentials;
-import com.tsl.baseapp.model.Objects.user.SignUpCredentials;
-import com.tsl.baseapp.model.Objects.user.User;
-import com.tsl.baseapp.model.Utilities.Constants;
+import com.tsl.baseapp.model.objects.project.ProjectsResults;
+import com.tsl.baseapp.model.objects.token.Token;
+import com.tsl.baseapp.model.objects.user.AuthCredentials;
+import com.tsl.baseapp.model.objects.user.ChangePasswordCredentials;
+import com.tsl.baseapp.model.objects.user.SignUpCredentials;
+import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.utils.Constants;
 
-import java.util.List;
-
-import clojure.lang.Cons;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import rx.Observable;

@@ -10,8 +10,8 @@ import android.preference.PreferenceFragment;
 import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseAppActivity;
-import com.tsl.baseapp.model.Objects.user.User;
-import com.tsl.baseapp.model.Utilities.Constants;
+import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.webview.WebViewActivity;
 
 /**
