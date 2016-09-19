@@ -2,9 +2,7 @@ package com.tsl.baseapp.api;
 
 import com.tsl.baseapp.model.objects.project.ProjectsResults;
 import com.tsl.baseapp.model.objects.token.Token;
-import com.tsl.baseapp.model.objects.user.AuthCredentials;
 import com.tsl.baseapp.model.objects.user.ChangePasswordCredentials;
-import com.tsl.baseapp.model.objects.user.SignUpCredentials;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.Constants;
 
@@ -19,8 +17,8 @@ import rx.Observable;
  */
 public interface BaseApi {
 
-    @POST("/v1/auth/login/")
-    Observable<Token> loginUser(@Body AuthCredentials auth);
+    @POST("login")
+    Observable<Token> loginUser(@Body User auth);
 
     @POST("register")
     Observable<User> signUpUser(@Body User auth);

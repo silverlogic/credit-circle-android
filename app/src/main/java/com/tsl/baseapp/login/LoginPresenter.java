@@ -4,7 +4,6 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
 import com.tsl.baseapp.model.objects.token.Token;
-import com.tsl.baseapp.model.objects.user.AuthCredentials;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
 import com.tsl.baseapp.model.objects.user.User;
 
@@ -31,7 +30,7 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
         this.eventBus = eventBus;
     }
 
-    public void doLogin(AuthCredentials credentials) {
+    public void doLogin(User credentials) {
 
         if (isViewAttached()) {
             getView().showLoading();
@@ -60,32 +59,8 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
                     }
 
                     @Override
-                    public void onNext(final Token t) {
-                        final String token = "Token " + t.getToken();
-                        api.getUser(token)
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribeOn(Schedulers.io())
-                                .subscribe(new Subscriber<User>() {
-                                    @Override
-                                    public void onCompleted() {
-                                        if (isViewAttached()) {
-                                            getView().loginSuccessful();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onError(Throwable e) {
-                                        if (isViewAttached()) {
-                                            Timber.d(e.getMessage());
-                                            getView().showError();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onNext(User user) {
-                                        eventBus.post(new LoginSuccessfulEvent(token, user));
-                                    }
-                                });
+                    public void onNext(final Token token) {
+                        eventBus.post(new LoginSuccessfulEvent(token));
                     }
                 });
     }

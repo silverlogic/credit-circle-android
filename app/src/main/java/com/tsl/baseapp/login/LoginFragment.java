@@ -18,7 +18,8 @@ import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.feed.FeedActivity;
-import com.tsl.baseapp.model.objects.user.AuthCredentials;
+import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.settings.SettingsActivity;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.KeyboardUtils;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
@@ -129,7 +130,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     @Override
     public void loginSuccessful() {
         mLoginButton.setProgress(100); // We are done
-        Intent intent = new Intent(getActivity(), FeedActivity.class);
+        Intent intent = new Intent(getActivity(), SettingsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         getActivity().overridePendingTransition(0, 0);
@@ -138,7 +139,6 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     @Subscribe
     public void onEvent(LoginSuccessfulEvent event){
         Hawk.put(Constants.TOKEN, event.getToken());
-        Hawk.put(Constants.USER, event.getUser());
     }
 
     @Override
@@ -163,8 +163,11 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
             KeyboardUtils.hideKeyboard(mInputPassword);
         }
 
+        User user = new User();
+        user.login(username, pass);
+
         // Start login
-        presenter.doLogin(new AuthCredentials(username, pass));
+        presenter.doLogin(user);
     }
 
     @OnClick(R.id.link_signup)
