@@ -13,11 +13,14 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="error_forgot_password">Error resetting your password</string>
+    <string name="password_reset">Password has been reset. Please check your email.</string>
 
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_web_view">WebViewActivity</string>
     <string name="title_activity_edit_profile">Edit Profile</string>
     <string name="title_activity_sign_up">Sign Up</string>
+    <string name="title_activity_forgot_password">Forgot Password</string>
 
     <string name="login">Log in</string>
     <string name="signup">Sign Up</string>

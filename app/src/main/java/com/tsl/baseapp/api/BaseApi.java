@@ -1,5 +1,6 @@
 package com.tsl.baseapp.api;
 
+import com.google.gson.JsonObject;
 import com.tsl.baseapp.model.objects.project.ProjectsResults;
 import com.tsl.baseapp.model.objects.token.Token;
 import com.tsl.baseapp.model.objects.user.ChangePasswordCredentials;
@@ -25,6 +26,9 @@ public interface BaseApi {
 
     @GET("/v1/user/")
     Observable<User> getUser(@Header(Constants.AUTHORIZATION) String token);
+
+    @POST("forgot-password")
+    Observable<Void> forgotPassword(@Body JsonObject auth);
 
     @POST("v1/auth/change-password/")
     Observable<Void> changePassword(@Header(Constants.AUTHORIZATION) String token, @Body ChangePasswordCredentials creds);
