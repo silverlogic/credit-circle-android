@@ -31,39 +31,39 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
         this.eventBus = eventBus;
     }
 
-//    public void updateEmail(AuthCredentials credentials, final Context context) {
-//
-//        if (isViewAttached()) {
-//            getView().showLoading();
-//        }
-//
-//        cancelSubscription();
-//        final BaseApi api = new BaseApiManager().getAppApi();
-//        subscription = api.resetEmail(credentials)
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new Subscriber<Void>() {
-//                    @Override
-//                    public void onCompleted() {
-//                        if (isViewAttached()) {
-//                            getView().showUpdateEmailSuccess();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        if (isViewAttached()) {
-//                            String error = context.getString(R.string.change_email_failed);
-//                            Timber.d(e.getMessage());
-//                            getView().showError(error);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onNext(Void aVoid) {
-//                    }
-//                });
-//    }
+    public void updateEmail(String token, User credentials, final Context context) {
+
+        if (isViewAttached()) {
+            getView().showLoading();
+        }
+
+        cancelSubscription();
+        final BaseApi api = new BaseApiManager().getAppApi();
+        subscription = api.changeEmail(token, credentials)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<Void>() {
+                    @Override
+                    public void onCompleted() {
+                        if (isViewAttached()) {
+                            getView().showUpdateEmailSuccess();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (isViewAttached()) {
+                            String error = context.getString(R.string.change_email_failed);
+                            Timber.d(e.getMessage());
+                            getView().showError(error);
+                        }
+                    }
+
+                    @Override
+                    public void onNext(Void aVoid) {
+                    }
+                });
+    }
 
     public void changePassword(String token, User creds, final Context context){
 

@@ -75,6 +75,8 @@
     <string name="update_email">Update Email</string>
     <string name="email_updated">Email Updated</string>
     <string name="change_password_failed">Error changing password</string>
+    <string name="change_email_failed">Error updating email</string>
+    <string name="new_email">New Email</string>
 
     <!-- About page -->
     <string name="website_url">tsl.io</string>

@@ -198,9 +198,9 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             mChangeEmailInput.setError(mContext.getString(R.string.valid_email_error));
         } else {
-//            AuthCredentials credentials = new AuthCredentials();
-//            credentials.setEmail(email);
-//            presenter.updateEmail(credentials, mContext);
+            User user = new User();
+            user.changeEmail(email);
+            presenter.updateEmail(Constants.getToken(mContext), user, mContext);
         }
     }
 

@@ -24,14 +24,14 @@ public interface BaseApi {
     @POST("register")
     Observable<User> signUpUser(@Body User auth);
 
-    @GET("/v1/user/")
-    Observable<User> getUser(@Header(Constants.AUTHORIZATION) String token);
-
     @POST("forgot-password")
     Observable<Void> forgotPassword(@Body JsonObject auth);
 
     @POST("users/change-password")
     Observable<Void> changePassword(@Header(Constants.AUTHORIZATION) String token, @Body User creds);
+
+    @POST("change-email")
+    Observable<Void> changeEmail(@Header(Constants.AUTHORIZATION) String token, @Body User creds);
 
     @GET("v1/projects/")
     Observable<ProjectsResults> getProjects(@Header(Constants.AUTHORIZATION) String token);

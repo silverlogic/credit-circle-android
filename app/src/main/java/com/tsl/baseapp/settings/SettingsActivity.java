@@ -35,6 +35,7 @@ public class SettingsActivity extends BaseAppActivity {
         Preference mAbout;
         Preference mTerms;
         Preference mFeedback;
+        Preference mChangeEmail;
         Preference mChangePassword;
         Preference mLogout;
 
@@ -58,6 +59,9 @@ public class SettingsActivity extends BaseAppActivity {
             if (preference == mChangePassword){
                 changePassword();
             }
+            if (preference == mChangeEmail){
+                changeEmail();
+            }
             if (preference == mLogout){
                 logout();
             }
@@ -70,12 +74,15 @@ public class SettingsActivity extends BaseAppActivity {
             mFeedback = findPreference("feedback");
             mChangePassword = findPreference("change_password");
             mLogout = findPreference("logout");
+            mChangeEmail = findPreference("change_email");
+
 
             mAbout.setOnPreferenceClickListener(this);
             mTerms.setOnPreferenceClickListener(this);
             mFeedback.setOnPreferenceClickListener(this);
             mChangePassword.setOnPreferenceClickListener(this);
             mLogout.setOnPreferenceClickListener(this);
+            mChangeEmail.setOnPreferenceClickListener(this);
         }
 
         private void about(){
@@ -103,6 +110,13 @@ public class SettingsActivity extends BaseAppActivity {
             User mUser = Hawk.get(Constants.USER);
             SendFeedBack sendFeedBack = new SendFeedBack();
             sendFeedBack.send(mUser, getActivity());
+        }
+
+        private void changeEmail(){
+            Intent intent = new Intent(getActivity(), UpdatePasswordAndEmailActivity.class);
+            intent.putExtra(UpdatePasswordAndEmailFragment.TYPE, UpdatePasswordAndEmailFragment.UPDATE_EMAIL);
+            startActivity(intent);
+            getActivity().overridePendingTransition(0, 0);
         }
 
         private void changePassword(){
