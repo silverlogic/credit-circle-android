@@ -35,6 +35,12 @@
             android:label="@string/title_activity_forgot_password"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".updatepasswordemail.UpdatePasswordAndEmailActivity"
+            android:label="@string/change_password"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".signup.SignUpActivity"
             android:label="@string/title_activity_sign_up"

@@ -71,6 +71,10 @@
     <string name="yes">Yes</string>
     <string name="logged_out">Logged Out</string>
     <string name="no">No</string>
+    <string name="updating">Updating...</string>
+    <string name="update_email">Update Email</string>
+    <string name="email_updated">Email Updated</string>
+    <string name="change_password_failed">Error changing password</string>
 
     <!-- About page -->
     <string name="website_url">tsl.io</string>

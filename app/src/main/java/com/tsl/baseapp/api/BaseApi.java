@@ -30,8 +30,8 @@ public interface BaseApi {
     @POST("forgot-password")
     Observable<Void> forgotPassword(@Body JsonObject auth);
 
-    @POST("v1/auth/change-password/")
-    Observable<Void> changePassword(@Header(Constants.AUTHORIZATION) String token, @Body ChangePasswordCredentials creds);
+    @POST("users/change-password")
+    Observable<Void> changePassword(@Header(Constants.AUTHORIZATION) String token, @Body User creds);
 
     @GET("v1/projects/")
     Observable<ProjectsResults> getProjects(@Header(Constants.AUTHORIZATION) String token);

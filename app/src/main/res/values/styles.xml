@@ -30,5 +30,13 @@
         <item name="colorControlActivated">@color/colorAccent</item>
     </style>
 
+    <style name="TextAppearence.App.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="SnackBarSingleLine" parent="Material.Widget.SnackBar.Mobile">
+        <item name="android:typeface">serif</item>
+    </style>
 
 </resources>
