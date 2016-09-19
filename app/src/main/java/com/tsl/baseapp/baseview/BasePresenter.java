@@ -4,8 +4,8 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
 import com.tsl.baseapp.model.objects.user.SignUpCredentials;
-import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
+import com.tsl.baseapp.model.objects.user.User;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -36,36 +36,36 @@ public class BasePresenter extends MvpBasePresenter<BaseView> {
             getView().showLoading();
         }
 
-        // MAKE THE API CALL HERE
-        cancelSubscription();
-        final BaseApi api = new BaseApiManager().getAppApi();
-        baseSubscriber = api.signUpUser(credentials)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<User>() {
-                    @Override
-                    public void onCompleted() {
-                        // FINISH API CALL
-                        if (isViewAttached()) {
-                            getView().showForm();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        //API ERROR
-                        if (isViewAttached()) {
-                            Timber.d(e.getMessage());
-                            getView().showError();
-                        }
-                    }
-
-                    @Override
-                    public void onNext(User user) {
-                        // POST THE RESULT OF API CALL
-                        eventBus.post(new SignUpSuccessfulEvent(user));
-                    }
-                });
+//        // MAKE THE API CALL HERE
+//        cancelSubscription();
+//        final BaseApi api = new BaseApiManager().getAppApi();
+//        baseSubscriber = api.signUpUser(credentials)
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(Schedulers.io())
+//                .subscribe(new Subscriber<User>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        // FINISH API CALL
+//                        if (isViewAttached()) {
+//                            getView().showForm();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        //API ERROR
+//                        if (isViewAttached()) {
+//                            Timber.d(e.getMessage());
+//                            getView().showError();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onNext(User user) {
+//                        // POST THE RESULT OF API CALL
+//                        eventBus.post(new SignUpSuccessfulEvent(user));
+//                    }
+//                });
     }
 
     /**

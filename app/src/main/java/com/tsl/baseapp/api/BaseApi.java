@@ -22,8 +22,8 @@ public interface BaseApi {
     @POST("/v1/auth/login/")
     Observable<Token> loginUser(@Body AuthCredentials auth);
 
-    @POST("/v1/auth/register/")
-    Observable<User> signUpUser(@Body SignUpCredentials auth);
+    @POST("register")
+    Observable<User> signUpUser(@Body User auth);
 
     @GET("/v1/user/")
     Observable<User> getUser(@Header(Constants.AUTHORIZATION) String token);

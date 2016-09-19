@@ -5,8 +5,8 @@ import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
 import com.tsl.baseapp.model.objects.token.Token;
 import com.tsl.baseapp.model.objects.user.AuthCredentials;
-import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
+import com.tsl.baseapp.model.objects.user.User;
 
 import org.greenrobot.eventbus.EventBus;
 
