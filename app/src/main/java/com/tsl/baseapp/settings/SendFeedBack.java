@@ -7,7 +7,7 @@ import android.widget.Toast;
 import com.jaredrummler.android.device.DeviceName;
 import com.tsl.baseapp.BuildConfig;
 import com.tsl.baseapp.R;
-import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.model.objects.user.User1;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -16,11 +16,11 @@ import java.util.Date;
  * Created by kevinlavi on 5/4/16.
  */
 public class SendFeedBack {
-    public void send(User mUser, Context mContext){
+    public void send(User1 mUser1, Context mContext){
         String buildVersion = BuildConfig.VERSION_NAME;
-        String firstName = mUser.getFirst_name();
-        String lastName = mUser.getLast_name();
-        String userId = String.valueOf(mUser.getId());
+        String firstName = mUser1.getFirst_name();
+        String lastName = mUser1.getLast_name();
+        String userId = String.valueOf(mUser1.getId());
         String deviceName = DeviceName.getDeviceName();
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         String appName = mContext.getString(R.string.app_name);
@@ -34,7 +34,7 @@ public class SendFeedBack {
                 "Dear " + appName + "," +
                         "\n" + "\n" + "\n" +
                         "Version: " + buildVersion + "\n" +
-                        "User ID: " + userId + "\n" +
+                        "User1 ID: " + userId + "\n" +
                         "First Name: " + firstName + "\n" +
                         "Last Name: " + lastName + "\n" +
                         "Device: " + deviceName);

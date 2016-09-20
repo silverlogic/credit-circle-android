@@ -6,7 +6,7 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
-import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.model.objects.user.User1;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -31,7 +31,7 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
         this.eventBus = eventBus;
     }
 
-    public void updateEmail(String token, User credentials, final Context context) {
+    public void updateEmail(String token, User1 credentials, final Context context) {
 
         if (isViewAttached()) {
             getView().showLoading();
@@ -65,7 +65,7 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
                 });
     }
 
-    public void changePassword(String token, User creds, final Context context){
+    public void changePassword(String token, User1 creds, final Context context){
 
         if (isViewAttached()) {
             getView().showLoading();

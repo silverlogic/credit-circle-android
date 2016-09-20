@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -21,7 +20,7 @@ import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.forgotpassword.ForgotPasswordActivity;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
-import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.model.objects.user.User1;
 import com.tsl.baseapp.settings.SettingsActivity;
 import com.tsl.baseapp.signup.SignUpActivity;
 import com.tsl.baseapp.utils.Constants;
@@ -30,7 +29,6 @@ import com.tsl.baseapp.utils.KeyboardUtils;
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -169,11 +167,11 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
             KeyboardUtils.hideKeyboard(mInputPassword);
         }
 
-        User user = new User();
-        user.login(username, pass);
+        User1 user1 = new User1();
+        user1.login(username, pass);
 
         // Start login
-        presenter.doLogin(user);
+        presenter.doLogin(user1);
     }
 
     @OnClick(R.id.link_signup)

@@ -1,20 +1,13 @@
 package com.tsl.baseapp.baseview;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
-import com.tsl.baseapp.api.BaseApi;
-import com.tsl.baseapp.api.BaseApiManager;
-import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
-import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.model.objects.user.User1;
 
 import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
-import rx.Subscriber;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import timber.log.Timber;
 
 /**
  * Created by kevinlavi on 5/6/16.
@@ -29,7 +22,7 @@ public class BasePresenter extends MvpBasePresenter<BaseView> {
         this.eventBus = eventBus;
     }
 
-    public void doSignUp(User credentials) {
+    public void doSignUp(User1 credentials) {
 
         if (isViewAttached()) {
             getView().showLoading();
@@ -41,7 +34,7 @@ public class BasePresenter extends MvpBasePresenter<BaseView> {
 //        baseSubscriber = api.signUpUser(credentials)
 //                .observeOn(AndroidSchedulers.mainThread())
 //                .subscribeOn(Schedulers.io())
-//                .subscribe(new Subscriber<User>() {
+//                .subscribe(new Subscriber<User1>() {
 //                    @Override
 //                    public void onCompleted() {
 //                        // FINISH API CALL
@@ -60,7 +53,7 @@ public class BasePresenter extends MvpBasePresenter<BaseView> {
 //                    }
 //
 //                    @Override
-//                    public void onNext(User user) {
+//                    public void onNext(User1 user) {
 //                        // POST THE RESULT OF API CALL
 //                        eventBus.post(new SignUpSuccessfulEvent(user));
 //                    }

@@ -10,7 +10,7 @@ import android.preference.PreferenceFragment;
 import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseAppActivity;
-import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.model.objects.user.User1;
 import com.tsl.baseapp.updatepasswordemail.UpdatePasswordAndEmailActivity;
 import com.tsl.baseapp.updatepasswordemail.UpdatePasswordAndEmailFragment;
 import com.tsl.baseapp.utils.Constants;
@@ -107,9 +107,9 @@ public class SettingsActivity extends BaseAppActivity {
         }
 
         private void feedback(){
-            User mUser = Hawk.get(Constants.USER);
+            User1 mUser1 = Hawk.get(Constants.USER);
             SendFeedBack sendFeedBack = new SendFeedBack();
-            sendFeedBack.send(mUser, getActivity());
+            sendFeedBack.send(mUser1, getActivity());
         }
 
         private void changeEmail(){

@@ -5,7 +5,6 @@ package com.tsl.baseapp.model.event;
  */
 
 import com.tsl.baseapp.model.objects.token.Token;
-import com.tsl.baseapp.model.objects.user.User;
 
 /**
  * Fired to inform that the login was successful
