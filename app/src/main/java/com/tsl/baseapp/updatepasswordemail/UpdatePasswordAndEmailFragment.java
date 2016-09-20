@@ -166,7 +166,7 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
     @Override
     public void showUpdateEmailSuccess() {
         vs.setUpdateEmailSuccess();
-        Utils.makeToast(mContext, R.string.email_updated).show();
+        Utils.makeToast(mContext, R.string.email_update_sent).show();
         mSubmitButton.setProgress(100);
         setEnabled(true);
         getActivity().finish();

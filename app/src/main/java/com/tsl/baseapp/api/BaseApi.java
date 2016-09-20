@@ -27,7 +27,7 @@ public interface BaseApi {
     Observable<Void> forgotPassword(@Body JsonObject auth);
 
     @POST("users/change-password")
-    Observable<Void> changePassword(@Header(Constants.AUTHORIZATION) String token, @Body User creds);
+    Observable<JsonObject> changePassword(@Header(Constants.AUTHORIZATION) String token, @Body User creds);
 
     @POST("change-email")
     Observable<Void> changeEmail(@Header(Constants.AUTHORIZATION) String token, @Body User creds);

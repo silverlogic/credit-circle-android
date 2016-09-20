@@ -74,6 +74,7 @@
     <string name="updating">Updating...</string>
     <string name="update_email">Update Email</string>
     <string name="email_updated">Email Updated</string>
+    <string name="email_update_sent">An email has been sent to the email you provided</string>
     <string name="change_password_failed">Error changing password</string>
     <string name="change_email_failed">Error updating email</string>
     <string name="new_email">New Email</string>
