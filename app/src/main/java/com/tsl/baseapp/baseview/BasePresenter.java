@@ -1,7 +1,7 @@
 package com.tsl.baseapp.baseview;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
-import com.tsl.baseapp.model.objects.user.User1;
+import com.tsl.baseapp.model.objects.user.User;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -22,7 +22,7 @@ public class BasePresenter extends MvpBasePresenter<BaseView> {
         this.eventBus = eventBus;
     }
 
-    public void doSignUp(User1 credentials) {
+    public void doSignUp(User credentials) {
 
         if (isViewAttached()) {
             getView().showLoading();
@@ -34,7 +34,7 @@ public class BasePresenter extends MvpBasePresenter<BaseView> {
 //        baseSubscriber = api.signUpUser(credentials)
 //                .observeOn(AndroidSchedulers.mainThread())
 //                .subscribeOn(Schedulers.io())
-//                .subscribe(new Subscriber<User1>() {
+//                .subscribe(new Subscriber<User>() {
 //                    @Override
 //                    public void onCompleted() {
 //                        // FINISH API CALL
@@ -53,7 +53,7 @@ public class BasePresenter extends MvpBasePresenter<BaseView> {
 //                    }
 //
 //                    @Override
-//                    public void onNext(User1 user) {
+//                    public void onNext(User user) {
 //                        // POST THE RESULT OF API CALL
 //                        eventBus.post(new SignUpSuccessfulEvent(user));
 //                    }

@@ -3,7 +3,7 @@ package com.tsl.baseapp.api;
 import com.google.gson.JsonObject;
 import com.tsl.baseapp.model.objects.project.ProjectsResults;
 import com.tsl.baseapp.model.objects.token.Token;
-import com.tsl.baseapp.model.objects.user.User1;
+import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.Constants;
 
 import retrofit2.http.Body;
@@ -18,19 +18,19 @@ import rx.Observable;
 public interface BaseApi {
 
     @POST("login")
-    Observable<Token> loginUser(@Body User1 auth);
+    Observable<Token> loginUser(@Body User auth);
 
     @POST("register")
-    Observable<User1> signUpUser(@Body User1 auth);
+    Observable<User> signUpUser(@Body User auth);
 
     @POST("forgot-password")
     Observable<Void> forgotPassword(@Body JsonObject auth);
 
     @POST("users/change-password")
-    Observable<Void> changePassword(@Header(Constants.AUTHORIZATION) String token, @Body User1 creds);
+    Observable<Void> changePassword(@Header(Constants.AUTHORIZATION) String token, @Body User creds);
 
     @POST("change-email")
-    Observable<Void> changeEmail(@Header(Constants.AUTHORIZATION) String token, @Body User1 creds);
+    Observable<Void> changeEmail(@Header(Constants.AUTHORIZATION) String token, @Body User creds);
 
     @GET("v1/projects/")
     Observable<ProjectsResults> getProjects(@Header(Constants.AUTHORIZATION) String token);

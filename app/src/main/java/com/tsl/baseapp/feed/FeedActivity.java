@@ -9,7 +9,7 @@ import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseAppActivity;
 import com.tsl.baseapp.login.LoginActivity;
-import com.tsl.baseapp.model.objects.user.User1;
+import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.settings.SettingsActivity;
 
@@ -20,8 +20,8 @@ public class FeedActivity extends BaseAppActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
 
-        User1 user1 = Hawk.get(Constants.USER);
-        if (user1 == null){
+        User user = Hawk.get(Constants.USER);
+        if (user == null){
             Intent intent = new Intent(this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);

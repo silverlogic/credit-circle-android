@@ -1,18 +1,18 @@
 package com.tsl.baseapp.model.event;
 
-import com.tsl.baseapp.model.objects.user.User1;
+import com.tsl.baseapp.model.objects.user.User;
 
 /**
  * Created by kevinlavi on 5/3/16.
  */
 public class SignUpSuccessfulEvent {
-    private User1 mUser1;
+    private User mUser;
 
-    public SignUpSuccessfulEvent(User1 user1) {
-        mUser1 = user1;
+    public SignUpSuccessfulEvent(User user) {
+        mUser = user;
     }
 
-    public User1 getUser() {
-        return mUser1;
+    public User getUser() {
+        return mUser;
     }
 }

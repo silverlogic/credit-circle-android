@@ -5,7 +5,7 @@ import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
 import com.tsl.baseapp.model.objects.token.Token;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
-import com.tsl.baseapp.model.objects.user.User1;
+import com.tsl.baseapp.model.objects.user.User;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -30,7 +30,7 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
         this.eventBus = eventBus;
     }
 
-    public void doLogin(User1 credentials) {
+    public void doLogin(User credentials) {
 
         if (isViewAttached()) {
             getView().showLoading();

@@ -20,7 +20,7 @@ import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.forgotpassword.ForgotPasswordActivity;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
-import com.tsl.baseapp.model.objects.user.User1;
+import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.settings.SettingsActivity;
 import com.tsl.baseapp.signup.SignUpActivity;
 import com.tsl.baseapp.utils.Constants;
@@ -167,11 +167,11 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
             KeyboardUtils.hideKeyboard(mInputPassword);
         }
 
-        User1 user1 = new User1();
-        user1.login(username, pass);
+        User user = new User();
+        user.login(username, pass);
 
         // Start login
-        presenter.doLogin(user1);
+        presenter.doLogin(user);
     }
 
     @OnClick(R.id.link_signup)

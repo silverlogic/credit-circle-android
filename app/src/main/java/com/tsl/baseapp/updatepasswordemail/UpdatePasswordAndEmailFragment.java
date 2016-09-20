@@ -20,7 +20,7 @@ import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
-import com.tsl.baseapp.model.objects.user.User1;
+import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.Utils;
 import com.tsl.baseapp.utils.viewhelper.ActionProcessButtonChangeText;
@@ -195,9 +195,9 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             mChangeEmailInput.setError(mContext.getString(R.string.valid_email_error));
         } else {
-            User1 user1 = new User1();
-            user1.changeEmail(email);
-            presenter.updateEmail(Constants.getToken(mContext), user1, mContext);
+            User user = new User();
+            user.changeEmail(email);
+            presenter.updateEmail(Constants.getToken(mContext), user, mContext);
         }
     }
 
@@ -209,9 +209,9 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
         } else if (!passNew.equals(passNewConfirm)) {
             mConfirmNewPassword.setError(mContext.getString(R.string.new_password_error));
         } else {
-            User1 user1 = new User1();
-            user1.changePassword(currentPass, passNew);
-            presenter.changePassword(Constants.getToken(mContext), user1, mContext);
+            User user = new User();
+            user.changePassword(currentPass, passNew);
+            presenter.changePassword(Constants.getToken(mContext), user, mContext);
         }
     }
 
