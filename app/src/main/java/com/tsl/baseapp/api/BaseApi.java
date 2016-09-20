@@ -3,7 +3,6 @@ package com.tsl.baseapp.api;
 import com.google.gson.JsonObject;
 import com.tsl.baseapp.model.objects.project.ProjectsResults;
 import com.tsl.baseapp.model.objects.token.Token;
-import com.tsl.baseapp.model.objects.user.ChangePasswordCredentials;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.Constants;
 

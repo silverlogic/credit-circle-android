@@ -37,6 +37,9 @@ public class User {
     @SerializedName("last_name")
     private String last_name;
 
+    private String current_password;
+    private String new_password;
+
     public User(){};
 
     public void register(String email, String password, String first_name, String last_name){
@@ -57,6 +60,15 @@ public class User {
     public void login(String email, String password){
         this.email = email;
         this.password = password;
+    }
+
+    public void changePassword(String current_password, String new_password){
+        this.current_password = current_password;
+        this.new_password = new_password;
+    }
+
+    public void changeEmail(String new_email){
+        this.new_email = new_email;
     }
 
     public int getId() {
