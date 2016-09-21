@@ -3,9 +3,9 @@ package com.tsl.baseapp.signup;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
-import com.tsl.baseapp.model.objects.user.SignUpCredentials;
-import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
+import com.tsl.baseapp.model.objects.token.Token;
+import com.tsl.baseapp.model.objects.user.User;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -30,7 +30,7 @@ public class SignUpPresenter extends MvpBasePresenter<SignUpView> {
         this.eventBus = eventBus;
     }
 
-    public void doSignUp(SignUpCredentials credentials) {
+    public void doSignUp(final User credentials) {
 
         if (isViewAttached()) {
             getView().showLoading();
@@ -38,16 +38,13 @@ public class SignUpPresenter extends MvpBasePresenter<SignUpView> {
 
         // Kind of "callback"
         cancelSubscription();
-        BaseApi api = new BaseApiManager().getAppApi();
+        final BaseApi api = new BaseApiManager().getAppApi();
         signUpSubscriber = api.signUpUser(credentials)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<User>() {
                     @Override
                     public void onCompleted() {
-                        if (isViewAttached()) {
-                            getView().signUpSuccessful();
-                        }
                     }
 
                     @Override
@@ -59,8 +56,31 @@ public class SignUpPresenter extends MvpBasePresenter<SignUpView> {
                     }
 
                     @Override
-                    public void onNext(User user) {
-                        eventBus.post(new SignUpSuccessfulEvent(user));
+                    public void onNext(final User user) {
+                        signUpSubscriber = api.loginUser(credentials)
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribeOn(Schedulers.io())
+                                .subscribe(new Subscriber<Token>() {
+                                    @Override
+                                    public void onCompleted() {
+                                        if (isViewAttached()) {
+                                            getView().signUpSuccessful();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        if (isViewAttached()) {
+                                            Timber.d(e.getMessage());
+                                            getView().showError();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onNext(final Token token) {
+                                        eventBus.post(new SignUpSuccessfulEvent(user, token));
+                                    }
+                                });
                     }
                 });
     }

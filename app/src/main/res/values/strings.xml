@@ -13,11 +13,14 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="error_forgot_password">Error resetting your password</string>
+    <string name="password_reset">Password has been reset. Please check your email.</string>
 
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_web_view">WebViewActivity</string>
     <string name="title_activity_edit_profile">Edit Profile</string>
     <string name="title_activity_sign_up">Sign Up</string>
+    <string name="title_activity_forgot_password">Forgot Password</string>
 
     <string name="login">Log in</string>
     <string name="signup">Sign Up</string>
@@ -68,6 +71,13 @@
     <string name="yes">Yes</string>
     <string name="logged_out">Logged Out</string>
     <string name="no">No</string>
+    <string name="updating">Updating...</string>
+    <string name="update_email">Update Email</string>
+    <string name="email_updated">Email Updated</string>
+    <string name="email_update_sent">An email has been sent to the email you provided</string>
+    <string name="change_password_failed">Error changing password</string>
+    <string name="change_email_failed">Error updating email</string>
+    <string name="new_email">New Email</string>
 
     <!-- About page -->
     <string name="website_url">tsl.io</string>

@@ -2,6 +2,7 @@ package com.tsl.baseapp.api;
 
 import com.tsl.baseapp.BuildConfig;
 import com.tsl.baseapp.utils.Constants;
+import com.tsl.baseapp.utils.RxErrorHandlingCallAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -42,7 +43,7 @@ public class BaseApiManager {
 
             mAppApi = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(builder.build())
                     .build()

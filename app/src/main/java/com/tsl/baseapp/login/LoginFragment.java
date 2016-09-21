@@ -10,19 +10,21 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.facebook.login.widget.LoginButton;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 import com.hkm.ui.processbutton.iml.ActionProcessButton;
 import com.orhanobut.hawk.Hawk;
-import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.R;
+import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.base.BaseViewStateFragment;
-import com.tsl.baseapp.feed.FeedActivity;
-import com.tsl.baseapp.model.objects.user.AuthCredentials;
+import com.tsl.baseapp.forgotpassword.ForgotPasswordActivity;
+import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
+import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.settings.SettingsActivity;
+import com.tsl.baseapp.signup.SignUpActivity;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.KeyboardUtils;
-import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
-import com.tsl.baseapp.signup.SignUpActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -43,6 +45,8 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     LoginButton mFacebookLoginButton;
     @Bind(R.id.link_signup)
     TextView mSignupLink;
+    @Bind(R.id.link_forgot_password)
+    TextView mLinkForgotPassword;
     @Bind(R.id.loginForm)
     ViewGroup mLoginForm;
 
@@ -129,15 +133,15 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     @Override
     public void loginSuccessful() {
         mLoginButton.setProgress(100); // We are done
-        Intent intent = new Intent(getActivity(), FeedActivity.class);
+        Intent intent = new Intent(getActivity(), SettingsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         getActivity().overridePendingTransition(0, 0);
         getActivity().finish();
     }
+
     @Subscribe
-    public void onEvent(LoginSuccessfulEvent event){
-        Hawk.put(Constants.TOKEN, event.getToken());
+    public void onEvent(LoginSuccessfulEvent event) {
         Hawk.put(Constants.USER, event.getUser());
     }
 
@@ -148,7 +152,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
                 .build();
     }
 
-    private void login(){
+    private void login() {
         String username = mInputEmail.getText().toString();
         String pass = mInputPassword.getText().toString();
         LoginValidation validation = new LoginValidation();
@@ -163,13 +167,23 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
             KeyboardUtils.hideKeyboard(mInputPassword);
         }
 
+        User user = new User();
+        user.login(username, pass);
+
         // Start login
-        presenter.doLogin(new AuthCredentials(username, pass));
+        presenter.doLogin(user);
     }
 
     @OnClick(R.id.link_signup)
-    public void signUpActivity(){
+    public void signUpActivity() {
         Intent intent = new Intent(getActivity(), SignUpActivity.class);
+        startActivity(intent);
+        getActivity().overridePendingTransition(0, 0);
+    }
+
+    @OnClick(R.id.link_forgot_password)
+    public void forgotPasswordActivity() {
+        Intent intent = new Intent(getActivity(), ForgotPasswordActivity.class);
         startActivity(intent);
         getActivity().overridePendingTransition(0, 0);
     }

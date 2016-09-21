@@ -11,6 +11,8 @@ import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseAppActivity;
 import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.updatepasswordemail.UpdatePasswordAndEmailActivity;
+import com.tsl.baseapp.updatepasswordemail.UpdatePasswordAndEmailFragment;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.webview.WebViewActivity;
 
@@ -33,6 +35,7 @@ public class SettingsActivity extends BaseAppActivity {
         Preference mAbout;
         Preference mTerms;
         Preference mFeedback;
+        Preference mChangeEmail;
         Preference mChangePassword;
         Preference mLogout;
 
@@ -56,6 +59,9 @@ public class SettingsActivity extends BaseAppActivity {
             if (preference == mChangePassword){
                 changePassword();
             }
+            if (preference == mChangeEmail){
+                changeEmail();
+            }
             if (preference == mLogout){
                 logout();
             }
@@ -68,12 +74,15 @@ public class SettingsActivity extends BaseAppActivity {
             mFeedback = findPreference("feedback");
             mChangePassword = findPreference("change_password");
             mLogout = findPreference("logout");
+            mChangeEmail = findPreference("change_email");
+
 
             mAbout.setOnPreferenceClickListener(this);
             mTerms.setOnPreferenceClickListener(this);
             mFeedback.setOnPreferenceClickListener(this);
             mChangePassword.setOnPreferenceClickListener(this);
             mLogout.setOnPreferenceClickListener(this);
+            mChangeEmail.setOnPreferenceClickListener(this);
         }
 
         private void about(){
@@ -103,10 +112,18 @@ public class SettingsActivity extends BaseAppActivity {
             sendFeedBack.send(mUser, getActivity());
         }
 
+        private void changeEmail(){
+            Intent intent = new Intent(getActivity(), UpdatePasswordAndEmailActivity.class);
+            intent.putExtra(UpdatePasswordAndEmailFragment.TYPE, UpdatePasswordAndEmailFragment.UPDATE_EMAIL);
+            startActivity(intent);
+            getActivity().overridePendingTransition(0, 0);
+        }
+
         private void changePassword(){
-            String token = Hawk.get(Constants.TOKEN);
-            ChangePasswordDialog dialog = new ChangePasswordDialog();
-            dialog.setDialog(getActivity(), token);
+            Intent intent = new Intent(getActivity(), UpdatePasswordAndEmailActivity.class);
+            intent.putExtra(UpdatePasswordAndEmailFragment.TYPE, UpdatePasswordAndEmailFragment.CHANGE_PASSWORD);
+            startActivity(intent);
+            getActivity().overridePendingTransition(0, 0);
         }
 
         private void logout(){

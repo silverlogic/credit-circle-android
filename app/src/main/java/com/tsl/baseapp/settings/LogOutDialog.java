@@ -28,8 +28,7 @@ public class LogOutDialog {
                         if (isFacebookLoggedIn()) {
                             LoginManager.getInstance().logOut();
                         }
-                        Hawk.remove(Constants.TOKEN);
-                        Hawk.remove(Constants.USER);
+                        Hawk.clear();
                         Intent intent = new Intent(mContext, LoginActivity.class);
                         logoutIntent(intent, mContext);
                     }

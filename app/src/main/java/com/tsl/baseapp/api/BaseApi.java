@@ -1,10 +1,8 @@
 package com.tsl.baseapp.api;
 
+import com.google.gson.JsonObject;
 import com.tsl.baseapp.model.objects.project.ProjectsResults;
 import com.tsl.baseapp.model.objects.token.Token;
-import com.tsl.baseapp.model.objects.user.AuthCredentials;
-import com.tsl.baseapp.model.objects.user.ChangePasswordCredentials;
-import com.tsl.baseapp.model.objects.user.SignUpCredentials;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.Constants;
 
@@ -19,17 +17,23 @@ import rx.Observable;
  */
 public interface BaseApi {
 
-    @POST("/v1/auth/login/")
-    Observable<Token> loginUser(@Body AuthCredentials auth);
+    @POST("login")
+    Observable<Token> loginUser(@Body User auth);
 
-    @POST("/v1/auth/register/")
-    Observable<User> signUpUser(@Body SignUpCredentials auth);
+    @POST("register")
+    Observable<User> signUpUser(@Body User auth);
 
-    @GET("/v1/user/")
-    Observable<User> getUser(@Header(Constants.AUTHORIZATION) String token);
+    @POST("forgot-password")
+    Observable<Void> forgotPassword(@Body JsonObject auth);
 
-    @POST("v1/auth/change-password/")
-    Observable<Void> changePassword(@Header(Constants.AUTHORIZATION) String token, @Body ChangePasswordCredentials creds);
+    @POST("users/change-password")
+    Observable<JsonObject> changePassword(@Header(Constants.AUTHORIZATION) String token, @Body User creds);
+
+    @POST("change-email")
+    Observable<Void> changeEmail(@Header(Constants.AUTHORIZATION) String token, @Body User creds);
+
+    @GET("users/me")
+    Observable<User> getCurrentUser(@Header(Constants.AUTHORIZATION) String token);
 
     @GET("v1/projects/")
     Observable<ProjectsResults> getProjects(@Header(Constants.AUTHORIZATION) String token);

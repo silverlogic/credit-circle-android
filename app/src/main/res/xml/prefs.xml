@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-
-    <PreferenceCategory android:title="@string/settings">
-        <Preference
-            android:title="@string/about"
-            android:key="about"/>
-        <Preference
-            android:title="@string/terms_of_services"
-            android:key="terms"/>
-        <Preference
-            android:title= "@string/send_feedback"
-            android:key="feedback"/>
-        <Preference
-            android:title= "@string/change_password"
-            android:key="change_password"/>
-        <Preference
-            android:title= "@string/logout"
-            android:key="logout"/>
-    </PreferenceCategory>
-
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+        android:title= "@string/update_email"
+        android:key="change_email"/>
+    <Preference
+        android:title= "@string/change_password"
+        android:key="change_password"/>
+    <Preference
+        android:title="@string/about"
+        android:key="about"/>
+    <Preference
+        android:title="@string/terms_of_services"
+        android:key="terms"/>
+    <Preference
+        android:title= "@string/send_feedback"
+        android:key="feedback"/>
+    <Preference
+        android:title= "@string/logout"
+        android:key="logout"/>
 </PreferenceScreen>

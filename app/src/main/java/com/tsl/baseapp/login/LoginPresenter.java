@@ -1,12 +1,13 @@
 package com.tsl.baseapp.login;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
+import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
 import com.tsl.baseapp.model.objects.token.Token;
-import com.tsl.baseapp.model.objects.user.AuthCredentials;
-import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
+import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.utils.Constants;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -31,7 +32,7 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
         this.eventBus = eventBus;
     }
 
-    public void doLogin(AuthCredentials credentials) {
+    public void doLogin(User credentials) {
 
         if (isViewAttached()) {
             getView().showLoading();
@@ -46,9 +47,6 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
                 .subscribe(new Subscriber<Token>() {
                     @Override
                     public void onCompleted() {
-                        if (isViewAttached()) {
-                            getView().loginSuccessful();
-                        }
                     }
 
                     @Override
@@ -60,9 +58,9 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
                     }
 
                     @Override
-                    public void onNext(final Token t) {
-                        final String token = "Token " + t.getToken();
-                        api.getUser(token)
+                    public void onNext(final Token token) {
+                        Hawk.put(Constants.TOKEN, token.getToken());
+                        loginSubscriber = api.getCurrentUser(Constants.getToken())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribeOn(Schedulers.io())
                                 .subscribe(new Subscriber<User>() {
@@ -82,7 +80,7 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
                                     }
 
                                     @Override
-                                    public void onNext(User user) {
+                                    public void onNext(final User user) {
                                         eventBus.post(new LoginSuccessfulEvent(token, user));
                                     }
                                 });

@@ -3,11 +3,33 @@ package com.tsl.baseapp.model.objects.user;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by kevinlavi on 5/3/16.
+ * Created by Kevin Lavi on 9/19/16.
  */
+
 public class User {
     @SerializedName("id")
     private int id;
+
+    @SerializedName("email")
+    private String email;
+
+    @SerializedName("password")
+    private String password;
+
+    @SerializedName("is_email_confirmed")
+    private boolean is_email_confirmed;
+
+    @SerializedName("new_email")
+    private String new_email;
+
+    @SerializedName("is_new_email_confirmed")
+    private boolean is_new_email_confirmed;
+
+    @SerializedName("referral_code")
+    private String referral_code;
+
+    @SerializedName("avatar")
+    private UserImages userImages;
 
     @SerializedName("first_name")
     private String first_name;
@@ -15,50 +37,39 @@ public class User {
     @SerializedName("last_name")
     private String last_name;
 
-    @SerializedName("email")
-    private String email;
+    private String current_password;
+    private String new_password;
 
-    @SerializedName("facebook")
-    private String facebook;
+    public User(){};
 
-    @SerializedName("linkedin")
-    private String linkedin;
+    public void register(String email, String password, String first_name, String last_name){
+        this.email = email;
+        this.password = password;
+        this.first_name = first_name;
+        this.last_name = last_name;
+    }
 
-    @SerializedName("instagram")
-    private String instagram;
+    public void register(String email, String password, String first_name, String last_name, String referral_code){
+        this.email = email;
+        this.password = password;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.referral_code = referral_code;
+    }
 
-    @SerializedName("slug")
-    private String slug;
+    public void login(String email, String password){
+        this.email = email;
+        this.password = password;
+    }
 
-    @SerializedName("tagline")
-    private String tagline;
+    public void changePassword(String current_password, String new_password){
+        this.current_password = current_password;
+        this.new_password = new_password;
+    }
 
-    @SerializedName("shipping_address")
-    private String shipping_address;
-
-    @SerializedName("billing_address")
-    private String billing_address;
-
-    @SerializedName("website")
-    private String website;
-
-    @SerializedName("credits")
-    private double credits;
-
-    @SerializedName("referral_code")
-    private String referral_code;
-
-    @SerializedName("new_email")
-    private String new_email;
-
-    @SerializedName("is_new_email_confirmed")
-    private Boolean is_new_email_confirmed;
-
-    @SerializedName("newsletter")
-    private Boolean newsletter;
-
-    @SerializedName("avatar")
-    private UserImages userImages;
+    public void changeEmail(String new_email){
+        this.new_email = new_email;
+    }
 
     public int getId() {
         return id;
@@ -76,6 +87,46 @@ public class User {
         this.email = email;
     }
 
+    public boolean is_email_confirmed() {
+        return is_email_confirmed;
+    }
+
+    public void setIs_email_confirmed(boolean is_email_confirmed) {
+        this.is_email_confirmed = is_email_confirmed;
+    }
+
+    public String getNew_email() {
+        return new_email;
+    }
+
+    public void setNew_email(String new_email) {
+        this.new_email = new_email;
+    }
+
+    public boolean is_new_email_confirmed() {
+        return is_new_email_confirmed;
+    }
+
+    public void setIs_new_email_confirmed(boolean is_new_email_confirmed) {
+        this.is_new_email_confirmed = is_new_email_confirmed;
+    }
+
+    public String getReferral_code() {
+        return referral_code;
+    }
+
+    public void setReferral_code(String referral_code) {
+        this.referral_code = referral_code;
+    }
+
+    public UserImages getUserImages() {
+        return userImages;
+    }
+
+    public void setUserImages(UserImages userImages) {
+        this.userImages = userImages;
+    }
+
     public String getFirst_name() {
         return first_name;
     }
@@ -90,117 +141,5 @@ public class User {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
-    }
-
-    public String getFacebook() {
-        return facebook;
-    }
-
-    public void setFacebook(String facebook) {
-        this.facebook = facebook;
-    }
-
-    public String getLinkedin() {
-        return linkedin;
-    }
-
-    public void setLinkedin(String linkedin) {
-        this.linkedin = linkedin;
-    }
-
-    public String getInstagram() {
-        return instagram;
-    }
-
-    public void setInstagram(String instagram) {
-        this.instagram = instagram;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
-
-    public String getTagline() {
-        return tagline;
-    }
-
-    public void setTagline(String tagline) {
-        this.tagline = tagline;
-    }
-
-    public String getShipping_address() {
-        return shipping_address;
-    }
-
-    public void setShipping_address(String shipping_address) {
-        this.shipping_address = shipping_address;
-    }
-
-    public String getBilling_address() {
-        return billing_address;
-    }
-
-    public void setBilling_address(String billing_address) {
-        this.billing_address = billing_address;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public double getCredits() {
-        return credits;
-    }
-
-    public void setCredits(double credits) {
-        this.credits = credits;
-    }
-
-    public String getReferral_code() {
-        return referral_code;
-    }
-
-    public void setReferral_code(String referral_code) {
-        this.referral_code = referral_code;
-    }
-
-    public String getNew_email() {
-        return new_email;
-    }
-
-    public void setNew_email(String new_email) {
-        this.new_email = new_email;
-    }
-
-    public Boolean getIs_new_email_confirmed() {
-        return is_new_email_confirmed;
-    }
-
-    public void setIs_new_email_confirmed(Boolean is_new_email_confirmed) {
-        this.is_new_email_confirmed = is_new_email_confirmed;
-    }
-
-    public Boolean getNewsletter() {
-        return newsletter;
-    }
-
-    public void setNewsletter(Boolean newsletter) {
-        this.newsletter = newsletter;
-    }
-
-    public UserImages getUserImages() {
-        return userImages;
-    }
-
-    public void setUserImages(UserImages userImages) {
-        this.userImages = userImages;
     }
 }

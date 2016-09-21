@@ -17,7 +17,7 @@ import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.login.LoginActivity;
-import com.tsl.baseapp.model.objects.user.SignUpCredentials;
+import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.KeyboardUtils;
 import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
@@ -129,6 +129,7 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
     @Subscribe
     public void onEvent(SignUpSuccessfulEvent event){
         Hawk.put(Constants.USER, event.getUser());
+        Hawk.put(Constants.TOKEN, event.getToken().getToken());
     }
 
     private void setFormEnabled(boolean enabled) {
@@ -168,10 +169,11 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
             KeyboardUtils.hideKeyboard(mInputPassword);
         }
 
-        SignUpCredentials credentials = new SignUpCredentials(email, password, confirm_password, firstName, lastName);
+        User user = new User();
+        user.register(email, password, firstName, lastName);
 
-        // Start login
-        presenter.doSignUp(credentials);
+        // Start signup
+        presenter.doSignUp(user);
     }
 
     @OnClick(R.id.link_login)

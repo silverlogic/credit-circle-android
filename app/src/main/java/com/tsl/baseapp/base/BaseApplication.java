@@ -44,9 +44,6 @@ public class BaseApplication extends Application {
         FacebookSdk.sdkInitialize(getApplicationContext());
         Fabric.with(this, new Crashlytics());
         JodaTimeAndroid.init(this);
-        if (BuildConfig.DEBUG){
-            Timber.plant(new Timber.DebugTree());
-        }
     }
 
     public static RefWatcher getRefWatcher(Context context) {
