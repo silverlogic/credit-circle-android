@@ -197,7 +197,7 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
         } else {
             User user = new User();
             user.changeEmail(email);
-            presenter.updateEmail(Constants.getToken(mContext), user, mContext);
+            presenter.updateEmail(Constants.getToken(), user, mContext);
         }
     }
 
@@ -211,7 +211,7 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
         } else {
             User user = new User();
             user.changePassword(currentPass, passNew);
-            presenter.changePassword(Constants.getToken(mContext), user, mContext);
+            presenter.changePassword(Constants.getToken(), user, mContext);
         }
     }
 

@@ -142,7 +142,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
 
     @Subscribe
     public void onEvent(LoginSuccessfulEvent event) {
-        Hawk.put(Constants.TOKEN, event.getToken());
+        Hawk.put(Constants.USER, event.getUser());
     }
 
     @Override

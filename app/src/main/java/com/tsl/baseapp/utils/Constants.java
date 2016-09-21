@@ -33,7 +33,7 @@ public class Constants {
     public static final String PICTURE_CAPTURE = "capture";
     public static final String PICTURE_PICK = "pick";
 
-    public static final String getToken(Context ctx){
+    public static final String getToken(){
         String token = "Token " + Hawk.get(TOKEN);
         return token;
     }

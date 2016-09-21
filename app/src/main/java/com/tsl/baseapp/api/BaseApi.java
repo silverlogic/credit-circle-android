@@ -32,6 +32,9 @@ public interface BaseApi {
     @POST("change-email")
     Observable<Void> changeEmail(@Header(Constants.AUTHORIZATION) String token, @Body User creds);
 
+    @GET("users/me")
+    Observable<User> getCurrentUser(@Header(Constants.AUTHORIZATION) String token);
+
     @GET("v1/projects/")
     Observable<ProjectsResults> getProjects(@Header(Constants.AUTHORIZATION) String token);
 }

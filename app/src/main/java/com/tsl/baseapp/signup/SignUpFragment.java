@@ -129,6 +129,7 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
     @Subscribe
     public void onEvent(SignUpSuccessfulEvent event){
         Hawk.put(Constants.USER, event.getUser());
+        Hawk.put(Constants.TOKEN, event.getToken().getToken());
     }
 
     private void setFormEnabled(boolean enabled) {
