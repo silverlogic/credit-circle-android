@@ -1,9 +1,7 @@
 package com.tsl.baseapp.feed;
 
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -27,7 +25,6 @@ import com.tsl.baseapp.utils.EndlessRecyclerOnScrollListener;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 
 import butterknife.Bind;
@@ -40,7 +37,7 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
 
 
     @Bind(R.id.feed)
-    RecyclerView mFeed;
+    RecyclerView mRecyclerView;
     @Bind(R.id.swipe)
     SwipeRefreshLayout mSwipe;
     private Context mContext;
@@ -91,10 +88,11 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     public void showFeed() {
         vs.setShowFeed();
         stopRefreshing();
-        final LinearLayoutManager lm = new LinearLayoutManager(mContext);
-        mFeed.setLayoutManager(lm);
+        final LinearLayoutManager lm = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(lm);
+        mRecyclerView.setHasFixedSize(true);
         mAdapter = new FeedAdapter(mUserList);
-        mFeed.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnRecyclerViewItemClickListener(recylerOnClick());
         mPagination = new EndlessRecyclerOnScrollListener(lm, mAdapter) {
             @Override
@@ -104,7 +102,7 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
                 presenter.updateUserList(Constants.getToken(), page);
             }
         };
-        mFeed.addOnScrollListener(mPagination);
+        mRecyclerView.addOnScrollListener(mPagination);
     }
 
     @Override
