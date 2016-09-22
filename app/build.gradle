@@ -183,5 +183,4 @@ dependencies {
 
     // Adapter
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v1.9.7'
-
 }

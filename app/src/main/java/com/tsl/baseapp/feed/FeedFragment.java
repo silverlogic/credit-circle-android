@@ -22,8 +22,7 @@ import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.model.event.UsersEvent;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.Constants;
-import com.tsl.baseapp.utils.KeyboardUtils;
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+import com.tsl.baseapp.utils.EndlessRecyclerOnScrollListener;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -49,11 +48,16 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     private FeedComponent feedComponent;
     private BaseQuickAdapter mAdapter;
     private List<User> mUserList = new ArrayList<>();
+    private EndlessRecyclerOnScrollListener mPagination;
+    private int page;
+    private final int FIRST_PAGE = 1;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        page = FIRST_PAGE;
     }
 
     @Override
@@ -87,11 +91,20 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     public void showFeed() {
         vs.setShowFeed();
         stopRefreshing();
-        mFeed.setLayoutManager(new LinearLayoutManager(mContext));
+        final LinearLayoutManager lm = new LinearLayoutManager(mContext);
+        mFeed.setLayoutManager(lm);
         mAdapter = new FeedAdapter(mUserList);
         mFeed.setAdapter(mAdapter);
         mAdapter.setOnRecyclerViewItemClickListener(recylerOnClick());
-        Timber.d("FEEDEEEED");
+        mPagination = new EndlessRecyclerOnScrollListener(lm, mAdapter) {
+            @Override
+            public void onLoadMore(int current_page) {
+                Timber.d(String.valueOf(current_page));
+                page = current_page;
+                presenter.updateUserList(Constants.getToken(), page);
+            }
+        };
+        mFeed.addOnScrollListener(mPagination);
     }
 
     @Override
@@ -103,13 +116,21 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     @Override
     public void showLoading() {
         vs.setShowLoading();
+        if (page == FIRST_PAGE){
+            mSwipe.setRefreshing(true);
+        }
     }
 
     @Override
     public void fetchUsers() {
         vs.fetchUsers();
-        presenter.getUserList(Constants.getToken(), 1);
-        mSwipe.setRefreshing(true);
+        presenter.getUserList(Constants.getToken(), page);
+    }
+
+    @Override
+    public void updateFeed() {
+        vs.updateFeed();
+        stopRefreshing();
     }
 
     @Override
@@ -121,8 +142,13 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
 
     @Subscribe
     public void onEvent(UsersEvent event){
-        mUserList = event.getUserList();
-        Timber.d("USERLIST");
+        List<User> userList = event.getUserList();
+        if (mUserList.size() == 0){
+            mUserList.addAll(event.getUserList());
+        } else {
+            // add data - pagination
+            mAdapter.addData(userList);
+        }
     }
 
     private void setUpFeed(){
@@ -132,7 +158,10 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
         mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                fetchUsers();
+                page = FIRST_PAGE;
+                mPagination.reset(page, true);
+                mAdapter.getData().clear();
+                presenter.getUserList(Constants.getToken(), page);
             }
         });
         fetchUsers();
