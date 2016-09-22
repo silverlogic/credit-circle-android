@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -100,6 +101,8 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     public void showLoginForm() {
         vs.setShowLoginForm();
         changeFbButton();
+        // set password form to hide inputs
+        mInputPassword.setTransformationMethod(new PasswordTransformationMethod());
         setFormEnabled(true);
         mLoginButton.setProgress(0);
     }

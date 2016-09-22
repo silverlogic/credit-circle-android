@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -98,6 +99,9 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
     public void showSignUpForm() {
         vs.setShowSignUpForm();
         setFormEnabled(true);
+        // set password form to hide inputs
+        mInputPassword.setTransformationMethod(new PasswordTransformationMethod());
+        mInputPasswordConfirm.setTransformationMethod(new PasswordTransformationMethod());
         mSignUpButton.setProgress(0);
     }
 
