@@ -12,22 +12,11 @@ public class UserList {
     @SerializedName("results")
     private List<User> userList;
 
-    @SerializedName("next")
-    private String next;
-
     public List<User> getUserList() {
         return userList;
     }
 
     public void setUserList(List<User> userList) {
         this.userList = userList;
-    }
-
-    public String getNext() {
-        return next;
-    }
-
-    public void setNext(String next) {
-        this.next = next;
     }
 }
