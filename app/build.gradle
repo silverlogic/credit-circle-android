@@ -181,4 +181,7 @@ dependencies {
     compile 'com.yqritc:recyclerview-flexibledivider:1.2.6'
     compile 'com.github.ivbaranov:MaterialFavoriteButton:0.1.1'
 
+    // Adapter
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v1.9.7'
+
 }

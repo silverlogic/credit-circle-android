@@ -12,11 +12,15 @@ import android.view.View;
 
 
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
+import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
+import com.tsl.baseapp.model.event.UsersEvent;
 import com.tsl.baseapp.model.objects.project.Project;
 import com.tsl.baseapp.model.event.ProjectsEvent;
+import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.utils.Constants;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -39,7 +43,7 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     private FeedViewState vs;
     private FeedComponent feedComponent;
     private FeedAdapter mFeedAdapter;
-    private List<Project> mProjectsList = new ArrayList<>();
+    private List<User> mUserList = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +60,7 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mContext = getContext();
-        setUpFeed();
+        //setUpFeed();
     }
 
     @Override
@@ -94,7 +98,7 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
 
     @Override
     public void fetchProjects() {
-        presenter.getProjects();
+        presenter.getUserList(Constants.getToken(), 1);
         mSwipe.setRefreshing(true);
     }
 
@@ -106,9 +110,9 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     }
 
     @Subscribe
-    public void onEvent(ProjectsEvent event){
-        mProjectsList = event.getProjects();
-        mFeedAdapter.setNewsList(mProjectsList);
+    public void onEvent(UsersEvent event){
+        mUserList = event.getUserList();
+       // mFeedAdapter.setNewsList(mProjectsList);
     }
 
     private void setUpFeed(){

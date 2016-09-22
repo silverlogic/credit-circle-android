@@ -1,12 +1,13 @@
 package com.tsl.baseapp.feed;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
-import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
+import com.tsl.baseapp.model.event.UsersEvent;
 import com.tsl.baseapp.model.objects.project.Project;
 import com.tsl.baseapp.model.objects.project.ProjectsResults;
-import com.tsl.baseapp.utils.Constants;
+import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.model.objects.user.UserList;
 import com.tsl.baseapp.model.event.ProjectsEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -32,7 +33,7 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
         this.eventBus = eventBus;
     }
 
-    public void getProjects() {
+    public void getUserList(String token, int page) {
 
         if (isViewAttached()) {
             getView().showLoading();
@@ -41,11 +42,10 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
         // Kind of "callback"
         cancelSubscription();
         final BaseApi api = new BaseApiManager().getAppApi();
-        String token = Hawk.get(Constants.TOKEN);
-        projectsSubscription = api.getProjects(token)
+        projectsSubscription = api.getUserList(token, page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<ProjectsResults>() {
+                .subscribe(new Subscriber<UserList>() {
                     @Override
                     public void onCompleted() {
                         if (isViewAttached()) {
@@ -62,9 +62,9 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
                     }
 
                     @Override
-                    public void onNext(ProjectsResults results) {
-                        List<Project> projects = results.getProjects();
-                        eventBus.post(new ProjectsEvent(projects));
+                    public void onNext(UserList results) {
+                        List<User> userList = results.getUserList();
+                        eventBus.post(new UsersEvent(userList));
                     }
                 });
 

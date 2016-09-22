@@ -1,15 +1,16 @@
 package com.tsl.baseapp.api;
 
 import com.google.gson.JsonObject;
-import com.tsl.baseapp.model.objects.project.ProjectsResults;
 import com.tsl.baseapp.model.objects.token.Token;
 import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.model.objects.user.UserList;
 import com.tsl.baseapp.utils.Constants;
 
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -35,6 +36,6 @@ public interface BaseApi {
     @GET("users/me")
     Observable<User> getCurrentUser(@Header(Constants.AUTHORIZATION) String token);
 
-    @GET("v1/projects/")
-    Observable<ProjectsResults> getProjects(@Header(Constants.AUTHORIZATION) String token);
+    @GET("users")
+    Observable<UserList> getUserList(@Header(Constants.AUTHORIZATION) String token, @Query("page") int page);
 }
