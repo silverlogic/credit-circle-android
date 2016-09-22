@@ -25,6 +25,7 @@ import com.tsl.baseapp.settings.SettingsActivity;
 import com.tsl.baseapp.signup.SignUpActivity;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.KeyboardUtils;
+import com.tsl.baseapp.utils.Utils;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -133,10 +134,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     @Override
     public void loginSuccessful() {
         mLoginButton.setProgress(100); // We are done
-        Intent intent = new Intent(getActivity(), SettingsActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        getActivity().overridePendingTransition(0, 0);
+        Utils.startActivity(getActivity(), SettingsActivity.class, true);
         getActivity().finish();
     }
 
@@ -176,16 +174,12 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
 
     @OnClick(R.id.link_signup)
     public void signUpActivity() {
-        Intent intent = new Intent(getActivity(), SignUpActivity.class);
-        startActivity(intent);
-        getActivity().overridePendingTransition(0, 0);
+        Utils.startActivity(getActivity(), SignUpActivity.class, false);
     }
 
     @OnClick(R.id.link_forgot_password)
     public void forgotPasswordActivity() {
-        Intent intent = new Intent(getActivity(), ForgotPasswordActivity.class);
-        startActivity(intent);
-        getActivity().overridePendingTransition(0, 0);
+        Utils.startActivity(getActivity(), ForgotPasswordActivity.class, false);
     }
 
     private void changeFbButton() {

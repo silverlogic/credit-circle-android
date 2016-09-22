@@ -22,6 +22,7 @@ import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.KeyboardUtils;
 import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
 import com.tsl.baseapp.settings.SettingsActivity;
+import com.tsl.baseapp.utils.Utils;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -119,10 +120,7 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
     @Override
     public void signUpSuccessful() {
         mSignUpButton.setProgress(100); // We are done
-        Intent intent = new Intent(getActivity(), SettingsActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        getActivity().overridePendingTransition(0, 0);
+        Utils.startActivity(getActivity(), SettingsActivity.class, true);
         getActivity().finish();
     }
 
@@ -178,8 +176,6 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
 
     @OnClick(R.id.link_login)
     public void signUpActivity(){
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
-        startActivity(intent);
-        getActivity().overridePendingTransition(0, 0);
+        Utils.startActivity(getActivity(), LoginActivity.class, false);
     }
 }
