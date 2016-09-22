@@ -4,11 +4,8 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
 import com.tsl.baseapp.model.event.UsersEvent;
-import com.tsl.baseapp.model.objects.project.Project;
-import com.tsl.baseapp.model.objects.project.ProjectsResults;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.model.objects.user.UserList;
-import com.tsl.baseapp.model.event.ProjectsEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import java.util.List;

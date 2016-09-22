@@ -1,62 +1,45 @@
 package com.tsl.baseapp.feed;
 
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.support.v7.widget.AppCompatImageView;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.tsl.baseapp.R;
-import com.tsl.baseapp.model.objects.project.Project;
+import com.tsl.baseapp.model.objects.user.User;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
+import timber.log.Timber;
 
 /**
  * Created by kevinlavi on 5/5/16.
  */
-public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder> {
+public class FeedAdapter extends BaseQuickAdapter<User> {
 
-    @Inject
-    public Context mContext;
-    private List<Project> mProjectList = new ArrayList<>();
-
-    public FeedAdapter(Context context){
-        mContext = context;
+    public FeedAdapter(List<User> userList){
+        super(R.layout.card_item, userList);
     }
 
     @Override
-    public FeedViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View card = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
-        FeedViewHolder holder = new FeedViewHolder(card);
-        return holder;
-    }
+    protected void convert(BaseViewHolder holder, User user) {
+        //some users in baseapp don't have names so we can set it ourselves
+        String firstName = user.getFirst_name();
+        String lastName = user.getLast_name();
+        if (firstName.equals("")){
+            firstName = "First Name";
+        }
+        if (lastName.equals("")){
+            lastName = "Last Name";
+        }
+        holder.setText(R.id.user_first_name, firstName);
+        holder.setText(R.id.user_last_name, lastName);
 
-    @Override
-    public void onBindViewHolder(FeedViewHolder holder, int position) {
-        Project project = mProjectList.get(position);
-        holder.mTextView.setText(project.getTagline());
-        loadImage(project.getImage_url(), holder.mImageView);
-    }
-
-    private void loadImage(String url, ImageView view) {
         Glide.with(mContext)
-                .load(url)
-                .into(view);
-    }
+                .load(user.getUserImages().getSmall())
+                .into((AppCompatImageView) holder.getView(R.id.user_small_image));
+        Glide.with(mContext)
+                .load(user.getUserImages().getFull_size())
+                .into((AppCompatImageView) holder.getView(R.id.user_large_image));
 
-
-    @Override
-    public int getItemCount() {
-        return mProjectList.size();
-    }
-
-    public void setNewsList(List<Project> list) {
-        this.mProjectList = list;
-        notifyDataSetChanged();
     }
 }

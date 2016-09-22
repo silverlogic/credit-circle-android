@@ -29,7 +29,7 @@ public class FeedViewState implements ViewState<FeedView> {
                 break;
 
             case STATE_FETCH_PROJECTS:
-                view.fetchProjects();
+                view.fetchUsers();
                 break;
         }
     }
@@ -46,5 +46,5 @@ public class FeedViewState implements ViewState<FeedView> {
         state = STATE_SHOW_LOADING;
     }
 
-    public void fetchProjects(){state = STATE_FETCH_PROJECTS;}
+    public void fetchUsers(){state = STATE_FETCH_PROJECTS;}
 }
