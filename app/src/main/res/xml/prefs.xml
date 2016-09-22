@@ -15,6 +15,10 @@
     <Preference
         android:title= "@string/send_feedback"
         android:key="feedback"/>
+
+    <Preference
+        android:title="@string/version"
+        android:key="version"/>
     <Preference
         android:title= "@string/logout"
         android:key="logout"/>

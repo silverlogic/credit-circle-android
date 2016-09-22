@@ -12,6 +12,7 @@ import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.login.LoginActivity;
 import com.tsl.baseapp.utils.Constants;
+import com.tsl.baseapp.utils.Utils;
 
 /**
  * Created by kevinlavi on 5/4/16.
@@ -29,8 +30,9 @@ public class LogOutDialog {
                             LoginManager.getInstance().logOut();
                         }
                         Hawk.clear();
-                        Intent intent = new Intent(mContext, LoginActivity.class);
-                        logoutIntent(intent, mContext);
+                        Activity activity = (Activity) mContext;
+                        Utils.startActivityWithoutTransition(activity, LoginActivity.class, true);
+                        activity.finish();
                     }
                 })
                 .negativeText(R.string.no).onNegative(new MaterialDialog.SingleButtonCallback() {
@@ -45,13 +47,5 @@ public class LogOutDialog {
     public boolean isFacebookLoggedIn() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         return accessToken != null;
-    }
-
-    private void logoutIntent(Intent intent, Context context){
-        Activity activity = (Activity) context;
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        activity.startActivity(intent);
-        activity.overridePendingTransition(0, 0);
-        activity.finish();
     }
 }

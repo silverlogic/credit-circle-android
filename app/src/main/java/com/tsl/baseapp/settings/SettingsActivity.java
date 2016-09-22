@@ -8,6 +8,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
 import com.orhanobut.hawk.Hawk;
+import com.tsl.baseapp.BuildConfig;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseAppActivity;
 import com.tsl.baseapp.model.objects.user.User;
@@ -38,11 +39,13 @@ public class SettingsActivity extends BaseAppActivity {
         Preference mChangeEmail;
         Preference mChangePassword;
         Preference mLogout;
+        Preference mVersion;
 
         @Override public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.prefs);
             setPrefs();
+            setVersion();
         }
 
         @Override
@@ -75,6 +78,7 @@ public class SettingsActivity extends BaseAppActivity {
             mChangePassword = findPreference("change_password");
             mLogout = findPreference("logout");
             mChangeEmail = findPreference("change_email");
+            mVersion = findPreference("version");
 
 
             mAbout.setOnPreferenceClickListener(this);
@@ -83,6 +87,11 @@ public class SettingsActivity extends BaseAppActivity {
             mChangePassword.setOnPreferenceClickListener(this);
             mLogout.setOnPreferenceClickListener(this);
             mChangeEmail.setOnPreferenceClickListener(this);
+        }
+
+        void setVersion(){
+            String buildVersion = "v" + BuildConfig.VERSION_NAME;
+            mVersion.setSummary(buildVersion);
         }
 
         private void about(){
