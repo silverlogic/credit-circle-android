@@ -19,6 +19,7 @@ import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.base.BaseViewStateFragment;
+import com.tsl.baseapp.feed.FeedActivity;
 import com.tsl.baseapp.forgotpassword.ForgotPasswordActivity;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
 import com.tsl.baseapp.model.objects.user.User;
@@ -137,7 +138,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     @Override
     public void loginSuccessful() {
         mLoginButton.setProgress(100); // We are done
-        Utils.startActivity(getActivity(), SettingsActivity.class, true);
+        Utils.startActivity(getActivity(), FeedActivity.class, true);
         getActivity().finish();
     }
 

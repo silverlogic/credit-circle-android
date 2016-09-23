@@ -6,29 +6,29 @@ import com.google.gson.annotations.SerializedName;
  * Created by kevinlavi on 5/3/16.
  */
 public class UserImages {
-    @SerializedName("small_url")
-    private String small_url;
+    @SerializedName("small")
+    private String small;
 
-    @SerializedName("large_url")
-    private String large_url;
+    @SerializedName("full_size")
+    private String full_size;
 
     @SerializedName("url")
     private String url;
 
-    public String getSmall_url() {
-        return small_url;
+    public String getSmall() {
+        return small;
     }
 
-    public void setSmall_url(String small_url) {
-        this.small_url = small_url;
+    public void setSmall(String small) {
+        this.small = small;
     }
 
-    public String getLarge_url() {
-        return large_url;
+    public String getFull_size() {
+        return full_size;
     }
 
-    public void setLarge_url(String large_url) {
-        this.large_url = large_url;
+    public void setFull_size(String full_size) {
+        this.full_size = full_size;
     }
 
     public String getUrl() {

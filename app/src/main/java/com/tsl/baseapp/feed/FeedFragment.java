@@ -11,12 +11,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
+import com.rey.material.widget.SnackBar;
 import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
-import com.tsl.baseapp.model.objects.project.Project;
-import com.tsl.baseapp.model.event.ProjectsEvent;
+import com.tsl.baseapp.model.event.UsersEvent;
+import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.utils.Constants;
+import com.tsl.baseapp.utils.EndlessRecyclerOnScrollListener;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -24,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import timber.log.Timber;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,19 +37,24 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
 
 
     @Bind(R.id.feed)
-    RecyclerView mFeed;
+    RecyclerView mRecyclerView;
     @Bind(R.id.swipe)
     SwipeRefreshLayout mSwipe;
     private Context mContext;
     private FeedViewState vs;
     private FeedComponent feedComponent;
-    private FeedAdapter mFeedAdapter;
-    private List<Project> mProjectsList = new ArrayList<>();
+    private BaseQuickAdapter mAdapter;
+    private List<User> mUserList = new ArrayList<>();
+    private EndlessRecyclerOnScrollListener mPagination;
+    private int page;
+    private final int FIRST_PAGE = 1;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        page = FIRST_PAGE;
     }
 
     @Override
@@ -56,7 +66,6 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mContext = getContext();
-        setUpFeed();
     }
 
     @Override
@@ -67,7 +76,7 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     @Override
     public void onNewViewStateInstance() {
         vs = (FeedViewState) viewState;
-        fetchProjects();
+        setUpFeed();
     }
 
     @Override
@@ -79,6 +88,21 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     public void showFeed() {
         vs.setShowFeed();
         stopRefreshing();
+        final LinearLayoutManager lm = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(lm);
+        mRecyclerView.setHasFixedSize(true);
+        mAdapter = new FeedAdapter(mUserList);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnRecyclerViewItemClickListener(recylerOnClick());
+        mPagination = new EndlessRecyclerOnScrollListener(lm, mAdapter) {
+            @Override
+            public void onLoadMore(int current_page) {
+                Timber.d(String.valueOf(current_page));
+                page = current_page;
+                presenter.updateUserList(Constants.getToken(), page);
+            }
+        };
+        mRecyclerView.addOnScrollListener(mPagination);
     }
 
     @Override
@@ -90,12 +114,21 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     @Override
     public void showLoading() {
         vs.setShowLoading();
+        if (page == FIRST_PAGE){
+            mSwipe.setRefreshing(true);
+        }
     }
 
     @Override
-    public void fetchProjects() {
-        presenter.getProjects();
-        mSwipe.setRefreshing(true);
+    public void fetchUsers() {
+        vs.fetchUsers();
+        presenter.getUserList(Constants.getToken(), page);
+    }
+
+    @Override
+    public void updateFeed() {
+        vs.updateFeed();
+        stopRefreshing();
     }
 
     @Override
@@ -106,31 +139,52 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     }
 
     @Subscribe
-    public void onEvent(ProjectsEvent event){
-        mProjectsList = event.getProjects();
-        mFeedAdapter.setNewsList(mProjectsList);
+    public void onEvent(UsersEvent event){
+        List<User> userList = event.getUserList();
+        if (mUserList.size() == 0){
+            mUserList.addAll(event.getUserList());
+        } else {
+            // add data - pagination
+            mAdapter.addData(userList);
+        }
     }
 
     private void setUpFeed(){
-        mFeedAdapter = new FeedAdapter(mContext);
-        mFeed.setLayoutManager(new LinearLayoutManager(mContext));
-        mFeed.setAdapter(mFeedAdapter);
-
         mSwipe.setColorSchemeColors(getResources().getColor(R.color.colorAccent),
                 getResources().getColor(R.color.colorPrimary),
                 getResources().getColor(R.color.colorPrimaryDark));
         mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                fetchProjects();
+                page = FIRST_PAGE;
+                mPagination.reset(page, true);
+                mAdapter.getData().clear();
+                presenter.getUserList(Constants.getToken(), page);
             }
         });
+        fetchUsers();
     }
 
     private void stopRefreshing(){
         if (mSwipe.isRefreshing()){
             mSwipe.setRefreshing(false);
         }
+    }
+
+    private BaseQuickAdapter.OnRecyclerViewItemClickListener recylerOnClick() {
+        BaseQuickAdapter.OnRecyclerViewItemClickListener onClickListener = new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                // onclick listener for recyclerview item
+                SnackBar.make(mContext)
+                        .applyStyle(R.style.SnackBarSingleLine)
+                        .text("Selected item #" + String.valueOf(position))
+                        .singleLine(true)
+                        .duration(3000)
+                        .show(getActivity());
+            }
+        };
+        return onClickListener;
     }
 
 }

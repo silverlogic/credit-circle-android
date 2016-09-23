@@ -17,6 +17,7 @@ import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
+import com.tsl.baseapp.feed.FeedActivity;
 import com.tsl.baseapp.login.LoginActivity;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.Constants;
@@ -124,7 +125,7 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
     @Override
     public void signUpSuccessful() {
         mSignUpButton.setProgress(100); // We are done
-        Utils.startActivity(getActivity(), SettingsActivity.class, true);
+        Utils.startActivity(getActivity(), FeedActivity.class, true);
         getActivity().finish();
     }
 

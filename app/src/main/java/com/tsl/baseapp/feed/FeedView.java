@@ -12,5 +12,8 @@ public interface FeedView extends MvpView {
 
     public void showLoading();
 
-    public void fetchProjects();
+    public void fetchUsers();
+
+    public void updateFeed();
+
 }
