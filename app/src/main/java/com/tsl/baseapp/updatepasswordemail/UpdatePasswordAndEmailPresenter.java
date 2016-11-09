@@ -101,16 +101,7 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
                     @Override
                     public void onError(Throwable e) {
                         if (isViewAttached()) {
-                            RetrofitException error = (RetrofitException) e;
-                            Timber.d(e.getLocalizedMessage());
-                            Error response = null;
-                            try {
-                                response = error.getErrorBodyAs(Error.class);
-                                Timber.d(response.current_password.get(0));
-                                getView().showError(response.current_password.get(0));
-                            } catch (IOException e1) {
-                                e1.printStackTrace();
-                            }
+                            getView().showError("error");
                         }
                     }
 
