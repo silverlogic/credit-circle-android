@@ -109,13 +109,13 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     }
 
     @Override
-    public void showError() {
+    public void showError(String error) {
         vs.setShowError();
 
         setFormEnabled(true);
         mLoginButton.setProgress(0);
 
-        Toast.makeText(getActivity(), R.string.login_failed, Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
     }
 
     @Override

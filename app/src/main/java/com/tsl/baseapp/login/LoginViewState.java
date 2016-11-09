@@ -20,7 +20,7 @@ public class LoginViewState implements ViewState<LoginView> {
                 break;
 
             case STATE_SHOW_ERROR:
-                view.showError();
+                view.showError("error");
                 break;
 
             case STATE_SHOW_LOGIN_FORM:

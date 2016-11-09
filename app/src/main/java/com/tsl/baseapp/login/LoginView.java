@@ -8,7 +8,7 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 public interface LoginView extends MvpView {
     public void showLoginForm();
 
-    public void showError();
+    public void showError(String error);
 
     public void showLoading();
 
