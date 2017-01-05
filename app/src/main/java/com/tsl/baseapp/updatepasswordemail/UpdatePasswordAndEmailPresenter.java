@@ -67,9 +67,26 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
                     @Override
                     public void onError(Throwable e) {
                         if (isViewAttached()) {
-                            String error = context.getString(R.string.change_email_failed);
-                            Timber.d(e.getMessage());
-                            getView().showError(error);
+                            if (e instanceof RetrofitException) {
+                                RetrofitException error = (RetrofitException) e;
+                                if (error.getKind() == RetrofitException.Kind.NETWORK) {
+                                    //handle network error
+                                    Timber.d("NETWORK ERROR");
+                                } else {
+                                    //handle error message from server
+                                    Timber.d(e.getLocalizedMessage());
+                                    Error response = null;
+                                    try {
+                                        response = error.getErrorBodyAs(Error.class);
+                                        String errorString = response.getErrorString();
+                                        Timber.d("Error = " + errorString);
+                                        // FINISH API CALL
+                                        getView().showError(response.getErrorString());
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -101,7 +118,26 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
                     @Override
                     public void onError(Throwable e) {
                         if (isViewAttached()) {
-                            getView().showError("error");
+                            if (e instanceof RetrofitException) {
+                                RetrofitException error = (RetrofitException) e;
+                                if (error.getKind() == RetrofitException.Kind.NETWORK) {
+                                    //handle network error
+                                    Timber.d("NETWORK ERROR");
+                                } else {
+                                    //handle error message from server
+                                    Timber.d(e.getLocalizedMessage());
+                                    Error response = null;
+                                    try {
+                                        response = error.getErrorBodyAs(Error.class);
+                                        String errorString = response.getErrorString();
+                                        Timber.d("Error = " + errorString);
+                                        // FINISH API CALL
+                                        getView().showError(response.getErrorString());
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
+                            }
                         }
                     }
 
