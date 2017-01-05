@@ -4,10 +4,14 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
 import com.tsl.baseapp.model.event.UsersEvent;
+import com.tsl.baseapp.model.objects.error.Error;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.model.objects.user.UserList;
+import com.tsl.baseapp.utils.RetrofitException;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -53,8 +57,26 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
                     @Override
                     public void onError(Throwable e) {
                         if (isViewAttached()) {
-                            Timber.d(e.getMessage());
-                            getView().showError();
+                            if (e instanceof RetrofitException) {
+                                RetrofitException error = (RetrofitException) e;
+                                if (error.getKind() == RetrofitException.Kind.NETWORK) {
+                                    //handle network error
+                                    Timber.d("NETWORK ERROR");
+                                } else {
+                                    //handle error message from server
+                                    Timber.d(e.getLocalizedMessage());
+                                    Error response = null;
+                                    try {
+                                        response = error.getErrorBodyAs(Error.class);
+                                        String errorString = response.getErrorString();
+                                        Timber.d("Error = " + errorString);
+                                        // FINISH API CALL
+                                        getView().showError();
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -90,8 +112,26 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
                     @Override
                     public void onError(Throwable e) {
                         if (isViewAttached()) {
-                            Timber.d(e.getMessage());
-                            getView().showError();
+                            if (e instanceof RetrofitException) {
+                                RetrofitException error = (RetrofitException) e;
+                                if (error.getKind() == RetrofitException.Kind.NETWORK) {
+                                    //handle network error
+                                    Timber.d("NETWORK ERROR");
+                                } else {
+                                    //handle error message from server
+                                    Timber.d(e.getLocalizedMessage());
+                                    Error response = null;
+                                    try {
+                                        response = error.getErrorBodyAs(Error.class);
+                                        String errorString = response.getErrorString();
+                                        Timber.d("Error = " + errorString);
+                                        // FINISH API CALL
+                                        getView().showError();
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
+                            }
                         }
                     }
 

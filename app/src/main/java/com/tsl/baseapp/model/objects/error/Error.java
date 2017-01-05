@@ -12,6 +12,14 @@ public class Error {
     public List<String> email;
     public List<String> username;
     public List<String> password;
+    public List<String> first_name;
+    public List<String> last_name;
+    public List<String> location;
+    public List<String> paypal_email;
+    public List<String> gender;
+    public List<String> marital_status;
+    public List<String> children;
+    public List<String> birthday;
 
     public final String getErrorString(){
         StringBuilder result = new StringBuilder();
