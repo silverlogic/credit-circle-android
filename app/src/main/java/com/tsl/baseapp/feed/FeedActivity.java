@@ -10,6 +10,8 @@ import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseAppActivity;
 import com.tsl.baseapp.login.LoginActivity;
 import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.userdetails.UserDetailsActivity;
+import com.tsl.baseapp.userdetails.UserDetailsFragment;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.settings.SettingsActivity;
 
@@ -52,6 +54,15 @@ public class FeedActivity extends BaseAppActivity {
             return true;
         }
 
+        if (id == R.id.action_profile) {
+            User user = Hawk.get(Constants.USER);
+            Intent intent = new Intent(this, UserDetailsActivity.class);
+            intent.putExtra(UserDetailsFragment.USER, user);
+            intent.putExtra(UserDetailsFragment.IS_CURRENT_USER, true);
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

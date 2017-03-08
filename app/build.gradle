@@ -21,7 +21,7 @@ repositories {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "24.0.1"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.tsl.baseapp"
@@ -180,6 +180,7 @@ dependencies {
     compile 'com.pkmmte.view:circularimageview:1.1'
     compile 'com.yqritc:recyclerview-flexibledivider:1.2.6'
     compile 'com.github.ivbaranov:MaterialFavoriteButton:0.1.1'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 
     // Adapter
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v1.9.7'

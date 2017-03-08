@@ -2,11 +2,13 @@ package com.tsl.baseapp.model.objects.user;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Kevin Lavi on 9/19/16.
  */
 
-public class User {
+public class User implements Serializable {
     @SerializedName("id")
     private int id;
 
@@ -39,6 +41,7 @@ public class User {
 
     private String current_password;
     private String new_password;
+
 
     public User(){};
 

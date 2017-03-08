@@ -6,4 +6,9 @@
         android:orderInCategory="300"
         android:icon="@drawable/ic_settings"
         app:showAsAction="always"/>
+    <item android:id="@+id/action_profile"
+          android:title="@string/action_profile"
+          android:orderInCategory="200"
+          android:icon="@drawable/ic_person_white"
+          app:showAsAction="always"/>
 </menu>

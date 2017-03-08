@@ -2,6 +2,7 @@ package com.tsl.baseapp.feed;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,8 @@ import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.model.event.UsersEvent;
 import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.userdetails.UserDetailsActivity;
+import com.tsl.baseapp.userdetails.UserDetailsFragment;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.EndlessRecyclerOnScrollListener;
 
@@ -175,13 +178,12 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
         BaseQuickAdapter.OnRecyclerViewItemClickListener onClickListener = new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                // onclick listener for recyclerview item
-                SnackBar.make(mContext)
-                        .applyStyle(R.style.SnackBarSingleLine)
-                        .text("Selected item #" + String.valueOf(position))
-                        .singleLine(true)
-                        .duration(3000)
-                        .show(getActivity());
+                User user = mUserList.get(position);
+                Intent intent = new Intent(getActivity(), UserDetailsActivity.class);
+                intent.putExtra(UserDetailsFragment.USER, user);
+                intent.putExtra(UserDetailsFragment.IS_CURRENT_USER, false);
+                getActivity().startActivity(intent);
+                getActivity().overridePendingTransition(0, 0);
             }
         };
         return onClickListener;

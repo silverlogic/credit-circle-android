@@ -20,6 +20,7 @@ public class Error {
     public List<String> marital_status;
     public List<String> children;
     public List<String> birthday;
+    public List<String> avatar;
 
     public final String getErrorString(){
         StringBuilder result = new StringBuilder();

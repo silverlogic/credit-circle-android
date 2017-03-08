@@ -2,10 +2,12 @@ package com.tsl.baseapp.model.objects.user;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by kevinlavi on 5/3/16.
  */
-public class UserImages {
+public class UserImages implements Serializable {
     @SerializedName("small")
     private String small;
 

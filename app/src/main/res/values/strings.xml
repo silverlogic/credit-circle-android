@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">BaseApp</string>
     <string name="action_settings">Settings</string>
+    <string name="action_profile">Profile</string>
     <string name="title_activity_login">Sign in</string>
     <string name="facebook_app_id">973634146036464</string>
 
@@ -108,5 +109,21 @@
     <string name="filter_nashville">NASHVILLE</string>
     <string name="filter_1977">1977</string>
     <string name="filter_lordkelvin">LORDKELVIN</string>
+
+    <!-- Edit profile -->
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="facebook_url">Facebook Url</string>
+    <string name="instagram_url">Instagram Url</string>
+    <string name="linkedin_url">LinkedIn Url</string>
+    <string name="twitter_url">Twitter Url</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="choose_picture">Choose Picture</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="picture_options">Take a new picture or choose from existing</string>
+    <string name="camera_permission">Permission to use camera is required</string>
+    <string name="successful_update">Successfully updated user!</string>
+    <string name="updating_user">Updating User...</string>
+    <string name="fetching_user">Fetching User...</string>
 
 </resources>

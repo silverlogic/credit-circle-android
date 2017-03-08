@@ -2,6 +2,7 @@ package com.tsl.baseapp.api;
 
 import com.google.gson.JsonObject;
 import com.tsl.baseapp.model.objects.token.Token;
+import com.tsl.baseapp.model.objects.user.UpdateUser;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.model.objects.user.UserList;
 import com.tsl.baseapp.utils.Constants;
@@ -9,7 +10,10 @@ import com.tsl.baseapp.utils.Constants;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -38,4 +42,7 @@ public interface BaseApi {
 
     @GET("users")
     Observable<UserList> getUserList(@Header(Constants.AUTHORIZATION) String token, @Query("page") int page);
+
+    @PATCH("users/{id}")
+    Observable<User> updateUser(@Header(Constants.AUTHORIZATION) String token, @Path("id") int id, @Body UpdateUser user);
 }
