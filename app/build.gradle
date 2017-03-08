@@ -46,7 +46,6 @@ android {
         }
     }
     dexOptions {
-        incremental true
         javaMaxHeapSize "6g"
         //dexInProcess false
     }
@@ -115,7 +114,6 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
     compile 'com.google.code.gson:gson:2.6.2'
-    compile 'org.apache.httpcomponents:httpmime:4.5.1'
 
     // Butterknife
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -181,6 +179,7 @@ dependencies {
     compile 'com.yqritc:recyclerview-flexibledivider:1.2.6'
     compile 'com.github.ivbaranov:MaterialFavoriteButton:0.1.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
 
     // Adapter
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v1.9.7'

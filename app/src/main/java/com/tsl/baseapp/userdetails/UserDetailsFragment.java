@@ -73,14 +73,6 @@ public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, 
     EditText mEditFirstName;
     @Bind(R.id.edit_last_name)
     EditText mEditLastName;
-    @Bind(R.id.edit_facebook_url)
-    EditText mEditFacebookUrl;
-    @Bind(R.id.edit_instagram_url)
-    EditText mEditInstagramUrl;
-    @Bind(R.id.edit_linkedin_url)
-    EditText mEditLinkedinUrl;
-    @Bind(R.id.edit_twitter_url)
-    EditText mEditTwitterUrl;
     @Bind(R.id.confirm_changes_button)
     Button mConfirmChangesButton;
     private Context mContext;
@@ -225,11 +217,6 @@ public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, 
         mEditImage.setEnabled(enabled);
         mEditFirstName.setEnabled(enabled);
         mEditLastName.setEnabled(enabled);
-        // set social stuff to false until backend is ready
-        mEditFacebookUrl.setEnabled(false);
-        mEditInstagramUrl.setEnabled(false);
-        mEditLinkedinUrl.setEnabled(false);
-        mEditTwitterUrl.setEnabled(false);
         if (enabled) {
             mConfirmChangesButton.setVisibility(View.VISIBLE);
         } else {

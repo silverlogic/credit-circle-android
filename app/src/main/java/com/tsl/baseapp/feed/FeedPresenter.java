@@ -144,6 +144,54 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
 
     }
 
+    public void searchUser(String token, int page, String query, final boolean update) {
+        cancelSubscription();
+        final BaseApi api = new BaseApiManager().getAppApi();
+        projectsSubscription = api.searchUser(token, page, query)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<UserList>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (isViewAttached()) {
+                            if (e instanceof RetrofitException) {
+                                RetrofitException error = (RetrofitException) e;
+                                if (error.getKind() == RetrofitException.Kind.NETWORK) {
+                                    //handle network error
+                                    Timber.d("NETWORK ERROR");
+                                } else {
+                                    //handle error message from server
+                                    Timber.d(e.getLocalizedMessage());
+                                    Error response = null;
+                                    try {
+                                        response = error.getErrorBodyAs(Error.class);
+                                        String errorString = response.getErrorString();
+                                        Timber.d("Error = " + errorString);
+                                        // FINISH API CALL
+                                        getView().showError();
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onNext(UserList results) {
+                        List<User> userList = results.getUserList();
+                        if (isViewAttached()) {
+                            getView().onSearchResult(update, userList);
+                        }
+                    }
+                });
+
+    }
+
     /**
      * Cancels any previous callback
      */

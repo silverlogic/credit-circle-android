@@ -2,6 +2,7 @@ package com.tsl.baseapp.feed;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -21,6 +22,9 @@ public class FeedActivity extends BaseAppActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
 
         User user = Hawk.get(Constants.USER);
         if (user == null){
@@ -38,35 +42,6 @@ public class FeedActivity extends BaseAppActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            startActivity(new Intent(FeedActivity.this, SettingsActivity.class));
-            overridePendingTransition(0, 0);
-            return true;
-        }
-
-        if (id == R.id.action_profile) {
-            User user = Hawk.get(Constants.USER);
-            Intent intent = new Intent(this, UserDetailsActivity.class);
-            intent.putExtra(UserDetailsFragment.USER, user);
-            intent.putExtra(UserDetailsFragment.IS_CURRENT_USER, true);
-            startActivity(intent);
-            overridePendingTransition(0, 0);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(0, 0);

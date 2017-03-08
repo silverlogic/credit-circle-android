@@ -1,6 +1,11 @@
 package com.tsl.baseapp.feed;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
+import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.model.objects.user.UserList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kevinlavi on 5/5/16.
@@ -11,6 +16,7 @@ public class FeedViewState implements ViewState<FeedView> {
     final int STATE_SHOW_ERROR = 2;
     final int STATE_FETCH_OBJECTS = 3;
     final int STATE_UPDATE_FEED = 4;
+    final int STATE_SEARCH_RESULT = 5;
 
     int state = STATE_FETCH_OBJECTS;
 
@@ -36,6 +42,10 @@ public class FeedViewState implements ViewState<FeedView> {
             case STATE_UPDATE_FEED:
                 view.updateFeed();
                 break;
+
+            case STATE_SEARCH_RESULT:
+                view.onSearchResult(false, new ArrayList<User>());
+                break;
         }
     }
 
@@ -54,4 +64,6 @@ public class FeedViewState implements ViewState<FeedView> {
     public void fetchUsers(){state = STATE_FETCH_OBJECTS;}
 
     public void updateFeed(){state = STATE_UPDATE_FEED;}
+
+    public void searchResult(){state = STATE_SEARCH_RESULT;}
 }

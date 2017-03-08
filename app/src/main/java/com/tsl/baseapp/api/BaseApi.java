@@ -45,4 +45,7 @@ public interface BaseApi {
 
     @PATCH("users/{id}")
     Observable<User> updateUser(@Header(Constants.AUTHORIZATION) String token, @Path("id") int id, @Body UpdateUser user);
+
+    @GET("users")
+    Observable<UserList> searchUser(@Header(Constants.AUTHORIZATION) String token, @Query("page") int page, @Query("q") String query);
 }
