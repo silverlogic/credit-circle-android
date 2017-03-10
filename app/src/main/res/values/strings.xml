@@ -52,10 +52,10 @@
     <string name="version">Version</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="change_password">Change Password</string>
-    <string name="terms_of_services">Terms of Services</string>
+    <string name="terms_of_services">Terms of Use</string>
     <string name="send_feedback">Send Feedback</string>
     <string name="logout">Log Out</string>
-    <string name="terms_link">http://www.kazuwifi.com/kzu-terms-conditions</string>
+    <string name="terms_link">https://app.baseapp.tsl.io/terms</string>
     <string name="send_mail">Send mail...</string>
     <string name="no_email_clients_installed">There are no email clients installed.</string>
     <string name="submit">Submit</string>
