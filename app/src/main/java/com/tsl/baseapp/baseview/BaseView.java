@@ -8,7 +8,7 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 public interface BaseView extends MvpView{
     public void showForm();
 
-    public void showError();
+    public void showError(String error);
 
     public void showLoading();
 }

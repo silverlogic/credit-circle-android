@@ -20,7 +20,7 @@ public class BaseViewState implements ViewState<BaseView> {
                 break;
 
             case STATE_SHOW_ERROR:
-                view.showError();
+                view.showError("error");
                 break;
 
             case STATE_SHOW_FORM:

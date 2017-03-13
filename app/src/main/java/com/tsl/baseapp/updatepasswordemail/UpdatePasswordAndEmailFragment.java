@@ -19,7 +19,7 @@ import com.rey.material.widget.SnackBar;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.base.BaseViewStateFragment;
-import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
+import com.tsl.baseapp.model.event.BaseEvent;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.Utils;
@@ -180,7 +180,7 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
     }
 
     @Subscribe
-    public void onEvent(SignUpSuccessfulEvent event) {
+    public void onEvent(BaseEvent event) {
         // Do stuff with Eventbus event
     }
 

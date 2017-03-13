@@ -3,7 +3,7 @@ package com.tsl.baseapp.baseview;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
-import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
+import com.tsl.baseapp.model.event.BaseEvent;
 import com.tsl.baseapp.model.objects.error.Error;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.RetrofitException;
@@ -38,7 +38,7 @@ public class BasePresenter extends MvpBasePresenter<BaseView> {
         if (isViewAttached()) {
             getView().showLoading();
         }
-
+//
 //        // MAKE THE API CALL HERE
 //        cancelSubscription();
 //        final BaseApi api = new BaseApiManager().getAppApi();
@@ -73,7 +73,7 @@ public class BasePresenter extends MvpBasePresenter<BaseView> {
 //                                            String errorString = response.getErrorString();
 //                                            Timber.d("Error = " + errorString);
 //                                            // FINISH API CALL
-//                                            getView().showError();
+//                                            getView().showError(errorString);
 //                                        } catch (IOException e1) {
 //                                            e1.printStackTrace();
 //                                        }
@@ -86,7 +86,7 @@ public class BasePresenter extends MvpBasePresenter<BaseView> {
 //                    @Override
 //                    public void onNext(User user) {
 //                        // POST THE RESULT OF API CALL
-//                        eventBus.post(new SignUpSuccessfulEvent(user));
+//                        eventBus.post(new BaseEvent());
 //                    }
 //                });
     }

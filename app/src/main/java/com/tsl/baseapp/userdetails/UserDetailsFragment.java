@@ -39,7 +39,7 @@ import com.rey.material.widget.SnackBar;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.base.BaseViewStateFragment;
-import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
+import com.tsl.baseapp.model.event.BaseEvent;
 import com.tsl.baseapp.model.objects.user.UpdateUser;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.Base64;
@@ -209,7 +209,7 @@ public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, 
     }
 
     @Subscribe
-    public void onEvent(SignUpSuccessfulEvent event) {
+    public void onEvent(BaseEvent event) {
         // Do stuff with Eventbus event
     }
 

@@ -5,12 +5,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Toast;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.base.BaseViewStateFragment;
-import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
+import com.tsl.baseapp.model.event.BaseEvent;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -58,8 +59,9 @@ public class BaseFragment extends BaseViewStateFragment<BaseView, BasePresenter>
     }
 
     @Override
-    public void showError() {
+    public void showError(String error) {
         vs.setShowError();
+        Toast.makeText(mContext, error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -75,7 +77,7 @@ public class BaseFragment extends BaseViewStateFragment<BaseView, BasePresenter>
     }
 
     @Subscribe
-    public void onEvent(SignUpSuccessfulEvent event){
+    public void onEvent(BaseEvent event){
        // Do stuff with Eventbus event
     }
 
