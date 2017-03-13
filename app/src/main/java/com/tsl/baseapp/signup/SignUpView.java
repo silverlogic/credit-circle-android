@@ -8,9 +8,11 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
 public interface SignUpView extends MvpView {
     public void showSignUpForm();
 
-    public void showError();
+    public void showError(String error);
 
     public void showLoading();
 
     public void signUpSuccessful();
+
+    public void updateUserSuccess();
 }

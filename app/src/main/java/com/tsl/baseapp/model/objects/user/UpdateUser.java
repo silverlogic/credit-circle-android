@@ -60,4 +60,10 @@ public class UpdateUser {
         this.last_name = last_name;
         this.avatar = avatar;
     }
+
+    public UpdateUser(int id, String first_name, String last_name){
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+    }
 }

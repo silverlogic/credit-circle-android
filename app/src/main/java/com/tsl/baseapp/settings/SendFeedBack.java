@@ -25,14 +25,16 @@ public class SendFeedBack {
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         String appName = mContext.getString(R.string.app_name);
         String subject = appName + " | Feedback | " + currentDateTimeString;
+        String email = mUser.getEmail();
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("message/rfc822");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"kl@tsl.io"});
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"info@tsl.io"});
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT,
                 "Dear " + appName + "," +
                         "\n" + "\n" + "\n" +
+                        "Email: " + email + "\n" +
                         "Version: " + buildVersion + "\n" +
                         "User ID: " + userId + "\n" +
                         "First Name: " + firstName + "\n" +

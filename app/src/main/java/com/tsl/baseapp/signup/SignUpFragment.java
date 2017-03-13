@@ -19,6 +19,7 @@ import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.feed.FeedActivity;
 import com.tsl.baseapp.login.LoginActivity;
+import com.tsl.baseapp.model.objects.user.UpdateUser;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.KeyboardUtils;
@@ -30,6 +31,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import timber.log.Timber;
 
 public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPresenter> implements SignUpView {
 
@@ -107,11 +109,11 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
     }
 
     @Override
-    public void showError() {
+    public void showError(String error) {
         vs.setShowError();
         setFormEnabled(true);
         mSignUpButton.setProgress(0);
-        Toast.makeText(getActivity(), R.string.sign_up_failed, Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -124,6 +126,24 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
 
     @Override
     public void signUpSuccessful() {
+        vs.setSignUpSuccess();
+        String firstName = mInputFirstName.getText().toString();
+        String lastName =  mInputLastName.getText().toString();
+        if (!firstName.isEmpty() || !lastName.isEmpty()){
+            User user = Hawk.get(Constants.USER);
+            UpdateUser updateUser  = new UpdateUser(user.getId(), firstName, lastName);
+            presenter.updateUser(updateUser);
+        }
+        else {
+            mSignUpButton.setProgress(100); // We are done
+            Utils.startActivity(getActivity(), FeedActivity.class, true);
+            getActivity().finish();
+        }
+    }
+
+    @Override
+    public void updateUserSuccess() {
+        vs.setUpdateSucces();
         mSignUpButton.setProgress(100); // We are done
         Utils.startActivity(getActivity(), FeedActivity.class, true);
         getActivity().finish();
@@ -131,8 +151,6 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
 
     @Subscribe
     public void onEvent(SignUpSuccessfulEvent event){
-        Hawk.put(Constants.USER, event.getUser());
-        Hawk.put(Constants.TOKEN, event.getToken().getToken());
     }
 
     private void setFormEnabled(boolean enabled) {
@@ -160,7 +178,7 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
         String lastName = mInputLastName.getText().toString();
 
         SignUpValidation validation = new SignUpValidation();
-        boolean valid = validation.validate(mInputFirstName, mInputLastName, mInputEmail,
+        boolean valid = validation.validate(mInputEmail,
                 mInputPassword, mInputPasswordConfirm, mContext);
 
         if (!valid) {
