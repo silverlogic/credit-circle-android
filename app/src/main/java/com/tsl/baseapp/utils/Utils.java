@@ -3,6 +3,9 @@ package com.tsl.baseapp.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.view.KeyEvent;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.joda.time.DateTime;
@@ -44,5 +47,25 @@ public class Utils {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("MMMM d, yyyy");
         String date = formatter.print(datetime);
         return date;
+    }
+
+    public static final TextView.OnEditorActionListener closeKeyboardOnEnter(final Context context){
+        // used to close keyboard after pressing enter on keyboard
+        TextView.OnEditorActionListener listener = new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId,
+                                          KeyEvent event) {
+                if (event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    InputMethodManager in = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                    in.hideSoftInputFromWindow(v.getApplicationWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                    return true;
+
+                }
+                return false;
+            }
+        };
+        return listener;
     }
 }
