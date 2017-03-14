@@ -11,7 +11,6 @@ public class SignUpViewState implements ViewState<SignUpView> {
     final int STATE_SHOW_LOADING = 1;
     final int STATE_SHOW_ERROR = 2;
     final int STATE_SIGNUP_SUCCESS = 3;
-    final int STATE_UPDATE_SUCCESS = 4;
 
     int state = STATE_SHOW_SIGN_UP_FORM;
 
@@ -31,6 +30,10 @@ public class SignUpViewState implements ViewState<SignUpView> {
                 view.showSignUpForm();
                 break;
 
+            case STATE_SIGNUP_SUCCESS:
+                view.signUpSuccessful();
+                break;
+
         }
     }
 
@@ -48,9 +51,5 @@ public class SignUpViewState implements ViewState<SignUpView> {
 
     public void setSignUpSuccess() {
         state = STATE_SIGNUP_SUCCESS;
-    }
-
-    public void setUpdateSucces() {
-        state = STATE_UPDATE_SUCCESS;
     }
 }

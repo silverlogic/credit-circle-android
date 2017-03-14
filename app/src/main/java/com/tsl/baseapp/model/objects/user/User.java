@@ -45,11 +45,9 @@ public class User implements Serializable {
 
     public User(){};
 
-    public void register(String email, String password, String first_name, String last_name){
+    public void register(String email, String password){
         this.email = email;
         this.password = password;
-        this.first_name = first_name;
-        this.last_name = last_name;
     }
 
     public void register(String email, String password, String first_name, String last_name, String referral_code){

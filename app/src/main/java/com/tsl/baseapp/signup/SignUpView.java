@@ -13,6 +13,4 @@ public interface SignUpView extends MvpView {
     public void showLoading();
 
     public void signUpSuccessful();
-
-    public void updateUserSuccess();
 }

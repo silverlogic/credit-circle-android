@@ -127,23 +127,6 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
     @Override
     public void signUpSuccessful() {
         vs.setSignUpSuccess();
-        String firstName = mInputFirstName.getText().toString();
-        String lastName =  mInputLastName.getText().toString();
-        if (!firstName.isEmpty() || !lastName.isEmpty()){
-            User user = Hawk.get(Constants.USER);
-            UpdateUser updateUser  = new UpdateUser(user.getId(), firstName, lastName);
-            presenter.updateUser(updateUser);
-        }
-        else {
-            mSignUpButton.setProgress(100); // We are done
-            Utils.startActivity(getActivity(), FeedActivity.class, true);
-            getActivity().finish();
-        }
-    }
-
-    @Override
-    public void updateUserSuccess() {
-        vs.setUpdateSucces();
         mSignUpButton.setProgress(100); // We are done
         Utils.startActivity(getActivity(), FeedActivity.class, true);
         getActivity().finish();
@@ -173,7 +156,6 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
     private void signUp(){
         String email = mInputEmail.getText().toString();
         String password = mInputPassword.getText().toString();
-        String confirm_password = mInputPasswordConfirm.getText().toString();
         String firstName = mInputFirstName.getText().toString();
         String lastName = mInputLastName.getText().toString();
 
@@ -191,7 +173,9 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
         }
 
         User user = new User();
-        user.register(email, password, firstName, lastName);
+        user.register(email, password);
+        if (!firstName.isEmpty()) user.setFirst_name(firstName);
+        if (!lastName.isEmpty()) user.setLast_name(lastName);
 
         // Start signup
         presenter.doSignUp(user);
