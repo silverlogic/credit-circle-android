@@ -21,6 +21,7 @@ import com.tsl.baseapp.feed.FeedActivity;
 import com.tsl.baseapp.login.LoginActivity;
 import com.tsl.baseapp.model.objects.user.UpdateUser;
 import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.model.objects.user.UserFinder;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.KeyboardUtils;
 import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
@@ -178,7 +179,7 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
         if (!lastName.isEmpty()) user.setLast_name(lastName);
 
         // Start signup
-        presenter.doSignUp(user);
+        presenter.doSignUp(user, mContext);
     }
 
     @OnClick(R.id.link_login)

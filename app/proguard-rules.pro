@@ -26,3 +26,9 @@
 #------------------------------
 
 -keepattributes EnclosingMethod
+
+# Realm sugar
+ -keepclassmembers class io.tsl.realm_sugar.RealmSugarAnnotationProcessor {
+     javax.annotation.processing.ProcessingEnvironment processingEnv;
+ }
+ -dontwarn io.tsl.realm_sugar.**

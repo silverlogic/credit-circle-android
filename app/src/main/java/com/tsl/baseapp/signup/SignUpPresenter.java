@@ -1,7 +1,10 @@
 package com.tsl.baseapp.signup;
 
+import android.content.Context;
+
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.orhanobut.hawk.Hawk;
+import com.tsl.baseapp.R;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
@@ -12,6 +15,7 @@ import com.tsl.baseapp.model.objects.user.UpdateUser;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.RetrofitException;
+import com.tsl.baseapp.utils.Writer;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -38,7 +42,7 @@ public class SignUpPresenter extends MvpBasePresenter<SignUpView> {
         this.eventBus = eventBus;
     }
 
-    public void doSignUp(final User credentials) {
+    public void doSignUp(final User credentials, final Context context) {
 
         if (isViewAttached()) {
             getView().showLoading();
@@ -63,6 +67,7 @@ public class SignUpPresenter extends MvpBasePresenter<SignUpView> {
                                 if (error.getKind() == RetrofitException.Kind.NETWORK) {
                                     //handle network error
                                     Timber.d("NETWORK ERROR");
+                                    getView().showError(context.getString(R.string.no_internet));
                                 } else {
                                     //handle error message from server
                                     Timber.d(e.getLocalizedMessage());
@@ -99,6 +104,7 @@ public class SignUpPresenter extends MvpBasePresenter<SignUpView> {
                                                 if (error.getKind() == RetrofitException.Kind.NETWORK) {
                                                     //handle network error
                                                     Timber.d("NETWORK ERROR");
+                                                    getView().showError(context.getString(R.string.no_internet));
                                                 } else {
                                                     //handle error message from server
                                                     Timber.d(e.getLocalizedMessage());
@@ -139,6 +145,7 @@ public class SignUpPresenter extends MvpBasePresenter<SignUpView> {
                                                                 if (error.getKind() == RetrofitException.Kind.NETWORK) {
                                                                     //handle network error
                                                                     Timber.d("NETWORK ERROR");
+                                                                    getView().showError(context.getString(R.string.no_internet));
                                                                 } else {
                                                                     //handle error message from server
                                                                     Timber.d(e.getLocalizedMessage());
@@ -159,7 +166,10 @@ public class SignUpPresenter extends MvpBasePresenter<SignUpView> {
 
                                                     @Override
                                                     public void onNext(final User user) {
-                                                        Hawk.put(Constants.USER, user);
+                                                        // persist user id for fetching from realms
+                                                        Hawk.put(Constants.USER_ID, user.getId());
+                                                        // persist current user
+                                                        Writer.persist(user);
                                                     }
                                                 });
                                     }
@@ -167,7 +177,6 @@ public class SignUpPresenter extends MvpBasePresenter<SignUpView> {
                     }
                 });
     }
-    
     /**
      * Cancels any previous callback
      */

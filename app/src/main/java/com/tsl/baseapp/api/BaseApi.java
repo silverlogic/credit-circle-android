@@ -1,6 +1,7 @@
 package com.tsl.baseapp.api;
 
 import com.google.gson.JsonObject;
+import com.tsl.baseapp.model.objects.api.PaginatedResponse;
 import com.tsl.baseapp.model.objects.token.Token;
 import com.tsl.baseapp.model.objects.user.UpdateUser;
 import com.tsl.baseapp.model.objects.user.User;
@@ -41,7 +42,7 @@ public interface BaseApi {
     Observable<User> getCurrentUser(@Header(Constants.AUTHORIZATION) String token);
 
     @GET("users")
-    Observable<UserList> getUserList(@Header(Constants.AUTHORIZATION) String token, @Query("page") int page);
+    Observable<PaginatedResponse<User>> getUserList(@Header(Constants.AUTHORIZATION) String token, @Query("page") int page);
 
     @PATCH("users/{id}")
     Observable<User> updateUser(@Header(Constants.AUTHORIZATION) String token, @Path("id") int id, @Body UpdateUser user);

@@ -17,6 +17,8 @@ import com.tsl.baseapp.dagger.DaggerBaseAppComponent;
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import io.fabric.sdk.android.Fabric;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import timber.log.Timber;
 
 /**
@@ -30,6 +32,16 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        // Realm
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(config);
+        Realm.getDefaultInstance();
+
+        
         baseComponent = DaggerBaseAppComponent.create();
         refWatcher = LeakCanary.install(this);
         if (BuildConfig.DEBUG) {

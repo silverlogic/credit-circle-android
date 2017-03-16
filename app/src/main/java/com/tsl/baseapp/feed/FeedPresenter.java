@@ -4,6 +4,7 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
 import com.tsl.baseapp.model.event.UsersEvent;
+import com.tsl.baseapp.model.objects.api.PaginatedResponse;
 import com.tsl.baseapp.model.objects.error.Error;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.model.objects.user.UserList;
@@ -46,7 +47,7 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
         projectsSubscription = api.getUserList(token, page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<UserList>() {
+                .subscribe(new Subscriber<PaginatedResponse<User>>() {
                     @Override
                     public void onCompleted() {
                         if (isViewAttached()) {
@@ -62,6 +63,7 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
                                 if (error.getKind() == RetrofitException.Kind.NETWORK) {
                                     //handle network error
                                     Timber.d("NETWORK ERROR");
+                                    getView().showError();
                                 } else {
                                     //handle error message from server
                                     Timber.d(e.getLocalizedMessage());
@@ -81,8 +83,9 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
                     }
 
                     @Override
-                    public void onNext(UserList results) {
-                        List<User> userList = results.getUserList();
+                    public void onNext(PaginatedResponse<User> results) {
+                        List<User> userList = results.getResults();
+                        results.persist();
                         eventBus.post(new UsersEvent(userList));
                     }
                 });
@@ -101,7 +104,7 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
         projectsSubscription = api.getUserList(token, page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<UserList>() {
+                .subscribe(new Subscriber<PaginatedResponse<User>>() {
                     @Override
                     public void onCompleted() {
                         if (isViewAttached()) {
@@ -136,8 +139,9 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
                     }
 
                     @Override
-                    public void onNext(UserList results) {
-                        List<User> userList = results.getUserList();
+                    public void onNext(PaginatedResponse<User> results) {
+                        List<User> userList = results.getResults();
+                        results.persist();
                         eventBus.post(new UsersEvent(userList));
                     }
                 });

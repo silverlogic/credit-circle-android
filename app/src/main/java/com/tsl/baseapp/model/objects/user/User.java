@@ -4,43 +4,49 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
+
 /**
  * Created by Kevin Lavi on 9/19/16.
  */
 
-public class User implements Serializable {
+@RealmClass
+public class User extends RealmObject implements Serializable {
     @SerializedName("id")
-    private int id;
+    @PrimaryKey
+    int id;
 
     @SerializedName("email")
-    private String email;
+    String email;
 
     @SerializedName("password")
-    private String password;
+    String password;
 
     @SerializedName("is_email_confirmed")
-    private boolean is_email_confirmed;
+    boolean is_email_confirmed;
 
     @SerializedName("new_email")
-    private String new_email;
+    String new_email;
 
     @SerializedName("is_new_email_confirmed")
-    private boolean is_new_email_confirmed;
+    boolean is_new_email_confirmed;
 
     @SerializedName("referral_code")
-    private String referral_code;
+    String referral_code;
 
     @SerializedName("avatar")
-    private UserImages userImages;
+    UserImages userImages;
 
     @SerializedName("first_name")
-    private String first_name;
+    String first_name;
 
     @SerializedName("last_name")
-    private String last_name;
+    String last_name;
 
-    private String current_password;
-    private String new_password;
+    String current_password;
+    String new_password;
 
 
     public User(){};

@@ -1,15 +1,21 @@
 package com.tsl.baseapp.api;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.tsl.baseapp.BuildConfig;
+import com.tsl.baseapp.api.expandable.Expandable;
+import com.tsl.baseapp.api.expandable.ExpandablePreprocessor;
+import com.tsl.baseapp.api.realm.RealmPostProcessor;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.RxErrorHandlingCallAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
 
+import io.gsonfire.GsonFireBuilder;
+import io.realm.RealmObject;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -41,10 +47,22 @@ public class BaseApiManager {
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(interceptor);
 
+            // Create GsonFireBuilder
+            GsonFireBuilder fireBuilder = new GsonFireBuilder();
+            fireBuilder.registerPreProcessor(Expandable.class, new ExpandablePreprocessor());
+            fireBuilder.registerPostProcessor(RealmObject.class, new RealmPostProcessor());
+
+            // Create GsonBuilder
+            GsonBuilder gsonBuilder = fireBuilder.createGsonBuilder();
+            // Configure gsonBuilder as usual
+
+            // Create gson for GsonBuilder
+            Gson gson = gsonBuilder.create();
+
             mAppApi = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(builder.build())
                     .build()
                     .create(BaseApi.class);

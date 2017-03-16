@@ -12,6 +12,7 @@ import com.tsl.baseapp.BuildConfig;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseAppActivity;
 import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.model.objects.user.UserFinder;
 import com.tsl.baseapp.updatepasswordemail.UpdatePasswordAndEmailActivity;
 import com.tsl.baseapp.updatepasswordemail.UpdatePasswordAndEmailFragment;
 import com.tsl.baseapp.utils.Constants;
@@ -116,9 +117,10 @@ public class SettingsActivity extends BaseAppActivity {
         }
 
         private void feedback(){
-            User mUser = Hawk.get(Constants.USER);
+            int userID = Hawk.get(Constants.USER_ID);
+            User user = UserFinder.find(userID);
             SendFeedBack sendFeedBack = new SendFeedBack();
-            sendFeedBack.send(mUser, getActivity());
+            sendFeedBack.send(user, getActivity());
         }
 
         private void changeEmail(){

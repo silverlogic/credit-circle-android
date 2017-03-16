@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListAdapter;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListItem;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -42,8 +44,10 @@ import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.model.event.BaseEvent;
 import com.tsl.baseapp.model.objects.user.UpdateUser;
 import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.model.objects.user.UserFinder;
 import com.tsl.baseapp.utils.Base64;
 import com.tsl.baseapp.utils.Constants;
+import com.tsl.baseapp.utils.Utils;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -78,7 +82,7 @@ public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, 
     private Context mContext;
     private UserDetailsViewState vs;
     private UserDetailsComponant mUserDetailsComponant;
-    public static final String USER = "user";
+    public static final String USER_ID = "user";
     public static final String IS_CURRENT_USER = "isCurrentUser";
     private ProgressDialog mProgressBar;
     private User mUser;
@@ -113,7 +117,8 @@ public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, 
         super.onViewCreated(view, savedInstanceState);
         mContext = getContext();
         Intent intent = getActivity().getIntent();
-        mUser = (User) intent.getSerializableExtra(USER);
+        int userId = intent.getIntExtra(USER_ID, 0);
+        mUser = UserFinder.find(userId);
         isCurrentUser = intent.getBooleanExtra(IS_CURRENT_USER, false);
         String name = mUser.getFirst_name() + " " + mUser.getLast_name();
         if (!isCurrentUser) {
@@ -134,7 +139,8 @@ public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, 
     @Override
     public void onNewViewStateInstance() {
         vs = (UserDetailsViewState) viewState;
-        if (isCurrentUser){
+        if (isCurrentUser && Utils.isNetworkAvailable(mContext)){
+            // fetch any updates for current user
             presenter.fetchUser(mContext);
         }
         else {
@@ -150,9 +156,17 @@ public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, 
     @Override
     public void showForm() {
         vs.setShowForm();
-        Glide.with(mContext)
-                .load(mUser.getUserImages().getFull_size())
-                .into(mEditImage);
+        if (Utils.isNetworkAvailable(mContext)){
+            Glide.with(mContext)
+                    .load(mUser.getUserImages().getFull_size())
+                    .into(mEditImage);
+        }
+        else {
+            Glide.with(mContext)
+                    .load(mUser.getUserImages().getFull_size())
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .into(mEditImage);
+        }
         mEditFirstName.setText(mUser.getFirst_name());
         mEditLastName.setText(mUser.getLast_name());
     }
@@ -197,7 +211,8 @@ public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, 
         vs.setFetchUserSuccess();
         mProgressBar.hide();
         setEnabled(true);
-        mUser = Hawk.get(Constants.USER);
+        int userId = Hawk.get(Constants.USER_ID);
+        mUser = UserFinder.find(userId);
         showForm();
     }
 
@@ -236,7 +251,6 @@ public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, 
             valid = false;
         } else {
             mEditFirstName.setError(null);
-            mUser.setFirst_name(first_name);
         }
 
         if (last_name.isEmpty()) {
@@ -244,13 +258,19 @@ public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, 
             valid = false;
         } else {
             mEditLastName.setError(null);
-            mUser.setLast_name(last_name);
         }
         if (valid){
-            Bitmap bitmap = ((GlideBitmapDrawable)mEditImage.getDrawable().getCurrent()).getBitmap();
-            String image = bitmapToBase64(bitmap);
-            UpdateUser user = new UpdateUser(mUser.getId(), first_name, last_name, image);
-            presenter.updateUser(mContext, user);
+            Drawable drawable = mEditImage.getDrawable();
+            if (drawable != null ){
+                Bitmap bitmap = ((GlideBitmapDrawable)drawable.getCurrent()).getBitmap();
+                String image = bitmapToBase64(bitmap);
+                UpdateUser user = new UpdateUser(mUser.getId(), first_name, last_name, image);
+                presenter.updateUser(mContext, user);
+            }
+            else {
+                UpdateUser user = new UpdateUser(mUser.getId(), first_name, last_name);
+                presenter.updateUser(mContext, user);
+            }
         }
     }
 
@@ -338,7 +358,8 @@ public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, 
                 photoOption();
                 break;
             case R.id.confirm_changes_button:
-                validate();
+                if (Utils.isNetworkAvailable(mContext)) validate();
+                else Toast.makeText(mContext, mContext.getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -375,7 +396,6 @@ public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, 
         if (requestCode == TAKE_PICTURE_REQUEST && resultCode == RESULT_OK) {
             File file = new File(Environment.getExternalStorageDirectory() + File.separator + "BaseApp_Camera_" + dt + ".jpg");
             Uri imageUri = Uri.fromFile(file);
-            Timber.d("IMAGE = " + imageUri);
             Glide.with(mContext)
                     .load(imageUri)
                     .into(mEditImage);

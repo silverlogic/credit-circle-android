@@ -13,6 +13,9 @@ import com.tsl.baseapp.R;
 import com.tsl.baseapp.login.LoginActivity;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.Utils;
+import com.tsl.baseapp.utils.Writer;
+
+import io.realm.Realm;
 
 /**
  * Created by kevinlavi on 5/4/16.
@@ -33,6 +36,12 @@ public class LogOutDialog {
                         Activity activity = (Activity) mContext;
                         Utils.startActivityWithoutTransition(activity, LoginActivity.class, true);
                         activity.finish();
+                        Writer.execute(new Writer.Task() {
+                            @Override
+                            public void run(Realm realm) {
+                                realm.deleteAll();
+                            }
+                        });
                     }
                 })
                 .negativeText(R.string.no).onNegative(new MaterialDialog.SingleButtonCallback() {

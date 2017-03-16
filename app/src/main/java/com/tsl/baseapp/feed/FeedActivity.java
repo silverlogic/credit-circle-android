@@ -10,6 +10,7 @@ import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseAppActivity;
 import com.tsl.baseapp.login.LoginActivity;
+import com.tsl.baseapp.model.objects.token.Token;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.userdetails.UserDetailsActivity;
 import com.tsl.baseapp.userdetails.UserDetailsFragment;
@@ -26,8 +27,8 @@ public class FeedActivity extends BaseAppActivity {
         setSupportActionBar(toolbar);
 
 
-        User user = Hawk.get(Constants.USER);
-        if (user == null){
+        String token = Hawk.get(Constants.TOKEN);
+        if (token == null){
             Intent intent = new Intent(this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);

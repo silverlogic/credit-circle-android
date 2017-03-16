@@ -71,6 +71,7 @@ public class ForgotPasswordPresenter extends MvpBasePresenter<ForgotPasswordView
                                 if (error.getKind() == RetrofitException.Kind.NETWORK) {
                                     //handle network error
                                     Timber.d("NETWORK ERROR");
+                                    getView().showError();
                                 } else {
                                     //handle error message from server
                                     Timber.d(e.getLocalizedMessage());
@@ -78,7 +79,6 @@ public class ForgotPasswordPresenter extends MvpBasePresenter<ForgotPasswordView
                                     try {
                                         response = error.getErrorBodyAs(Error.class);
                                         String errorString = response.getErrorString();
-                                        Timber.d("Error = " + errorString);
                                         // FINISH API CALL
                                         getView().showError();
                                     } catch (IOException e1) {

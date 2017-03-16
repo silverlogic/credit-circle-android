@@ -64,6 +64,7 @@ public class BasePresenter extends MvpBasePresenter<BaseView> {
 //                                    if (error.getKind() == RetrofitException.Kind.NETWORK) {
 //                                        //handle network error
 //                                        Timber.d("NETWORK ERROR");
+//                                        getView().showError();
 //                                    } else {
 //                                        //handle error message from server
 //                                        Timber.d(e.getLocalizedMessage());

@@ -72,6 +72,7 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
                                 if (error.getKind() == RetrofitException.Kind.NETWORK) {
                                     //handle network error
                                     Timber.d("NETWORK ERROR");
+                                    getView().showError(context.getString(R.string.no_internet));
                                 } else {
                                     //handle error message from server
                                     Timber.d(e.getLocalizedMessage());
@@ -79,7 +80,6 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
                                     try {
                                         response = error.getErrorBodyAs(Error.class);
                                         String errorString = response.getErrorString();
-                                        Timber.d("Error = " + errorString);
                                         // FINISH API CALL
                                         getView().showError(response.getErrorString());
                                     } catch (IOException e1) {

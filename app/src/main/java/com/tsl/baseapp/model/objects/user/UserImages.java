@@ -4,18 +4,22 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import io.realm.RealmObject;
+import io.realm.annotations.RealmClass;
+
 /**
  * Created by kevinlavi on 5/3/16.
  */
-public class UserImages implements Serializable {
+@RealmClass
+public class UserImages extends RealmObject implements Serializable {
     @SerializedName("small")
-    private String small;
+    String small;
 
     @SerializedName("full_size")
-    private String full_size;
+    String full_size;
 
     @SerializedName("url")
-    private String url;
+    String url;
 
     public String getSmall() {
         return small;

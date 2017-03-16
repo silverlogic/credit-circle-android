@@ -13,6 +13,7 @@ import com.tsl.baseapp.model.objects.user.UpdateUser;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.RetrofitException;
+import com.tsl.baseapp.utils.Writer;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -39,7 +40,7 @@ public class UserDetailsPresenter extends MvpBasePresenter<UserDetailsView> {
         this.eventBus = eventBus;
     }
 
-    public void fetchUser(Context context) {
+    public void fetchUser(final Context context) {
 
         if (isViewAttached()) {
             getView().showLoading(context.getString(R.string.fetching_user));
@@ -66,6 +67,7 @@ public class UserDetailsPresenter extends MvpBasePresenter<UserDetailsView> {
                                 if (error.getKind() == RetrofitException.Kind.NETWORK) {
                                     //handle network error
                                     Timber.d("NETWORK ERROR");
+                                    getView().showError(context.getString(R.string.no_internet));
                                 } else {
                                     //handle error message from server
                                     Timber.d(e.getLocalizedMessage());
@@ -86,13 +88,13 @@ public class UserDetailsPresenter extends MvpBasePresenter<UserDetailsView> {
 
                     @Override
                     public void onNext(final User user) {
-                        Hawk.remove(Constants.USER);
-                        Hawk.put(Constants.USER, user);
+                        //persist user
+                        User persistUser = Writer.persist(user);
                     }
                 });
     }
 
-    public void updateUser(Context context, UpdateUser user) {
+    public void updateUser(final Context context, UpdateUser user) {
 
         if (isViewAttached()) {
             getView().showLoading(context.getString(R.string.updating_user));
@@ -121,6 +123,7 @@ public class UserDetailsPresenter extends MvpBasePresenter<UserDetailsView> {
                                 if (error.getKind() == RetrofitException.Kind.NETWORK) {
                                     //handle network error
                                     Timber.d("NETWORK ERROR");
+                                    getView().showError(context.getString(R.string.no_internet));
                                 } else {
                                     //handle error message from server
                                     Timber.d(e.getLocalizedMessage());
@@ -141,9 +144,8 @@ public class UserDetailsPresenter extends MvpBasePresenter<UserDetailsView> {
 
                     @Override
                     public void onNext(User user) {
-                        // POST THE RESULT OF API CALL
-                        Hawk.remove(Constants.USER);
-                        Hawk.put(Constants.USER, user);
+                        // persist user
+                        User persistUser = Writer.persist(user);
                     }
                 });
     }

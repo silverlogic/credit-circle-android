@@ -14,8 +14,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -25,7 +28,9 @@ import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.model.event.UsersEvent;
+import com.tsl.baseapp.model.objects.api.PaginatedResponse;
 import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.model.objects.user.UserFinder;
 import com.tsl.baseapp.userdetails.UserDetailsActivity;
 import com.tsl.baseapp.userdetails.UserDetailsFragment;
 import com.tsl.baseapp.model.objects.user.UserList;
@@ -40,6 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import io.realm.Realm;
 import timber.log.Timber;
 
 import static android.R.attr.id;
@@ -94,23 +100,28 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
 
             @Override
             public boolean onQueryTextChange(final String query) {
-                if (!query.isEmpty() && !query.equals("")){
-                    //clear adapter then search
-                    mSwipe.setRefreshing(true);
-                    presenter.searchUser(Constants.getToken(), 1, query, false);
-                    mPagination = new EndlessRecyclerOnScrollListener(lm, mAdapter) {
-                        @Override
-                        public void onLoadMore(int current_page) {
-                            Timber.d(String.valueOf(current_page));
-                            page = current_page;
-                            presenter.searchUser(Constants.getToken(), page, query, true);
-                        }
-                    };
-                    mRecyclerView.clearOnScrollListeners();
-                    mRecyclerView.addOnScrollListener(mPagination);
+                if (!Utils.isNetworkAvailable(mContext)){
+                    Toast.makeText(mContext, "Search not available while offline", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    resetToOriginal();
+                    if (!query.isEmpty() && !query.equals("")){
+                        //clear adapter then search
+                        mSwipe.setRefreshing(true);
+                        presenter.searchUser(Constants.getToken(), 1, query, false);
+                        mPagination = new EndlessRecyclerOnScrollListener(lm, mAdapter) {
+                            @Override
+                            public void onLoadMore(int current_page) {
+                                Timber.d(String.valueOf(current_page));
+                                page = current_page;
+                                presenter.searchUser(Constants.getToken(), page, query, true);
+                            }
+                        };
+                        mRecyclerView.clearOnScrollListeners();
+                        mRecyclerView.addOnScrollListener(mPagination);
+                    }
+                    else {
+                        resetToOriginal();
+                    }
                 }
                 return false;
             }
@@ -118,7 +129,10 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
         mSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
-
+                if (!Utils.isNetworkAvailable(mContext)){
+                    Toast.makeText(mContext, "Search not available while offline", Toast.LENGTH_SHORT).show();
+                    mSearchView.closeSearch();
+                }
             }
 
             @Override
@@ -141,9 +155,9 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
         }
 
         if (id == R.id.action_profile) {
-            User user = Hawk.get(Constants.USER);
+            int userID = Hawk.get(Constants.USER_ID);
             Intent intent = new Intent(getActivity(), UserDetailsActivity.class);
-            intent.putExtra(UserDetailsFragment.USER, user);
+            intent.putExtra(UserDetailsFragment.USER_ID, userID);
             intent.putExtra(UserDetailsFragment.IS_CURRENT_USER, true);
             startActivity(intent);
             getActivity().overridePendingTransition(0, 0);
@@ -218,7 +232,14 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     @Override
     public void fetchUsers() {
         vs.fetchUsers();
-        presenter.getUserList(Constants.getToken(), page);
+        if (Utils.isNetworkAvailable(mContext)){
+            presenter.getUserList(Constants.getToken(), page);
+        }
+        else {
+            Toast.makeText(mContext, mContext.getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+            mUserList = new ArrayList<>(Realm.getDefaultInstance().where(User.class).findAll());
+            showFeed();
+        }
     }
 
     @Override
@@ -251,6 +272,10 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
             // add data - pagination
             mAdapter.addData(userList);
         }
+        for (User user : userList){
+            //preload images
+            Glide.with(mContext).load(user.getUserImages().getFull_size()).diskCacheStrategy(DiskCacheStrategy.SOURCE).preload();
+        }
     }
 
     private void setUpFeed(){
@@ -263,9 +288,8 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
                 page = FIRST_PAGE;
                 mPagination.reset(page, true);
                 mAdapter.getData().clear();
-                presenter.getUserList(Constants.getToken(), page);
+                fetchUsers();
                 if (mSearchView.isSearchOpen()){
-                    Timber.d("SEARCHVIEW IS OPEN");
                     mSearchView.closeSearch();
                 }
             }
@@ -291,7 +315,7 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
             public void onItemClick(View view, int position) {
                 User user = mUserList.get(position);
                 Intent intent = new Intent(getActivity(), UserDetailsActivity.class);
-                intent.putExtra(UserDetailsFragment.USER, user);
+                intent.putExtra(UserDetailsFragment.USER_ID, user.getId());
                 intent.putExtra(UserDetailsFragment.IS_CURRENT_USER, false);
                 getActivity().startActivity(intent);
                 getActivity().overridePendingTransition(0, 0);

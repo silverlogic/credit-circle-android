@@ -11,6 +11,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 apply plugin: 'android-apt'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'realm-android'
 
 repositories {
     maven {
@@ -114,6 +115,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
     compile 'com.google.code.gson:gson:2.6.2'
+    compile 'io.gsonfire:gson-fire:1.8.0'
 
     // Butterknife
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -184,3 +186,12 @@ dependencies {
     // Adapter
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v1.9.7'
 }
+
+// Needed for realm sugar
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+task realmSugarTask(type: Exec) {
+    commandLine 'cp', '../realm_sugar/build/libs/realm_sugar.jar', 'libs/'
+}
+realmSugarTask.dependsOn(':realm_sugar:build')
+preBuild.dependsOn(realmSugarTask)

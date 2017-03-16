@@ -3,6 +3,8 @@ package com.tsl.baseapp.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.view.KeyEvent;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -67,5 +69,12 @@ public class Utils {
             }
         };
         return listener;
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

@@ -144,7 +144,6 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
 
     @Subscribe
     public void onEvent(LoginSuccessfulEvent event) {
-        Hawk.put(Constants.USER, event.getUser());
     }
 
     @Override
@@ -173,7 +172,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
         user.login(username, pass);
 
         // Start login
-        presenter.doLogin(user);
+        presenter.doLogin(user, mContext);
     }
 
     @OnClick(R.id.link_signup)
