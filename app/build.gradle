@@ -24,6 +24,15 @@ android {
     compileSdkVersion 23
     buildToolsVersion '25.0.0'
 
+
+    signingConfigs {
+        release {
+            storeFile file('keystore/tslkey.jks')
+            storePassword "SilverLogic123"
+            keyAlias "tslkey"
+            keyPassword "SilverLogic123"
+        }
+    }
     defaultConfig {
         applicationId "com.tsl.baseapp"
         minSdkVersion 16
@@ -37,7 +46,7 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            //signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
             buildConfigField "boolean", "IS_RELEASE", "true"
             debuggable true
         }
