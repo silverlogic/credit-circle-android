@@ -6,8 +6,6 @@ import android.content.Intent;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.facebook.AccessToken;
-import com.facebook.login.LoginManager;
 import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.login.LoginActivity;
@@ -29,9 +27,6 @@ public class LogOutDialog {
                     @Override
                     public void onClick(MaterialDialog materialDialog, DialogAction dialogAction) {
                         Constants.makeToast(mContext, R.string.logged_out).show();
-                        if (isFacebookLoggedIn()) {
-                            LoginManager.getInstance().logOut();
-                        }
                         Hawk.clear();
                         Activity activity = (Activity) mContext;
                         Utils.startActivityWithoutTransition(activity, LoginActivity.class, true);
@@ -51,10 +46,5 @@ public class LogOutDialog {
                     }
                 })
                 .show();
-    }
-
-    public boolean isFacebookLoggedIn() {
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        return accessToken != null;
     }
 }

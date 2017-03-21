@@ -114,9 +114,6 @@ dependencies {
     apt "com.google.dagger:dagger-compiler:2.2"
     compile 'com.google.dagger:dagger:2.2'
 
-    // Facebook
-    compile 'com.facebook.android:facebook-android-sdk:4.6.0'
-
     // Rest API
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'

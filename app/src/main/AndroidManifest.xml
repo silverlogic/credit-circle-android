@@ -21,14 +21,21 @@
         android:label="@string/app_name"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme"
-        tools:replace="android:icon,android:theme">
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
+        tools:replace="android:icon,android:theme">>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="ccdf9e4a5cefcee65e6f1d40cd5dee0c45a38748" />
 
+        <activity
+            android:name=".login.OAuth2LoginActivity"
+            android:label="@string/login"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".login.OAuth1LoginActivity"
+            android:label="@string/login"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".login.LoginActivity"
             android:label="@string/app_name"
@@ -54,11 +61,6 @@
             android:name=".settings.SettingsActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".webview.WebViewActivity"
             android:screenOrientation="portrait"

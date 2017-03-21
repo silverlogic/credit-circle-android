@@ -4,6 +4,8 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.orhanobut.hawk.Hawk;
+import com.tsl.baseapp.BuildConfig;
+import com.tsl.baseapp.R;
 
 /**
  * Created by Kevin on 9/17/15.
@@ -25,6 +27,8 @@ public class Constants {
 
     public static final String URL = "url";
     public static final String TITLE = "title";
+    public static final String COLOR = "color";
+    public static final String COLOR_DARK = "colorDark";
 
     public static final String AUTHORIZATION = "Authorization";
 
@@ -32,6 +36,12 @@ public class Constants {
     public static final String PICTURE_TYPE = "picture_type";
     public static final String PICTURE_CAPTURE = "capture";
     public static final String PICTURE_PICK = "pick";
+
+    public static final String FACEBOOK_APP_ID = "973634146036464";
+    public static final String LINKEDIN_CLIENT_ID = "781ehwqhni34oe";
+    public static final String REDIRECT_URL = "https://app.baseapp.tsl.io/";
+
+    public static final String TWITTER_USER = "twitterUser";
 
     public static final String getToken(){
         String token = "Token " + Hawk.get(TOKEN);
@@ -42,4 +52,11 @@ public class Constants {
         return  Toast.makeText(ctx, msg, Toast.LENGTH_SHORT);
     }
 
+    public static String getOAuth2LoginURLForFacebook(Context context, int stringId, String appId) {
+        return context.getString(stringId, appId, Constants.REDIRECT_URL);
+    }
+
+    public static String getOAuth2LoginURLForLinkedIn(Context context, int stringId, String appId) {
+        return context.getString(stringId, appId, Constants.REDIRECT_URL, Utils.getRandomString());
+    }
 }

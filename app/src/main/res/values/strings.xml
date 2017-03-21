@@ -3,7 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="action_profile">Profile</string>
     <string name="title_activity_login">Sign in</string>
-    <string name="facebook_app_id">973634146036464</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -16,6 +15,7 @@
     <string name="error_field_required">This field is required</string>
     <string name="error_forgot_password">Error resetting your password</string>
     <string name="password_reset">Password has been reset. Please check your email.</string>
+    <string name="cancel">Cancel</string>
 
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_web_view">WebViewActivity</string>
@@ -37,6 +37,21 @@
     <string name="no_internet">You do not have an internet connection</string>
     <string name="ok">OK</string>
     <string name="gcm_defaultSenderId">620355883507</string>
+
+    <!-- facebook login -->
+    <string name="login_facebook">Log in with Facebook</string>
+    <string name="facebook_login_url">https://www.facebook.com/dialog/oauth?client_id=%1$s&amp;redirect_uri=%2$s&amp;scope=email,public_profile</string>
+
+    <!-- linkedin login -->
+    <string name="login_linkedin">Log in with LinkedIn</string>
+    <string name="linkedin_login_url">https://www.linkedin.com/oauth/v2/authorization?response_type=code&amp;client_id=%1$s&amp;redirect_uri=%2$s&amp;state=%3$s&amp;scope=r_basicprofile</string>
+
+    <!-- Twitter login -->
+    <string name="login_twitter">Log in with Twitter</string>
+    <string name="twitter_login_url">https://api.twitter.com/oauth/authenticate?oauth_token=%1$s&amp;redirect_uri=%2$s</string>
+    <string name="twitter_no_email_title">No Email Found</string>
+    <string name="twitter_no_email_body">Twitter did not provide us with your email. Please input your email</string>
+    <string name="error_logging_in">There was an error logging you in</string>
 
     <string name="no_account_yet">No account yet? Create one</string>
     <string name="email">Email</string>

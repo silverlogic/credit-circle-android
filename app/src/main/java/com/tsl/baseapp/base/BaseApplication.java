@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 
 import com.crashlytics.android.Crashlytics;
-import com.facebook.FacebookSdk;
 import com.orhanobut.hawk.Hawk;
 import com.orhanobut.hawk.HawkBuilder;
 import com.orhanobut.hawk.LogLevel;
@@ -53,7 +52,6 @@ public class BaseApplication extends Application {
                 .setLogLevel(LogLevel.FULL)
                 .build();
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
         Fabric.with(this, new Crashlytics());
         JodaTimeAndroid.init(this);
     }

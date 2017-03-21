@@ -13,4 +13,6 @@ public interface LoginView extends MvpView {
     public void showLoading();
 
     public void loginSuccessful();
+
+    public void twitterLogin();
 }

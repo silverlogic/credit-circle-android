@@ -9,5 +9,13 @@
     <color name="iron">#CCCCCC</color>
     <color name="white">#FFFFFF</color>
     <color name="backgroundWhite">#fffafafa</color>
+
     <color name="linkedinColor">#007bb5</color>
+    <color name="linkedinColorDark">#006290</color>
+
+    <color name="twitterColor">#00aced</color>
+    <color name="twitterColorDark">#0089BD</color>
+
+    <color name="facebookColor">#3b5998</color>
+    <color name="facebookColorDark">#2F4779</color>
 </resources>

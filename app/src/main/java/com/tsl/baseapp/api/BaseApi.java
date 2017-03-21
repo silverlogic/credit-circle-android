@@ -3,6 +3,7 @@ package com.tsl.baseapp.api;
 import com.google.gson.JsonObject;
 import com.tsl.baseapp.model.objects.api.PaginatedResponse;
 import com.tsl.baseapp.model.objects.token.Token;
+import com.tsl.baseapp.model.objects.user.SocialAuth;
 import com.tsl.baseapp.model.objects.user.UpdateUser;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.model.objects.user.UserList;
@@ -13,7 +14,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -49,4 +49,11 @@ public interface BaseApi {
 
     @GET("users")
     Observable<UserList> searchUser(@Header(Constants.AUTHORIZATION) String token, @Query("page") int page, @Query("q") String query);
+
+    @POST("social-auth")
+    Observable<Token> socialLogin(@Body SocialAuth auth);
+
+    @POST("social-auth")
+    Observable<SocialAuth> socialLoginTwitter(@Body SocialAuth auth);
+
 }

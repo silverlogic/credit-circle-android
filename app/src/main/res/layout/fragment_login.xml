@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/loginForm"
         android:focusableInTouchMode="true"
-        android:paddingTop="56dp"
+        android:paddingTop="24dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
         <ImageView android:src="@drawable/baseapp_logo"
             android:layout_width="wrap_content"
-            android:layout_height="72dp"
+            android:layout_height="120dp"
             android:layout_marginBottom="24dp"
             android:layout_gravity="center_horizontal" />
 
@@ -58,7 +58,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="4dp"
             android:padding="12dp"
             android:background="@color/colorPrimaryDark"
             android:text="@string/login"
@@ -71,28 +71,59 @@
             app:pb_textComplete="@string/successful"
             app:pb_textProgress="@string/logging_in" />
 
-        <com.facebook.login.widget.LoginButton
-            android:background="@color/com_facebook_blue"
-            android:id="@+id/facebook_login_button"
-            android:layout_width="match_parent"
+        <com.hkm.ui.processbutton.iml.ActionProcessButton
+            android:id="@+id/facebook_loginButton"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="7pt"/>
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:padding="12dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/login_facebook"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            app:pb_colorComplete="@color/facebookColor"
+            app:pb_colorNormal="@color/facebookColor"
+            app:pb_colorPressed="@color/facebookColor"
+            app:pb_textComplete="@string/successful"
+            app:pb_textProgress="@string/logging_in" />
 
-        <!--<android.support.v7.widget.AppCompatButton-->
-        <!--android:layout_marginTop="24dp"-->
-        <!--android:layout_marginBottom="24dp"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:drawableLeft="@drawable/ln_white_2"-->
-        <!--android:paddingLeft="10dp"-->
-        <!--android:id="@+id/linkedin_login"-->
-        <!--android:textSize="7pt"-->
-        <!--android:text="Log in with LinkedIn"-->
-        <!--android:textColor="@android:color/white"-->
-        <!--android:background="@color/linkedinColor"-->
-        <!--android:layout_gravity="center_horizontal" />-->
+        <com.hkm.ui.processbutton.iml.ActionProcessButton
+            android:id="@+id/linkedIn_loginButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:padding="12dp"
+            android:background="@color/linkedinColor"
+            android:text="@string/login_linkedin"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            app:pb_colorComplete="@color/linkedinColor"
+            app:pb_colorNormal="@color/linkedinColor"
+            app:pb_colorPressed="@color/linkedinColor"
+            app:pb_textComplete="@string/successful"
+            app:pb_textProgress="@string/logging_in" />
 
+        <com.hkm.ui.processbutton.iml.ActionProcessButton
+            android:id="@+id/twitter_loginButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:padding="12dp"
+            android:background="@color/twitterColor"
+            android:text="@string/login_twitter"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            app:pb_colorComplete="@color/twitterColor"
+            app:pb_colorNormal="@color/twitterColor"
+            app:pb_colorPressed="@color/twitterColor"
+            app:pb_textComplete="@string/successful"
+            app:pb_textProgress="@string/logging_in" />
 
         <TextView android:id="@+id/link_forgot_password"
             android:layout_width="fill_parent"

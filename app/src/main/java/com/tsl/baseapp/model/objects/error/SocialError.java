@@ -4,26 +4,18 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 /**
- * Created by Kevin Lavi on 9/20/16.
+ * Created by Kevin Lavi on 3/20/17.
  */
 
-public class Error {
-    public List<String> current_password;
-    public List<String> email;
-    public List<String> username;
-    public List<String> password;
-    public List<String> first_name;
-    public List<String> last_name;
-    public List<String> location;
-    public List<String> paypal_email;
-    public List<String> gender;
-    public List<String> marital_status;
-    public List<String> children;
-    public List<String> birthday;
-    public List<String> avatar;
-    public List<String> provider;
-    public List<String> non_field_errors;
-    public List<String> new_email;
+public class SocialError {
+
+    //only difference is that email is a string not a list
+    public String email;
+    public static final String NO_EMAIL_PROVIDED = "no_email_provided";
+
+    public String getEmail() {
+        return email;
+    }
 
     public final String getErrorString(){
         StringBuilder result = new StringBuilder();
