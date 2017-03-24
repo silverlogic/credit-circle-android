@@ -1,0 +1,25 @@
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "first_name": "Kevin",
+      "id": 27,
+      "last_name": "Lavi",
+      "avatar": {
+        "full_size": "https://www.gravatar.com/avatar/dfecf7ab1ec961d5757e76b606e2ac32/?d=retro&s=1024",
+        "small": "https://www.gravatar.com/avatar/dfecf7ab1ec961d5757e76b606e2ac32/?d=retro&s=64"
+      }
+    },
+    {
+      "first_name": "kevin",
+      "id": 11,
+      "last_name": "la",
+      "avatar": {
+        "full_size": "https://www.gravatar.com/avatar/d989e903766a52e36c29494bf72e88b0/?d=retro&s=1024",
+        "small": "https://www.gravatar.com/avatar/d989e903766a52e36c29494bf72e88b0/?d=retro&s=64"
+      }
+    }
+  ]
+}

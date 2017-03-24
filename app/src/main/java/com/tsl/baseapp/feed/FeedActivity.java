@@ -3,21 +3,17 @@ package com.tsl.baseapp.feed;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseAppActivity;
 import com.tsl.baseapp.login.LoginActivity;
-import com.tsl.baseapp.model.objects.token.Token;
-import com.tsl.baseapp.model.objects.user.User;
-import com.tsl.baseapp.userdetails.UserDetailsActivity;
-import com.tsl.baseapp.userdetails.UserDetailsFragment;
 import com.tsl.baseapp.utils.Constants;
-import com.tsl.baseapp.settings.SettingsActivity;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FeedActivity extends BaseAppActivity {
+    private static AtomicBoolean isRunningTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +21,6 @@ public class FeedActivity extends BaseAppActivity {
         setContentView(R.layout.activity_feed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         String token = Hawk.get(Constants.TOKEN);
         if (token == null){

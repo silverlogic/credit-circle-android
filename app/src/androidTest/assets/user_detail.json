@@ -1,0 +1,9 @@
+{
+  "first_name": "Kevin",
+  "id": 117,
+  "last_name": "L",
+  "avatar": {
+    "full_size": "https://baseapp-api-staging.s3.amazonaws.com:443/media/user-avatars/kl%2B1%40tsl.io/resized/1024/b81adb95-c07.png",
+    "small": "https://baseapp-api-staging.s3.amazonaws.com:443/media/user-avatars/kl%2B1%40tsl.io/resized/64/b81adb95-c07.png"
+  }
+}

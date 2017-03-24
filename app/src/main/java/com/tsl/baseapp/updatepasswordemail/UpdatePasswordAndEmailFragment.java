@@ -97,6 +97,7 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
             // inflate update email
             showUpdateEmailForm();
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+            mChangeEmailInput.setOnEditorActionListener(Utils.closeKeyboardOnEnter(mContext));
             mSubmitButton.setMode(ActionProcessButton.Mode.ENDLESS);
             mSubmitButton.setOnClickNormalState(new View.OnClickListener() {
                 @Override
@@ -120,7 +121,7 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
         mNewPassword.setTransformationMethod(new PasswordTransformationMethod());
         mConfirmNewPassword.setTransformationMethod(new PasswordTransformationMethod());
         mCurrentPassword.setTransformationMethod(new PasswordTransformationMethod());
-
+        mConfirmNewPassword.setOnEditorActionListener(Utils.closeKeyboardOnEnter(mContext));
 
         mUpdateEmailForm.setVisibility(View.GONE);
         mChangePasswordForm.setVisibility(View.VISIBLE);

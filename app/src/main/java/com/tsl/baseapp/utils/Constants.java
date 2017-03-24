@@ -15,7 +15,7 @@ public class Constants {
     }
 
     public static final String PRODUCTION_URL = "https://api.baseapp.tsl.io/v1/";
-    public static final String STAGING_URL = "https://api.baseapp.tsl.io/v1/";
+    public static String STAGING_URL = "https://api.baseapp.tsl.io/v1/";
 
     public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
     public static final String REGISTRATION_COMPLETE = "registrationComplete";

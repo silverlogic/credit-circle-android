@@ -102,11 +102,14 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
     @Override
     public void showSignUpForm() {
         vs.setShowSignUpForm();
-        setFormEnabled(true);
         // set password form to hide inputs
         mInputPassword.setTransformationMethod(new PasswordTransformationMethod());
+
         mInputPasswordConfirm.setTransformationMethod(new PasswordTransformationMethod());
+        mInputPasswordConfirm.setOnEditorActionListener(Utils.closeKeyboardOnEnter(mContext));
+
         mSignUpButton.setProgress(0);
+        setFormEnabled(true);
     }
 
     @Override

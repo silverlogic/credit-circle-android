@@ -41,6 +41,7 @@ android {
         versionName "0.01"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
         release {
@@ -61,6 +62,7 @@ android {
     }
 
     useLibrary 'org.apache.http.legacy'
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/androidTest/assets'] } }
 }
 
 repositories {
@@ -122,6 +124,8 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'io.gsonfire:gson-fire:1.8.0'
+    androidTestCompile 'com.squareup.okhttp3:mockwebserver:3.2.0'
+    androidTestCompile 'com.squareup.retrofit2:retrofit-mock:2.0.2'
 
     // Butterknife
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -191,6 +195,17 @@ dependencies {
 
     // Adapter
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v1.9.7'
+
+    // UI Testing
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
 }
 
 // Needed for realm sugar
