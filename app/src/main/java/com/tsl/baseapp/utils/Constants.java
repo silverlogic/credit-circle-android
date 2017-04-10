@@ -44,8 +44,13 @@ public class Constants {
     public static final String TWITTER_USER = "twitterUser";
 
     public static final String getToken(){
-        String token = "Token " + Hawk.get(TOKEN);
-        return token;
+        if (Hawk.isBuilt() && Hawk.get(TOKEN) != null){
+            return  "Token " + Hawk.get(TOKEN);
+        }
+        else {
+            // we do this to avoid testing hawk during unit testing
+            return "token for testing";
+        }
     }
 
     public static final Toast makeToast(Context ctx, int msg){

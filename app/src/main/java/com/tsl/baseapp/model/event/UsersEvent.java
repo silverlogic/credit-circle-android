@@ -1,5 +1,6 @@
 package com.tsl.baseapp.model.event;
 
+import com.tsl.baseapp.model.objects.api.PaginatedResponse;
 import com.tsl.baseapp.model.objects.user.User;
 
 import java.util.List;
@@ -9,13 +10,17 @@ import java.util.List;
  */
 
 public class UsersEvent {
-    private List<User> mUserList;
+    private PaginatedResponse<User> mUserList;
 
-    public UsersEvent(List<User> userList) {
+    public UsersEvent(PaginatedResponse<User> userList) {
         mUserList = userList;
     }
 
     public List<User> getUserList() {
+        return mUserList.getResults();
+    }
+
+    public PaginatedResponse<User> getResponse() {
         return mUserList;
     }
 }

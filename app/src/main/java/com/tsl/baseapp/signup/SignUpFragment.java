@@ -19,14 +19,13 @@ import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.feed.FeedActivity;
 import com.tsl.baseapp.login.LoginActivity;
-import com.tsl.baseapp.model.objects.user.UpdateUser;
+import com.tsl.baseapp.model.event.TokenEvent;
 import com.tsl.baseapp.model.objects.user.User;
-import com.tsl.baseapp.model.objects.user.UserFinder;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.KeyboardUtils;
 import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
-import com.tsl.baseapp.settings.SettingsActivity;
 import com.tsl.baseapp.utils.Utils;
+import com.tsl.baseapp.utils.Writer;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -74,7 +73,7 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
         mSignUpButton.setOnClickNormalState(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signUp();
+                validate();
             }
         }).build();
         mContext = getContext();
@@ -136,8 +135,43 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
         getActivity().finish();
     }
 
+    private void validate(){
+        boolean valid = presenter.validate(mInputEmail, mInputPassword, mInputPasswordConfirm, mContext);
+
+        if (!valid) return;
+
+        String email = mInputEmail.getText().toString();
+        String password = mInputPassword.getText().toString();
+        String firstName = mInputFirstName.getText().toString();
+        String lastName = mInputLastName.getText().toString();
+
+        // Hide keyboard
+        if (!KeyboardUtils.hideKeyboard(mInputEmail)) {
+            KeyboardUtils.hideKeyboard(mInputPassword);
+        }
+
+        User user = new User();
+        user.register(email, password);
+        if (!firstName.isEmpty()) user.setFirst_name(firstName);
+        if (!lastName.isEmpty()) user.setLast_name(lastName);
+
+        // Start signup
+        presenter.doSignUp(user, mContext);
+    }
+
     @Subscribe
     public void onEvent(SignUpSuccessfulEvent event){
+        User user = event.getUser();
+        // persist user id for fetching from realms
+        Hawk.put(Constants.USER_ID, user.getId());
+        // persist current user
+        Writer.persist(user);
+
+    }
+
+    @Subscribe
+    public void onEvent(TokenEvent event){
+        Hawk.put(Constants.TOKEN, event.getToken());
     }
 
     private void setFormEnabled(boolean enabled) {
@@ -157,36 +191,8 @@ public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPres
                 .build();
     }
 
-    private void signUp(){
-        String email = mInputEmail.getText().toString();
-        String password = mInputPassword.getText().toString();
-        String firstName = mInputFirstName.getText().toString();
-        String lastName = mInputLastName.getText().toString();
-
-        SignUpValidation validation = new SignUpValidation();
-        boolean valid = validation.validate(mInputEmail,
-                mInputPassword, mInputPasswordConfirm, mContext);
-
-        if (!valid) {
-            return;
-        }
-
-        // Hide keyboard
-        if (!KeyboardUtils.hideKeyboard(mInputEmail)) {
-            KeyboardUtils.hideKeyboard(mInputPassword);
-        }
-
-        User user = new User();
-        user.register(email, password);
-        if (!firstName.isEmpty()) user.setFirst_name(firstName);
-        if (!lastName.isEmpty()) user.setLast_name(lastName);
-
-        // Start signup
-        presenter.doSignUp(user, mContext);
-    }
-
     @OnClick(R.id.link_login)
-    public void signUpActivity(){
+    public void loginActivity(){
         Utils.startActivity(getActivity(), LoginActivity.class, false);
     }
 }

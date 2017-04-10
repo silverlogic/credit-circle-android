@@ -33,10 +33,12 @@ public class ForgotPasswordPresenter extends MvpBasePresenter<ForgotPasswordView
 
     private Subscription baseSubscriber;
     private EventBus eventBus;
+    private BaseApi api;
 
     @Inject
-    public ForgotPasswordPresenter(EventBus eventBus) {
+    public ForgotPasswordPresenter(EventBus eventBus, BaseApi api) {
         this.eventBus = eventBus;
+        this.api = api;
     }
 
     public void forgotPassword(String email, final Context context) {
@@ -47,11 +49,9 @@ public class ForgotPasswordPresenter extends MvpBasePresenter<ForgotPasswordView
 
         JsonObject emailObject = new JsonObject();
         emailObject.addProperty("email", email);
-        String message = "";
 
         // MAKE THE API CALL HERE
         cancelSubscription();
-        final BaseApi api = new BaseApiManager().getAppApi();
         baseSubscriber = api.forgotPassword(emailObject)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -96,8 +96,7 @@ public class ForgotPasswordPresenter extends MvpBasePresenter<ForgotPasswordView
                 });
     }
 
-
-    public boolean validateForgetPassword(EditText inputEmail, Context context) {
+    public boolean validateEmail(EditText inputEmail, Context context) {
         boolean valid = true;
 
         String email = inputEmail.getText().toString();
@@ -114,7 +113,6 @@ public class ForgotPasswordPresenter extends MvpBasePresenter<ForgotPasswordView
 
         return valid;
     }
-
 
     /**
      * Cancels any previous callback

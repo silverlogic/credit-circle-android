@@ -28,6 +28,7 @@ import com.tsl.baseapp.base.BaseViewStateFragment;
 import com.tsl.baseapp.feed.FeedActivity;
 import com.tsl.baseapp.forgotpassword.ForgotPasswordActivity;
 import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
+import com.tsl.baseapp.model.event.TokenEvent;
 import com.tsl.baseapp.model.objects.error.SocialError;
 import com.tsl.baseapp.model.objects.user.SocialAuth;
 import com.tsl.baseapp.model.objects.user.User;
@@ -35,6 +36,7 @@ import com.tsl.baseapp.signup.SignUpActivity;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.KeyboardUtils;
 import com.tsl.baseapp.utils.Utils;
+import com.tsl.baseapp.utils.Writer;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -91,7 +93,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
         mLoginButton.setOnClickNormalState(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                validate();
             }
         }).build();
 
@@ -213,9 +215,18 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
                 ContextCompat.getColor(mContext, R.color.twitterColorDark));
         startActivityForResult(intent, TWITTER_REQUEST);
     }
-
     @Subscribe
     public void onEvent(LoginSuccessfulEvent event) {
+        User user = event.getUser();
+        // persist user id for fetching from realms
+        Hawk.put(Constants.USER_ID, user.getId());
+        // persist current user
+        User persistedUser = Writer.persist(user);
+    }
+
+    @Subscribe
+    public void onEvent(TokenEvent event) {
+        Hawk.put(Constants.TOKEN, event.getToken());
     }
 
     @Override
@@ -225,16 +236,13 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
                 .build();
     }
 
-    private void login() {
+    private void validate(){
+        boolean valid = presenter.validate(mInputEmail, mInputPassword, mContext);
+
+        if (!valid) return;
+
         String username = mInputEmail.getText().toString();
         String pass = mInputPassword.getText().toString();
-        LoginValidation validation = new LoginValidation();
-        boolean valid = validation.validate(mInputEmail, mInputPassword, mContext);
-        mActiveButton = mLoginButton;
-
-        if (!valid) {
-            return;
-        }
 
         // Hide keyboard
         if (!KeyboardUtils.hideKeyboard(mInputEmail)) {

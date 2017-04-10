@@ -1,6 +1,7 @@
 package com.tsl.baseapp.updatepasswordemail;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -80,8 +81,7 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
     public void onNewViewStateInstance() {
         vs = (UpdatePasswordAndEmailViewState) viewState;
         // find out if activity is update email or change password
-        Intent intent = getActivity().getIntent();
-        String viewType = intent.getStringExtra(TYPE);
+        String viewType = getArguments().getString(TYPE);
         if (viewType.equals(CHANGE_PASSWORD)) {
             // inflate change password
             showChangePasswordForm();
@@ -193,27 +193,23 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
     }
 
     public void changeEmail(String email) {
-        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            mChangeEmailInput.setError(mContext.getString(R.string.valid_email_error));
-        } else {
-            User user = new User();
-            user.changeEmail(email);
-            presenter.updateEmail(Constants.getToken(), user, mContext);
-        }
+        boolean valid = presenter.validateEmail(mChangeEmailInput, mContext);
+
+        if (!valid) return;
+
+        User user = new User();
+        user.changeEmail(email);
+        presenter.updateEmail(Constants.getToken(), user, mContext);
     }
 
     private void changePassword(String currentPass, String passNew, String passNewConfirm) {
-        if (passNew.isEmpty()) {
-            mNewPassword.setError(mContext.getString(R.string.field_cannot_be_empty));
-        } else if (passNewConfirm.isEmpty()) {
-            mConfirmNewPassword.setError(mContext.getString(R.string.field_cannot_be_empty));
-        } else if (!passNew.equals(passNewConfirm)) {
-            mConfirmNewPassword.setError(mContext.getString(R.string.new_password_error));
-        } else {
-            User user = new User();
-            user.changePassword(currentPass, passNew);
-            presenter.changePassword(Constants.getToken(), user, mContext);
-        }
+        boolean valid = presenter.validatePasswords(mNewPassword, mConfirmNewPassword, mContext);
+
+        if (!valid) return;
+
+        User user = new User();
+        user.changePassword(currentPass, passNew);
+        presenter.changePassword(Constants.getToken(), user, mContext);
     }
 
     private void showErrorSnackbar(String error){

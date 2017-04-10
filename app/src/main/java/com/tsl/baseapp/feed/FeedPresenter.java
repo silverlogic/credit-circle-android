@@ -29,10 +29,12 @@ import timber.log.Timber;
 public class FeedPresenter extends MvpBasePresenter<FeedView> {
     private Subscription projectsSubscription;
     private EventBus eventBus;
+    private BaseApi api;
 
     @Inject
-    public FeedPresenter(EventBus eventBus) {
+    public FeedPresenter(EventBus eventBus, BaseApi api) {
         this.eventBus = eventBus;
+        this.api = api;
     }
 
     public void getUserList(String token, int page) {
@@ -43,7 +45,6 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
 
         // Kind of "callback"
         cancelSubscription();
-        final BaseApi api = new BaseApiManager().getAppApi();
         projectsSubscription = api.getUserList(token, page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -84,9 +85,7 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
 
                     @Override
                     public void onNext(PaginatedResponse<User> results) {
-                        List<User> userList = results.getResults();
-                        results.persist();
-                        eventBus.post(new UsersEvent(userList));
+                        eventBus.post(new UsersEvent(results));
                     }
                 });
 
@@ -100,7 +99,6 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
 
         // Kind of "callback"
         cancelSubscription();
-        final BaseApi api = new BaseApiManager().getAppApi();
         projectsSubscription = api.getUserList(token, page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -140,9 +138,7 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
 
                     @Override
                     public void onNext(PaginatedResponse<User> results) {
-                        List<User> userList = results.getResults();
-                        results.persist();
-                        eventBus.post(new UsersEvent(userList));
+                        eventBus.post(new UsersEvent(results));
                     }
                 });
 
@@ -150,7 +146,6 @@ public class FeedPresenter extends MvpBasePresenter<FeedView> {
 
     public void searchUser(String token, int page, String query, final boolean update) {
         cancelSubscription();
-        final BaseApi api = new BaseApiManager().getAppApi();
         projectsSubscription = api.searchUser(token, page, query)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

@@ -12,6 +12,9 @@ import com.tsl.baseapp.utils.Constants;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 public class FeedActivity extends BaseAppActivity {
     private static AtomicBoolean isRunningTest;
 
@@ -21,6 +24,18 @@ public class FeedActivity extends BaseAppActivity {
         setContentView(R.layout.activity_feed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if (!isTesting()){
+            // Realm
+            // robolectric can not run with realm. This is why we init in opening activity instead of application
+            Realm.init(this);
+            RealmConfiguration config = new RealmConfiguration.Builder()
+                    .deleteRealmIfMigrationNeeded()
+                    .build();
+            Realm.setDefaultConfiguration(config);
+            Realm.getDefaultInstance();
+
+        }
 
         String token = Hawk.get(Constants.TOKEN);
         if (token == null){
@@ -41,5 +56,15 @@ public class FeedActivity extends BaseAppActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(0, 0);
+    }
+
+    private boolean isTesting() {
+        // if testing do not initiate realm
+        try {
+            Class.forName("com.tsl.baseapp.feed.FeedPresenterTest");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
     }
 }

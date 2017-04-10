@@ -26,16 +26,11 @@ import okhttp3.mockwebserver.MockWebServer;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static android.support.test.espresso.action.ViewActions.replaceText;
-import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.bouncycastle.crypto.tls.ConnectionEnd.server;
 import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
@@ -61,7 +56,7 @@ public class FeedActivityTest extends InstrumentationTestCase {
     public void feedActivityTest() throws Exception {
         String fileName = "user_list.json";
         mMockWebServer.enqueue(new MockResponse()
-                .setResponseCode(200)
+                .setResponseCode(201)
                 .setBody(RestServiceTestHelper.getStringFromFile(getInstrumentation().getContext(), fileName)));
 
         Intent intent = new Intent();

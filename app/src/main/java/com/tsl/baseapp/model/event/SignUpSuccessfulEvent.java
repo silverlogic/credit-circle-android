@@ -8,17 +8,12 @@ import com.tsl.baseapp.model.objects.user.User;
  */
 public class SignUpSuccessfulEvent {
     private User mUser;
-    private Token mToken;
 
-    public SignUpSuccessfulEvent(User user, Token token) {
+    public SignUpSuccessfulEvent(User user) {
         mUser = user;
-        mToken = token;
     }
 
     public User getUser() {
         return mUser;
-    }
-    public Token getToken() {
-        return mToken;
     }
 }

@@ -1,21 +1,22 @@
 package com.tsl.baseapp.signup;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.Patterns;
+import android.widget.EditText;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.api.BaseApi;
 import com.tsl.baseapp.api.BaseApiManager;
-import com.tsl.baseapp.model.event.LoginSuccessfulEvent;
 import com.tsl.baseapp.model.event.SignUpSuccessfulEvent;
+import com.tsl.baseapp.model.event.TokenEvent;
 import com.tsl.baseapp.model.objects.error.Error;
 import com.tsl.baseapp.model.objects.token.Token;
-import com.tsl.baseapp.model.objects.user.UpdateUser;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.RetrofitException;
-import com.tsl.baseapp.utils.Writer;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -29,6 +30,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
+
 /**
  * Created by kevinlavi on 5/3/16.
  */
@@ -36,10 +38,15 @@ public class SignUpPresenter extends MvpBasePresenter<SignUpView> {
 
     private Subscription signUpSubscriber;
     private EventBus eventBus;
+    private SignUpView view;
+    private BaseApi api;
 
     @Inject
-    public SignUpPresenter(EventBus eventBus) {
+    public SignUpPresenter(EventBus eventBus, BaseApi api) {
         this.eventBus = eventBus;
+        this.api = api;
+        // push for bitrise
+        //TODO remove this
     }
 
     public void doSignUp(final User credentials, final Context context) {
@@ -48,9 +55,7 @@ public class SignUpPresenter extends MvpBasePresenter<SignUpView> {
             getView().showLoading();
         }
 
-        // Kind of "callback"
         cancelSubscription();
-        final BaseApi api = new BaseApiManager().getAppApi();
         signUpSubscriber = api.signUpUser(credentials)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -125,16 +130,14 @@ public class SignUpPresenter extends MvpBasePresenter<SignUpView> {
 
                                     @Override
                                     public void onNext(final Token token) {
-                                        Hawk.put(Constants.TOKEN, token.getToken());
+                                        eventBus.post(new TokenEvent(token));
                                         signUpSubscriber = api.getCurrentUser(Constants.getToken())
                                                 .observeOn(AndroidSchedulers.mainThread())
                                                 .subscribeOn(Schedulers.io())
                                                 .subscribe(new Subscriber<User>() {
                                                     @Override
                                                     public void onCompleted() {
-                                                        if (isViewAttached()) {
-                                                            getView().signUpSuccessful();
-                                                        }
+                                                        getView().signUpSuccessful();
                                                     }
 
                                                     @Override
@@ -166,10 +169,7 @@ public class SignUpPresenter extends MvpBasePresenter<SignUpView> {
 
                                                     @Override
                                                     public void onNext(final User user) {
-                                                        // persist user id for fetching from realms
-                                                        Hawk.put(Constants.USER_ID, user.getId());
-                                                        // persist current user
-                                                        Writer.persist(user);
+                                                        eventBus.post(new SignUpSuccessfulEvent(user));
                                                     }
                                                 });
                                     }
@@ -177,6 +177,41 @@ public class SignUpPresenter extends MvpBasePresenter<SignUpView> {
                     }
                 });
     }
+
+    public boolean validate(EditText inputEmail, EditText inputPassword, EditText inputConfirmPassword, Context context) {
+
+        boolean valid = true;
+
+        String email = inputEmail.getText().toString();
+        String password = inputPassword.getText().toString();
+        String confirm_pass= inputConfirmPassword.getText().toString();
+        Context mContext = context;
+        Resources r = mContext.getResources();
+
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            inputEmail.setError(r.getString(R.string.enter_valid_emil));
+            valid = false;
+        } else {
+            inputEmail.setError(null);
+        }
+
+        if (password.isEmpty()) {
+            inputPassword.setError(r.getString(R.string.enter_password));
+            valid = false;
+        } else {
+            inputPassword.setError(null);
+        }
+
+        if (confirm_pass.isEmpty() || !confirm_pass.equals(password)) {
+            inputConfirmPassword.setError(r.getString(R.string.passwords_must_match));
+            valid = false;
+        } else {
+            inputConfirmPassword.setError(null);
+        }
+
+        return valid;
+    }
+
     /**
      * Cancels any previous callback
      */

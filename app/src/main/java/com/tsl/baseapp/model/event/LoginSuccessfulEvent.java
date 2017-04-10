@@ -14,16 +14,10 @@ import com.tsl.baseapp.model.objects.user.User;
  */
 public class LoginSuccessfulEvent {
 
-    private String mToken;
     private User mUser;
 
-    public LoginSuccessfulEvent(Token token, User user) {
-        mToken = token.getToken();
+    public LoginSuccessfulEvent(User user) {
         mUser = user;
-    }
-
-    public String getToken() {
-        return mToken;
     }
 
     public User getUser(){return mUser;}

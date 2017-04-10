@@ -60,7 +60,7 @@ android {
         }
     }
     dexOptions {
-        javaMaxHeapSize "6g"
+        javaMaxHeapSize "4g"
         //dexInProcess false
     }
 
@@ -113,15 +113,23 @@ dependencies {
     // Dagger 2
     apt "com.google.dagger:dagger-compiler:2.2"
     compile 'com.google.dagger:dagger:2.2'
+    testCompile 'com.orhanobut:mockwebserverplus:1.0.0'
+    testCompile 'com.squareup.retrofit2:retrofit-mock:2.0.2'
+    testCompile 'org.mockito:mockito-core:2.7.0'
+    testCompile 'org.robolectric:robolectric:3.3'
+    testCompile 'org.robolectric:shadows-support-v4:3.0'
+    compile 'com.loopj.android:android-async-http:1.4.9'
     // Rest API
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.6'
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'io.gsonfire:gson-fire:1.8.0'
-    androidTestCompile 'com.squareup.okhttp3:mockwebserver:3.2.0'
+    androidTestCompile 'com.squareup.okhttp3:mockwebserver:3.5.0'
     androidTestCompile 'com.squareup.retrofit2:retrofit-mock:2.0.2'
     // Butterknife
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -138,8 +146,6 @@ dependencies {
     compile 'com.github.orhanobut:hawk:1.23'
     // Logging
     compile 'com.jakewharton.timber:timber:4.1.2'
-    // Caching
-    compile 'com.anupcowkur:reservoir:2.1'
     // Annotations
     compile 'com.hannesdorfmann.fragmentargs:annotation:3.0.2'
     // Mosby MVP

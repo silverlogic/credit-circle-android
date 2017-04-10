@@ -1,6 +1,9 @@
 package com.tsl.baseapp.updatepasswordemail;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.Patterns;
+import android.widget.EditText;
 
 import com.google.common.base.Converter;
 import com.google.gson.JsonObject;
@@ -39,10 +42,12 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
 
     private Subscription subscription;
     private EventBus eventBus;
+    private BaseApi api;
 
     @Inject
-    public UpdatePasswordAndEmailPresenter(EventBus eventBus) {
+    public UpdatePasswordAndEmailPresenter(EventBus eventBus, BaseApi api) {
         this.eventBus = eventBus;
+        this.api = api;
     }
 
     public void updateEmail(String token, User credentials, final Context context) {
@@ -52,7 +57,6 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
         }
 
         cancelSubscription();
-        final BaseApi api = new BaseApiManager().getAppApi();
         subscription = api.changeEmail(token, credentials)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -103,7 +107,6 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
         }
 
         cancelSubscription();
-        final BaseApi api = new BaseApiManager().getAppApi();
         subscription = api.changePassword(token, creds)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -147,6 +150,46 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
                 });
     }
 
+    public boolean validateEmail(EditText inputEmail, Context context) {
+        boolean valid = true;
+
+        String email = inputEmail.getText().toString();
+
+        Context mContext = context;
+        Resources r = mContext.getResources();
+
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            inputEmail.setError(r.getString(R.string.valid_email_error));
+            valid = false;
+        } else {
+            inputEmail.setError(null);
+        }
+
+        return valid;
+    }
+
+    public boolean validatePasswords(EditText inputNewPassword, EditText inputNewPasswordConfirm, Context context) {
+        boolean valid = true;
+
+        String passNew = inputNewPassword.getText().toString();
+        String passNewConfirm = inputNewPasswordConfirm.getText().toString();
+
+        Context mContext = context;
+        Resources r = mContext.getResources();
+
+        if (passNew.isEmpty()) {
+            inputNewPassword.setError(mContext.getString(R.string.field_cannot_be_empty));
+            valid = false;
+        } else if (passNewConfirm.isEmpty()) {
+            inputNewPasswordConfirm.setError(mContext.getString(R.string.field_cannot_be_empty));
+            valid = false;
+        } else if (!passNew.equals(passNewConfirm)) {
+            inputNewPasswordConfirm.setError(mContext.getString(R.string.new_password_error));
+            valid = false;
+        }
+
+        return valid;
+    }
 
     /**
      * Cancels any previous callback

@@ -32,15 +32,6 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // Realm
-        Realm.init(this);
-        RealmConfiguration config = new RealmConfiguration.Builder()
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        Realm.setDefaultConfiguration(config);
-        Realm.getDefaultInstance();
-
-        
         baseComponent = DaggerBaseAppComponent.create();
         refWatcher = LeakCanary.install(this);
         if (BuildConfig.DEBUG) {

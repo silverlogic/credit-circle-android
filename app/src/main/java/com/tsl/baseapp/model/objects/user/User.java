@@ -74,6 +74,14 @@ public class User extends RealmObject implements Serializable {
         this.new_password = new_password;
     }
 
+    public User testUser(String first_name, String last_name, UserImages userImages){
+        User user = new User();
+        user.first_name = first_name;
+        user.last_name = last_name;
+        user.userImages = userImages;
+        return user;
+    }
+
     public void changeEmail(String new_email){
         this.new_email = new_email;
     }

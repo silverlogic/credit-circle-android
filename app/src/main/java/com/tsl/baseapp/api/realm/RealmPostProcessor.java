@@ -2,10 +2,10 @@ package com.tsl.baseapp.api.realm;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import io.tsl.realm_sugar.Merger;
 
 import io.gsonfire.PostProcessor;
 import io.realm.RealmObject;
+import io.tsl.realm_sugar.Merger;
 
 /**
  * Created by Manu on 6/1/17.

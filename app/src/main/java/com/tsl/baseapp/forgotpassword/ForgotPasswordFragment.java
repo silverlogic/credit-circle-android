@@ -4,6 +4,7 @@ package com.tsl.baseapp.forgotpassword;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,6 +20,8 @@ import com.tsl.baseapp.model.event.ForgotPasswordEvent;
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
+
+import static com.tsl.baseapp.R.string.email;
 
 public class ForgotPasswordFragment extends BaseViewStateFragment<ForgotPasswordView, ForgotPasswordPresenter> implements ForgotPasswordView {
 
@@ -52,7 +55,7 @@ public class ForgotPasswordFragment extends BaseViewStateFragment<ForgotPassword
         mSubmitButton.setOnClickNormalState(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submit();
+                forgotPassword();
             }
         }).build();
     }
@@ -100,6 +103,15 @@ public class ForgotPasswordFragment extends BaseViewStateFragment<ForgotPassword
         showDialog(message);
     }
 
+    private void forgotPassword(){
+        boolean valid = presenter.validateEmail(mInputEmail, mContext);
+
+        if (!valid) return;
+
+        String email = mInputEmail.getText().toString();
+        presenter.forgotPassword(email, mContext);
+    }
+
     @Override
     protected void injectDependencies() {
         forgotPasswordComponent = DaggerForgotPasswordComponent.builder()
@@ -115,14 +127,6 @@ public class ForgotPasswordFragment extends BaseViewStateFragment<ForgotPassword
     private void setFormEnabled(boolean enabled) {
         mInputEmail.setEnabled(enabled);
         mSubmitButton.setEnabled(enabled);
-    }
-
-    private void submit(){
-        if (presenter.validateForgetPassword(mInputEmail, mContext)){
-            // email is validated. Make api call
-            String email = mInputEmail.getText().toString();
-            presenter.forgotPassword(email, mContext);
-        }
     }
 
     private void showDialog(String s){

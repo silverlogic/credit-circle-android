@@ -265,6 +265,7 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
 
     @Subscribe
     public void onEvent(UsersEvent event){
+        event.getResponse().persist();
         List<User> userList = event.getUserList();
         if (mUserList.size() == 0){
             mUserList.addAll(event.getUserList());
