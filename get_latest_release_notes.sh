@@ -26,4 +26,4 @@ $line"
 done <"$file"
 
 #Pipe release_notes and expose to bitrise build.
-echo "$release_notes" > temp_release_notes.md
+echo "$release_notes" > app/temp_release_notes.md
