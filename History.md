@@ -2,6 +2,11 @@
 v0.0.2 / 2017-04-17
 ===================
 
+  * BA-451 Add History File final
+
+v0.0.2 / 2017-04-17
+===================
+
   * Merged in BA-451-Automated-Fabric-Builds (pull request #29)
   * Merged in BA-516-CI-Setup-Improvements (pull request #28)
   * Merged in BA-529-Forgot-Password-Deeplink (pull request #30)
