@@ -24,6 +24,7 @@ public class Error {
     public List<String> provider;
     public List<String> non_field_errors;
     public List<String> new_email;
+    public List<String> token;
 
     public final String getErrorString(){
         StringBuilder result = new StringBuilder();

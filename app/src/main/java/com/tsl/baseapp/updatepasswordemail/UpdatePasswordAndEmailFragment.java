@@ -72,6 +72,7 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
     private final String DEEPLINK_CHANGE_EMAIL_CONFIRM = "change-email-confirm";
     private final String DEEPLINK_CHANGE_EMAIL_VERIFY = "change-email-verify";
     private final String DEEPLINK_CONFIRM_EMAIL = "confirm-email";
+
     private MaterialDialog mChangingEmailDialog;
     private MaterialDialog mConfirmEmailDialog;
 
@@ -112,8 +113,8 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         getDeepLinks();
 
         // find out if activity is update email or change password
@@ -331,7 +332,7 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
 
         User user = new User();
         user.changePasswordFromForgotPassword(token, passNew);
-        //presenter.forgotPasswordReset(user);
+        presenter.forgotPasswordReset(user);
     }
 
     private void showErrorSnackbar(String error){
@@ -352,7 +353,6 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
             public void onInitFinished(BranchUniversalObject branchUniversalObject, LinkProperties linkProperties, BranchError error) {
                 if (error == null && branchUniversalObject != null) {
                     JSONObject branchObject = branchUniversalObject.convertToJson();
-                    Timber.d("OBJECT ==== " + branchObject.toString());
                     try {
                         String type = branchObject.getString("type");
                         final String token = branchObject.getString("token");
@@ -383,6 +383,19 @@ public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<Update
                             User user = new User();
                             user.setToken(token);
                             presenter.confirmUsersEmail(id, user);
+                        }
+                        if (type.equals(DEEPLINK_FORGOT_PASSWORD)){
+                            // remove current password field
+                            mCurrentPassword.setVisibility(View.GONE);
+                            // inflate change password
+                            showChangePasswordForm();
+                            mSubmitButton.setMode(ActionProcessButton.Mode.ENDLESS);
+                            mSubmitButton.setOnClickNormalState(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    changePasswordFromForgotPassword(token, mConfirmNewPassword.getText().toString());
+                                }
+                            }).build();
                         }
                     } catch (JSONException e) {
                         Toast.makeText(mContext, mContext.getString(R.string.error_finding_user), Toast.LENGTH_SHORT).show();

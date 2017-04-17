@@ -200,6 +200,56 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
                 });
     }
 
+    public void confirmUsersEmail(int id, User token){
+
+        if (isViewAttached()) {
+            getView().showLoadingUserHasVerifiedEmail();
+        }
+
+        cancelSubscription();
+        subscription = api.confirmEmail(id, token)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<Void>() {
+                    @Override
+                    public void onCompleted() {
+                        if (isViewAttached()) {
+                            getView().showUserHasVerifiedEmail();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (isViewAttached()) {
+                            if (e instanceof RetrofitException) {
+                                RetrofitException error = (RetrofitException) e;
+                                if (error.getKind() == RetrofitException.Kind.NETWORK) {
+                                    //handle network error
+                                    Timber.d("NETWORK ERROR");
+                                } else {
+                                    //handle error message from server
+                                    Timber.d(e.getLocalizedMessage());
+                                    Error response = null;
+                                    try {
+                                        response = error.getErrorBodyAs(Error.class);
+                                        String errorString = response.getErrorString();
+                                        Timber.d("Error = " + errorString);
+                                        // FINISH API CALL
+                                        getView().showErrorUserHasVerifiedEmail(response.getErrorString());
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onNext(Void v) {
+                    }
+                });
+    }
+
     public void changePassword(String token, User creds, final Context context){
 
         if (isViewAttached()) {
@@ -250,21 +300,21 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
                 });
     }
 
-    public void confirmUsersEmail(int id, User token){
+    public void forgotPasswordReset(User user){
 
         if (isViewAttached()) {
-            getView().showLoadingUserHasVerifiedEmail();
+            getView().showLoading();
         }
 
         cancelSubscription();
-        subscription = api.confirmEmail(id, token)
+        subscription = api.forgotPasswordReset(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<Void>() {
                     @Override
                     public void onCompleted() {
                         if (isViewAttached()) {
-                            getView().showUserHasVerifiedEmail();
+                            getView().showChangePasswordSuccess(true);
                         }
                     }
 
@@ -285,7 +335,7 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
                                         String errorString = response.getErrorString();
                                         Timber.d("Error = " + errorString);
                                         // FINISH API CALL
-                                        getView().showErrorUserHasVerifiedEmail(response.getErrorString());
+                                        getView().showError(response.getErrorString());
                                     } catch (IOException e1) {
                                         e1.printStackTrace();
                                     }

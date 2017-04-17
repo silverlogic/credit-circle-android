@@ -99,6 +99,7 @@ public class ForgotPasswordFragment extends BaseViewStateFragment<ForgotPassword
     public void showSuccess() {
         vs.setShowSuccess();
         setFormEnabled(true);
+        mInputEmail.setText("");
         String message = getString(R.string.password_reset);
         showDialog(message);
     }
