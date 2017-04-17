@@ -66,7 +66,7 @@ android {
             buildConfigField "boolean", "IS_RELEASE", "false"
             resValue "string", "branch_io_key", "key_test_pmEf8Pqmg05t4N1MamZw4egeyxahRfTj"
             testCoverageEnabled true
-            ext.betaDistributionReleaseNotesFilePath="temp_release_notes.md"
+            ext.betaDistributionReleaseNotesFilePath="release_notes.md"
             ext.betaDistributionGroupAliases="sparkle"
             ext.betaDistributionNotifications=true
         }
