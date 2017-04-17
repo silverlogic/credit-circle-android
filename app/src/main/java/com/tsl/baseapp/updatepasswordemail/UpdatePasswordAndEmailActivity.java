@@ -28,4 +28,9 @@ public class UpdatePasswordAndEmailActivity extends BaseAppActivity {
                     .commit();
         }
     }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        this.setIntent(intent);
+    }
 }

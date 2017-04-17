@@ -14,7 +14,7 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="error_forgot_password">Error resetting your password</string>
-    <string name="password_reset">Password has been reset. Please check your email.</string>
+    <string name="password_reset">Please check your email to reset your password</string>
     <string name="cancel">Cancel</string>
 
     <string name="title_activity_settings">Settings</string>
@@ -140,5 +140,14 @@
     <string name="successful_update">Successfully updated user!</string>
     <string name="updating_user">Updating User...</string>
     <string name="fetching_user">Fetching User...</string>
+
+    <!-- Deeplink -->
+    <string name="error_finding_user">There was an error finding your information. Please try again.</string>
+    <string name="confirming_email">Confirming email...</string>
+    <string name="confirm_email_success">Your previous email has been confirmed. Please check the new email you provided</string>
+    <string name="verifying_email">Verifying new email...</string>
+    <string name="verify_email_success">Your new email has been verified. Login with your new email.</string>
+    <string name="user_confirming_email">Confirming Email...</string>
+    <string name="user_has_verified_email">Your email has now been verified.</string>
 
 </resources>

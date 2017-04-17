@@ -15,8 +15,21 @@ public interface UpdatePasswordAndEmailView extends MvpView{
 
     public void showLoading();
 
-    public void showChangePasswordSuccess();
+    public void showChangePasswordSuccess(boolean reset);
 
     public void showUpdateEmailSuccess();
 
+    public void showChangingEmailLoading(String body);
+
+    public void showConfirmEmailSuccess(String message);
+
+    public void showVerifyEmailSuccess(String message);
+
+    public void showChangingEmailFailed(String error);
+
+    public void showLoadingUserHasVerifiedEmail();
+
+    public void showUserHasVerifiedEmail();
+
+    public void showErrorUserHasVerifiedEmail(String error);
 }

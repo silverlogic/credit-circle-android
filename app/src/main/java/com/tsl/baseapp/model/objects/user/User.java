@@ -47,7 +47,7 @@ public class User extends RealmObject implements Serializable {
 
     String current_password;
     String new_password;
-
+    String token;
 
     public User(){};
 
@@ -71,6 +71,11 @@ public class User extends RealmObject implements Serializable {
 
     public void changePassword(String current_password, String new_password){
         this.current_password = current_password;
+        this.new_password = new_password;
+    }
+
+    public void changePasswordFromForgotPassword(String token, String new_password){
+        this.token = token;
         this.new_password = new_password;
     }
 
@@ -156,5 +161,13 @@ public class User extends RealmObject implements Serializable {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

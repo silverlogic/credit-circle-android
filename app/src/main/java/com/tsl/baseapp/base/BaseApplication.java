@@ -15,6 +15,7 @@ import com.tsl.baseapp.dagger.DaggerBaseAppComponent;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
+import io.branch.referral.Branch;
 import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -45,6 +46,8 @@ public class BaseApplication extends Application {
 
         Fabric.with(this, new Crashlytics());
         JodaTimeAndroid.init(this);
+        // Initialize the Branch object
+        Branch.getAutoInstance(this);
     }
 
     public static RefWatcher getRefWatcher(Context context) {

@@ -266,7 +266,7 @@ public class UpdatePasswordAndEmailPresenterTest {
 
         presenter.changePassword(token.getToken(), user, mMockContext);
         Mockito.verify(view).showLoading();
-        Mockito.verify(view).showChangePasswordSuccess();
+        Mockito.verify(view).showChangePasswordSuccess(false);
     }
 
 }

@@ -36,7 +36,7 @@ public class UpdatePasswordAndEmailViewState implements ViewState<UpdatePassword
                 break;
 
             case STATE_SHOW_CHANGE_PASSWORD_SUCCESS:
-                view.showChangePasswordSuccess();
+                view.showChangePasswordSuccess(false);
                 break;
 
             case STATE_SHOW_UPDATE_EMAIL_SUCCESS:

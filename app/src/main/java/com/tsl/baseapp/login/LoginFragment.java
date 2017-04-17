@@ -252,6 +252,8 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
         User user = new User();
         user.login(username, pass);
 
+        mActiveButton = mLoginButton;
+
         // Start login
         presenter.doNormalLogin(mContext, user);
     }

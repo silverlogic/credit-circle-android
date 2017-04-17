@@ -100,6 +100,106 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
                 });
     }
 
+    public void confirmEmail(int id, User user, final Context context) {
+
+        if (isViewAttached()) {
+            getView().showChangingEmailLoading(context.getString(R.string.confirming_email));
+        }
+
+        cancelSubscription();
+        subscription = api.changeEmailConfirm(id, user)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<Void>() {
+                    @Override
+                    public void onCompleted() {
+                        if (isViewAttached()) {
+                            getView().showConfirmEmailSuccess(context.getString(R.string.confirm_email_success));
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (isViewAttached()) {
+                            if (e instanceof RetrofitException) {
+                                RetrofitException error = (RetrofitException) e;
+                                if (error.getKind() == RetrofitException.Kind.NETWORK) {
+                                    //handle network error
+                                    Timber.d("NETWORK ERROR");
+                                    getView().showError(context.getString(R.string.no_internet));
+                                } else {
+                                    //handle error message from server
+                                    Timber.d(e.getLocalizedMessage());
+                                    Error response = null;
+                                    try {
+                                        response = error.getErrorBodyAs(Error.class);
+                                        String errorString = response.getErrorString();
+                                        // FINISH API CALL
+                                        getView().showChangingEmailFailed(response.getErrorString());
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onNext(Void aVoid) {
+                    }
+                });
+    }
+
+    public void verifyEmail(int id, User user, final Context context) {
+
+        if (isViewAttached()) {
+            getView().showChangingEmailLoading(context.getString(R.string.verifying_email));
+        }
+
+        cancelSubscription();
+        subscription = api.changeEmailVerify(id, user)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<Void>() {
+                    @Override
+                    public void onCompleted() {
+                        if (isViewAttached()) {
+                            getView().showVerifyEmailSuccess(context.getString(R.string.verify_email_success));
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (isViewAttached()) {
+                            if (e instanceof RetrofitException) {
+                                RetrofitException error = (RetrofitException) e;
+                                if (error.getKind() == RetrofitException.Kind.NETWORK) {
+                                    //handle network error
+                                    Timber.d("NETWORK ERROR");
+                                    getView().showError(context.getString(R.string.no_internet));
+                                } else {
+                                    //handle error message from server
+                                    Timber.d(e.getLocalizedMessage());
+                                    Error response = null;
+                                    try {
+                                        response = error.getErrorBodyAs(Error.class);
+                                        String errorString = response.getErrorString();
+                                        // FINISH API CALL
+                                        getView().showChangingEmailFailed(response.getErrorString());
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onNext(Void aVoid) {
+                    }
+                });
+    }
+
     public void changePassword(String token, User creds, final Context context){
 
         if (isViewAttached()) {
@@ -114,7 +214,7 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
                     @Override
                     public void onCompleted() {
                         if (isViewAttached()) {
-                            getView().showChangePasswordSuccess();
+                            getView().showChangePasswordSuccess(false);
                         }
                     }
 
@@ -146,6 +246,56 @@ public class UpdatePasswordAndEmailPresenter extends MvpBasePresenter<UpdatePass
 
                     @Override
                     public void onNext(JsonObject object) {
+                    }
+                });
+    }
+
+    public void confirmUsersEmail(int id, User token){
+
+        if (isViewAttached()) {
+            getView().showLoadingUserHasVerifiedEmail();
+        }
+
+        cancelSubscription();
+        subscription = api.confirmEmail(id, token)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<Void>() {
+                    @Override
+                    public void onCompleted() {
+                        if (isViewAttached()) {
+                            getView().showUserHasVerifiedEmail();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (isViewAttached()) {
+                            if (e instanceof RetrofitException) {
+                                RetrofitException error = (RetrofitException) e;
+                                if (error.getKind() == RetrofitException.Kind.NETWORK) {
+                                    //handle network error
+                                    Timber.d("NETWORK ERROR");
+                                } else {
+                                    //handle error message from server
+                                    Timber.d(e.getLocalizedMessage());
+                                    Error response = null;
+                                    try {
+                                        response = error.getErrorBodyAs(Error.class);
+                                        String errorString = response.getErrorString();
+                                        Timber.d("Error = " + errorString);
+                                        // FINISH API CALL
+                                        getView().showErrorUserHasVerifiedEmail(response.getErrorString());
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onNext(Void v) {
                     }
                 });
     }

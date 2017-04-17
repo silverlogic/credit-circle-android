@@ -38,6 +38,15 @@ public interface BaseApi {
     @POST("change-email")
     Observable<Void> changeEmail(@Header(Constants.AUTHORIZATION) String token, @Body User creds);
 
+    @POST("change-email/{id}/confirm")
+    Observable<Void> changeEmailConfirm(@Path("id") int id, @Body User token);
+
+    @POST("change-email/{id}/verify")
+    Observable<Void> changeEmailVerify(@Path("id") int id, @Body User token);
+
+    @POST("users/{id}/confirm-email")
+    Observable<Void> confirmEmail(@Path("id") int id, @Body User token);
+
     @GET("users/me")
     Observable<User> getCurrentUser(@Header(Constants.AUTHORIZATION) String token);
 
