@@ -1,3 +1,5 @@
+[![Build Status](https://www.bitrise.io/app/380631a2161fedd4.svg?token=x806ldx2oYEFkq0-pRYadA&branch=master)](https://www.bitrise.io/app/380631a2161fedd4) [![codecov](https://codecov.io/bb/silverlogic/baseapp-android/branch/master/graph/badge.svg?token=RlD1f2RLLU)](https://codecov.io/bb/silverlogic/baseapp-android)
+
 SETUP
 
 1) Copy link above (to the right of SSH starting with git@bitbucket)
