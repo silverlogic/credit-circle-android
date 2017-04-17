@@ -35,13 +35,19 @@ android {
             keyAlias "tslkey"
             keyPassword "SilverLogic123"
         }
+        debug {
+            storeFile file('keystore/debugkey.jks')
+            storePassword "SilverLogic123"
+            keyAlias "tsldebugkey"
+            keyPassword "SilverLogic123"
+        }
     }
     defaultConfig {
         applicationId "com.tsl.baseapp"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
-        versionName "0.01"
+        versionName "0.0.1"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
@@ -59,6 +65,9 @@ android {
             applicationIdSuffix ".staging"
             buildConfigField "boolean", "IS_RELEASE", "false"
             resValue "string", "branch_io_key", "key_test_pmEf8Pqmg05t4N1MamZw4egeyxahRfTj"
+            testCoverageEnabled true
+            ext.betaDistributionGroupAliases="sparkle"
+            ext.betaDistributionNotifications=true
         }
     }
     dexOptions {
@@ -117,6 +126,7 @@ dependencies {
     // Dagger 2
     apt "com.google.dagger:dagger-compiler:2.2"
     compile 'com.google.dagger:dagger:2.2'
+
     testCompile 'com.orhanobut:mockwebserverplus:1.0.0'
     testCompile 'com.squareup.retrofit2:retrofit-mock:2.0.2'
     testCompile 'org.mockito:mockito-core:2.7.0'
