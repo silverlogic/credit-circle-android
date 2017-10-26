@@ -11,8 +11,6 @@ buildscript {
 }
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
-apply plugin: 'android-apt'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'realm-android'
 apply plugin: 'jacoco-android'
 
@@ -25,7 +23,7 @@ repositories {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
 
 
     signingConfigs {
@@ -86,7 +84,9 @@ repositories {
 }
 
 repositories { mavenCentral() }
-repositories { maven { url "http://dl.bintray.com/jjhesk/maven" } }
+repositories { maven { url "http://dl.bintray.com/jjhesk/maven" }
+    google()
+}
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -110,8 +110,7 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     provided 'javax.annotation:jsr250-api:1.0'
-    provided 'frankiesardo:icepick-processor:3.2.0-SNAPSHOT'
-    apt 'com.hannesdorfmann.fragmentargs:processor:3.0.2'
+    annotationProcessor 'com.hannesdorfmann.fragmentargs:processor:3.0.2'
     compile 'com.intuit.sdp:sdp-android:1.0.2'
 
     // Google API's
@@ -125,7 +124,7 @@ dependencies {
     compile 'com.android.support:support-v4:23.3.0'
 
     // Dagger 2
-    apt "com.google.dagger:dagger-compiler:2.2"
+    annotationProcessor "com.google.dagger:dagger-compiler:2.2"
     compile 'com.google.dagger:dagger:2.2'
 
     testCompile 'com.orhanobut:mockwebserverplus:1.0.0'
@@ -149,6 +148,7 @@ dependencies {
     androidTestCompile 'com.squareup.retrofit2:retrofit-mock:2.0.2'
 
     // Butterknife
+    annotationProcessor 'com.jakewharton:butterknife:7.0.1'
     compile 'com.jakewharton:butterknife:7.0.1'
 
     //Progress Button
@@ -176,6 +176,7 @@ dependencies {
     // Mosby MVP
     compile 'com.hannesdorfmann.mosby:mvp:2.0.1'
     compile 'com.hannesdorfmann.mosby:viewstate:2.0.1'
+    annotationProcessor 'frankiesardo:icepick-processor:3.2.0-SNAPSHOT'
     compile 'frankiesardo:icepick:3.2.0-SNAPSHOT'
     // Eventbus
     compile 'org.greenrobot:eventbus:3.0.0'
@@ -225,6 +226,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
 
+    annotationProcessor files('libs/realm_sugar.jar')
     compile files('libs/realm_sugar.jar')
 
     //branch io deeplinking

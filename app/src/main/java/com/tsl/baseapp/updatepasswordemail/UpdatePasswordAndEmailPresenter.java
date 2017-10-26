@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.util.Patterns;
 import android.widget.EditText;
 
-import com.google.common.base.Converter;
 import com.google.gson.JsonObject;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import com.tsl.baseapp.R;
@@ -18,15 +17,9 @@ import com.tsl.baseapp.utils.RetrofitException;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
-import java.lang.annotation.Annotation;
 
 import javax.inject.Inject;
 
-import okhttp3.ResponseBody;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.HttpException;
-import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
