@@ -34,7 +34,7 @@ public class BaseApplication extends Application {
         super.onCreate();
 
         baseComponent = DaggerBaseAppComponent.create();
-        refWatcher = LeakCanary.install(this);
+        //refWatcher = LeakCanary.install(this);
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
