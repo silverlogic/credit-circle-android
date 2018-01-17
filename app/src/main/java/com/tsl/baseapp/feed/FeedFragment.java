@@ -27,6 +27,7 @@ import com.rey.material.widget.SnackBar;
 import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
+import com.tsl.baseapp.bluetooth.BluetoothActivity;
 import com.tsl.baseapp.model.event.UsersEvent;
 import com.tsl.baseapp.model.objects.api.PaginatedResponse;
 import com.tsl.baseapp.model.objects.user.User;
@@ -148,9 +149,13 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        if (id == R.id.action_bluetooth) {
+            Utils.startActivity(getActivity(), BluetoothActivity.class, false);
+            return true;
+        }
+
         if (id == R.id.action_settings) {
-            startActivity(new Intent(getActivity(), SettingsActivity.class));
-            getActivity().overridePendingTransition(0, 0);
+            Utils.startActivity(getActivity(), SettingsActivity.class, false);
             return true;
         }
 

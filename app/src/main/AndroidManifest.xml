@@ -111,6 +111,11 @@
             android:label="@string/title_activity_edit_profile"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".bluetooth.BluetoothActivity"
+            android:label="@string/title_activity_bluetooth"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity android:name=".baseview.BaseActivity"></activity>
 
 
