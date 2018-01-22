@@ -1,12 +1,14 @@
-package com.tsl.baseapp.bluetooth;
+package com.tsl.baseapp.bluetooth.bluetoothswitch;
 
 
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGattCharacteristic;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ParcelUuid;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -14,12 +16,14 @@ import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.base.BaseViewStateFragment;
+import com.tsl.baseapp.bluetooth.GattClient;
 import com.tsl.baseapp.model.event.BaseEvent;
 
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
+
+import static com.tsl.baseapp.bluetooth.bluetoothswitch.BluetoothActivity.EXTRA_DEVICE_ADDRESS;
 
 public class BluetoothFragment extends BaseViewStateFragment<BluetoothView, BluetoothPresenter> implements BluetoothView {
 
@@ -29,6 +33,7 @@ public class BluetoothFragment extends BaseViewStateFragment<BluetoothView, Blue
     private BluetoothViewState vs;
     private BluetoothComponant bluetoothComponant;
     boolean lightIsOn;
+    private final GattClient mGattClient = new GattClient();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,20 +54,18 @@ public class BluetoothFragment extends BaseViewStateFragment<BluetoothView, Blue
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!lightIsOn){
-                    // turn light on
-                    lightIsOn = true;
-                    mButton.setBackgroundColor(getResources().getColor(R.color.red));
-                    Toast.makeText(mContext, "Turn on light", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    // turn light off
-                    lightIsOn = false;
-                    mButton.setBackgroundColor(getResources().getColor(R.color.green));
-                    Toast.makeText(mContext, "Turn off light", Toast.LENGTH_SHORT).show();
-                }
+                mGattClient.writeInteractor();
             }
         });
+
+        String address = getActivity().getIntent().getStringExtra(EXTRA_DEVICE_ADDRESS);
+        mGattClient.onCreate(mContext, address, mButton);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mGattClient.onDestroy();
     }
 
     @Override
@@ -107,4 +110,5 @@ public class BluetoothFragment extends BaseViewStateFragment<BluetoothView, Blue
     public void onEvent(BaseEvent event) {
         // Do stuff with Eventbus event
     }
+
 }

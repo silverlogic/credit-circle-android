@@ -1,4 +1,4 @@
-package com.tsl.baseapp.bluetooth;
+package com.tsl.baseapp.bluetooth.bluetoothswitch;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
 

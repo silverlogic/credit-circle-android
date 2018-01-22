@@ -3,7 +3,6 @@ package com.tsl.baseapp.feed;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,18 +22,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.orhanobut.hawk.Hawk;
-import com.rey.material.widget.SnackBar;
 import com.tsl.baseapp.base.BaseApplication;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseViewStateFragment;
-import com.tsl.baseapp.bluetooth.BluetoothActivity;
+import com.tsl.baseapp.bluetooth.bluetoothswitch.BluetoothActivity;
+import com.tsl.baseapp.bluetooth.devicescan.ScanActivity;
 import com.tsl.baseapp.model.event.UsersEvent;
-import com.tsl.baseapp.model.objects.api.PaginatedResponse;
 import com.tsl.baseapp.model.objects.user.User;
-import com.tsl.baseapp.model.objects.user.UserFinder;
 import com.tsl.baseapp.userdetails.UserDetailsActivity;
 import com.tsl.baseapp.userdetails.UserDetailsFragment;
-import com.tsl.baseapp.model.objects.user.UserList;
 import com.tsl.baseapp.settings.SettingsActivity;
 import com.tsl.baseapp.utils.Constants;
 import com.tsl.baseapp.utils.EndlessRecyclerOnScrollListener;
@@ -48,8 +44,6 @@ import java.util.List;
 import butterknife.Bind;
 import io.realm.Realm;
 import timber.log.Timber;
-
-import static android.R.attr.id;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -150,7 +144,7 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
         int id = item.getItemId();
 
         if (id == R.id.action_bluetooth) {
-            Utils.startActivity(getActivity(), BluetoothActivity.class, false);
+            Utils.startActivity(getActivity(), ScanActivity.class, false);
             return true;
         }
 

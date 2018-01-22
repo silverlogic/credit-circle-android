@@ -7,6 +7,8 @@ import com.orhanobut.hawk.Hawk;
 import com.tsl.baseapp.BuildConfig;
 import com.tsl.baseapp.R;
 
+import java.util.UUID;
+
 /**
  * Created by Kevin on 9/17/15.
  */
@@ -42,6 +44,11 @@ public class Constants {
     public static final String REDIRECT_URL = "https://app.baseapp.tsl.io/";
 
     public static final String TWITTER_USER = "twitterUser";
+
+    // bluetooth device uuid
+    public static final UUID DEVICE_UUID = UUID.fromString("18d876b8-b6d6-503c-92f4-7ff407ddc89c");
+    public static final UUID BLUETOOTH_CHARACTERISTIC = UUID.fromString("eb18c3d6-c156-4c9e-9f89-a7ad886dabb6");
+    public static final UUID SERVICE_UUID = UUID.fromString("aa59768e-0591-436c-bf8e-ccfe879a3929");
 
     public static final String getToken(){
         if (Hawk.isBuilt() && Hawk.get(TOKEN) != null){

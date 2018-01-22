@@ -42,7 +42,7 @@ android {
     }
     defaultConfig {
         applicationId "com.tsl.baseapp"
-        minSdkVersion 16
+        minSdkVersion 18
         targetSdkVersion 26
         versionCode 1
         versionName "0.0.5"
@@ -64,9 +64,9 @@ android {
             buildConfigField "boolean", "IS_RELEASE", "false"
             resValue "string", "branch_io_key", "key_test_pmEf8Pqmg05t4N1MamZw4egeyxahRfTj"
             testCoverageEnabled true
-            ext.betaDistributionReleaseNotesFilePath="app/release_notes.txt"
-            ext.betaDistributionGroupAliases="sparkle"
-            ext.betaDistributionNotifications=true
+            ext.betaDistributionReleaseNotesFilePath = "app/release_notes.txt"
+            ext.betaDistributionGroupAliases = "sparkle"
+            ext.betaDistributionNotifications = true
         }
     }
     dexOptions {
@@ -85,7 +85,8 @@ repositories {
 }
 
 repositories { mavenCentral() }
-repositories { maven { url "http://dl.bintray.com/jjhesk/maven" }
+repositories {
+    maven { url "http://dl.bintray.com/jjhesk/maven" }
     google()
 }
 
@@ -231,7 +232,9 @@ dependencies {
     compile files('libs/realm_sugar.jar')
 
     //branch io deeplinking
-    compile ('io.branch.sdk.android:library:2.+') {
+    compile('io.branch.sdk.android:library:2.+') {
         exclude module: 'answers-shim'
     }
+
+    compile 'no.nordicsemi.android.support.v18:scanner:1.0.0'
 }
