@@ -42,6 +42,7 @@ public class Constants {
     public static final String FACEBOOK_APP_ID = "973634146036464";
     public static final String LINKEDIN_CLIENT_ID = "781ehwqhni34oe";
     public static final String REDIRECT_URL = "https://app.baseapp.tsl.io/";
+    public static final String VIEWED_TUTORIAL = "viewedTutorial";
 
     public static final String TWITTER_USER = "twitterUser";
 

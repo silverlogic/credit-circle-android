@@ -7,6 +7,9 @@
         android:title= "@string/change_password"
         android:key="change_password"/>
     <Preference
+        android:title= "@string/view_tutorial"
+        android:key="view_tutorial"/>
+    <Preference
         android:title="@string/about"
         android:key="about"/>
     <Preference

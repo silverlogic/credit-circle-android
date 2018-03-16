@@ -21,13 +21,13 @@ import com.tsl.baseapp.model.event.BaseEvent;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 import static com.tsl.baseapp.bluetooth.bluetoothswitch.BluetoothActivity.EXTRA_DEVICE_ADDRESS;
 
 public class BluetoothFragment extends BaseViewStateFragment<BluetoothView, BluetoothPresenter> implements BluetoothView {
 
-    @Bind(R.id.button)
+    @BindView(R.id.button)
     Button mButton;
     private Context mContext;
     private BluetoothViewState vs;

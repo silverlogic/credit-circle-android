@@ -12,8 +12,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="23" />
+        android:minSdkVersion="18"
+        android:targetSdkVersion="27" />
 
     <application
         android:name=".base.BaseApplication"
@@ -120,6 +120,9 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".baseview.BaseActivity"></activity>
 
+        <activity
+            android:name=".tutorial.TutorialActivity"
+            android:theme="@style/Tutorial" />
 
         <!-- Branch -->
         <meta-data android:name="io.branch.sdk.BranchKey"

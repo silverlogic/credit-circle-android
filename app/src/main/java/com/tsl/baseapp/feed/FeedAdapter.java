@@ -14,7 +14,7 @@ import timber.log.Timber;
 /**
  * Created by kevinlavi on 5/5/16.
  */
-public class FeedAdapter extends BaseQuickAdapter<User> {
+public class FeedAdapter extends BaseQuickAdapter<User, BaseViewHolder> {
 
     public FeedAdapter(List<User> userList){
         super(R.layout.card_item, userList);

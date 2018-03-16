@@ -10,6 +10,7 @@ import com.orhanobut.hawk.LogLevel;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 import com.tsl.baseapp.BuildConfig;
+import com.tsl.baseapp.R;
 import com.tsl.baseapp.dagger.BaseAppComponent;
 import com.tsl.baseapp.dagger.DaggerBaseAppComponent;
 
@@ -17,9 +18,8 @@ import net.danlew.android.joda.JodaTimeAndroid;
 
 import io.branch.referral.Branch;
 import io.fabric.sdk.android.Fabric;
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
 import timber.log.Timber;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by kevinlavi on 4/26/16.
@@ -34,7 +34,7 @@ public class BaseApplication extends Application {
         super.onCreate();
 
         baseComponent = DaggerBaseAppComponent.create();
-        //refWatcher = LeakCanary.install(this);
+        refWatcher = LeakCanary.install(this);
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
@@ -48,6 +48,13 @@ public class BaseApplication extends Application {
         JodaTimeAndroid.init(this);
         // Initialize the Branch object
         Branch.getAutoInstance(this);
+
+        // Add custom font file here
+        // Font goes into /assets/fonts folder and replace patch below
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/Roboto-Regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
     }
 
     public static RefWatcher getRefWatcher(Context context) {

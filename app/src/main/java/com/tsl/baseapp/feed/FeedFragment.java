@@ -29,6 +29,7 @@ import com.tsl.baseapp.bluetooth.bluetoothswitch.BluetoothActivity;
 import com.tsl.baseapp.bluetooth.devicescan.ScanActivity;
 import com.tsl.baseapp.model.event.UsersEvent;
 import com.tsl.baseapp.model.objects.user.User;
+import com.tsl.baseapp.tutorial.TutorialActivity;
 import com.tsl.baseapp.userdetails.UserDetailsActivity;
 import com.tsl.baseapp.userdetails.UserDetailsFragment;
 import com.tsl.baseapp.settings.SettingsActivity;
@@ -41,7 +42,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import io.realm.Realm;
 import timber.log.Timber;
 
@@ -51,9 +52,9 @@ import timber.log.Timber;
 public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter> implements FeedView {
 
 
-    @Bind(R.id.feed)
+    @BindView(R.id.feed)
     RecyclerView mRecyclerView;
-    @Bind(R.id.swipe)
+    @BindView(R.id.swipe)
     SwipeRefreshLayout mSwipe;
     private Context mContext;
     private FeedViewState vs;
@@ -174,6 +175,10 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mContext = getContext();
+        boolean hasSeenTutorial = Hawk.get(Constants.VIEWED_TUTORIAL, false);
+        if (!hasSeenTutorial) {
+            Utils.startActivity(getActivity(), TutorialActivity.class, false);
+        }
     }
 
     @Override
@@ -201,7 +206,7 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
         mRecyclerView.setHasFixedSize(true);
         mAdapter = new FeedAdapter(mUserList);
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnRecyclerViewItemClickListener(recylerOnClick());
+        mAdapter.setOnItemClickListener(recylerOnClick());
         mPagination = new EndlessRecyclerOnScrollListener(lm, mAdapter) {
             @Override
             public void onLoadMore(int current_page) {
@@ -274,7 +279,7 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
         }
         for (User user : userList){
             //preload images
-            Glide.with(mContext).load(user.getUserImages().getFull_size()).diskCacheStrategy(DiskCacheStrategy.SOURCE).preload();
+            Glide.with(mContext).load(user.getUserImages().getFull_size()).preload();
         }
     }
 
@@ -309,10 +314,10 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
         fetchUsers();
     }
 
-    private BaseQuickAdapter.OnRecyclerViewItemClickListener recylerOnClick() {
-        BaseQuickAdapter.OnRecyclerViewItemClickListener onClickListener = new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
+    private BaseQuickAdapter.OnItemClickListener recylerOnClick(){
+        return new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 User user = mUserList.get(position);
                 Intent intent = new Intent(getActivity(), UserDetailsActivity.class);
                 intent.putExtra(UserDetailsFragment.USER_ID, user.getId());
@@ -321,7 +326,5 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
                 getActivity().overridePendingTransition(0, 0);
             }
         };
-        return onClickListener;
     }
-
 }

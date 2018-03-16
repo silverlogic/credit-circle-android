@@ -155,4 +155,15 @@
     <string name="on">On</string>
     <string name="off">Off</string>
 
+    <!-- Tutorial -->
+    <string name="view_tutorial">View Tutorial</string>
+    <string name="tutorial_title_1">Tutorial title 1</string>
+    <string name="tutorial_body_1">Tutorial body 1</string>
+    <string name="tutorial_title_2">Tutorial title 2 - Example of permission request</string>
+    <string name="tutorial_body_2">Tutorial body 2 - Camera permission is required for this app</string>
+    <string name="tutorial_title_3">Tutorial title 3</string>
+    <string name="tutorial_body_3">Tutorial body 3</string>
+    <string name="tutorial_title_4">Tutorial title 4</string>
+    <string name="tutorial_body_4">Tutorial body 4</string>
+
 </resources>

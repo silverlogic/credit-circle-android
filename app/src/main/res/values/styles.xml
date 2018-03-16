@@ -76,4 +76,9 @@
         <item name="android:typeface">serif</item>
     </style>
 
+
+    <style name="Tutorial" parent="Theme.Intro">
+        <item name="android:typeface">serif</item>
+    </style>
+
 </resources>

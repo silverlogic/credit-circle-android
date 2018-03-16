@@ -29,25 +29,25 @@ import com.tsl.baseapp.utils.Writer;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 import timber.log.Timber;
 
 public class SignUpFragment extends BaseViewStateFragment<SignUpView, SignUpPresenter> implements SignUpView {
 
-    @Bind(R.id.input_first_name)
+    @BindView(R.id.input_first_name)
     EditText mInputFirstName;
-    @Bind(R.id.input_last_name)
+    @BindView(R.id.input_last_name)
     EditText mInputLastName;
-    @Bind(R.id.input_email)
+    @BindView(R.id.input_email)
     EditText mInputEmail;
-    @Bind(R.id.input_password)
+    @BindView(R.id.input_password)
     EditText mInputPassword;
-    @Bind(R.id.input_password_confirm)
+    @BindView(R.id.input_password_confirm)
     EditText mInputPasswordConfirm;
-    @Bind(R.id.btn_signup)
+    @BindView(R.id.btn_signup)
     ActionProcessButton mSignUpButton;
-    @Bind(R.id.link_login)
+    @BindView(R.id.link_login)
     TextView mLinkLogin;
 
     private SignUpComponent signUpComponent;

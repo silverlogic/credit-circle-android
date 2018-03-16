@@ -15,6 +15,7 @@ import com.hannesdorfmann.mosby.mvp.viewstate.MvpViewStateFragment;
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import icepick.Icepick;
 
 /**
@@ -22,6 +23,7 @@ import icepick.Icepick;
  */
 public abstract class BaseViewStateFragment<V extends MvpView, P extends MvpPresenter<V>>
         extends MvpViewStateFragment<V, P> {
+    private Unbinder unbinder;
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,13 +49,13 @@ public abstract class BaseViewStateFragment<V extends MvpView, P extends MvpPres
     @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         injectDependencies();
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
     }
 
     @Override public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+        unbinder.unbind();
         EventBus.getDefault().unregister(this);
     }
 

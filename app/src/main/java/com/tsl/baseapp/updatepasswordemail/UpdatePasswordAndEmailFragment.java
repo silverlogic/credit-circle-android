@@ -1,15 +1,12 @@
 package com.tsl.baseapp.updatepasswordemail;
 
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -20,7 +17,6 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 import com.hkm.ui.processbutton.iml.ActionProcessButton;
-import com.orhanobut.hawk.Hawk;
 import com.rey.material.widget.SnackBar;
 import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseApplication;
@@ -37,7 +33,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import io.branch.indexing.BranchUniversalObject;
 import io.branch.referral.Branch;
 import io.branch.referral.BranchError;
@@ -49,19 +45,19 @@ import static android.R.id.message;
 
 public class UpdatePasswordAndEmailFragment extends BaseViewStateFragment<UpdatePasswordAndEmailView, UpdatePasswordAndEmailPresenter> implements UpdatePasswordAndEmailView {
 
-    @Bind(R.id.current_password)
+    @BindView(R.id.current_password)
     EditText mCurrentPassword;
-    @Bind(R.id.new_password)
+    @BindView(R.id.new_password)
     EditText mNewPassword;
-    @Bind(R.id.confirm_new_password)
+    @BindView(R.id.confirm_new_password)
     EditText mConfirmNewPassword;
-    @Bind(R.id.change_password_form)
+    @BindView(R.id.change_password_form)
     LinearLayout mChangePasswordForm;
-    @Bind(R.id.change_email_input)
+    @BindView(R.id.change_email_input)
     EditText mChangeEmailInput;
-    @Bind(R.id.update_email_form)
+    @BindView(R.id.update_email_form)
     LinearLayout mUpdateEmailForm;
-    @Bind(R.id.submit_button)
+    @BindView(R.id.submit_button)
     ActionProcessButtonChangeText mSubmitButton;
 
     public static final String TYPE = "type";

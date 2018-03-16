@@ -9,8 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -40,31 +40,27 @@ import com.tsl.baseapp.utils.Writer;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
  */
 public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresenter> implements LoginView {
 
-    @Bind(R.id.input_email)
+    @BindView(R.id.input_email)
     EditText mInputEmail;
-    @Bind(R.id.input_password)
+    @BindView(R.id.input_password)
     EditText mInputPassword;
-    @Bind(R.id.loginButton)
+    @BindView(R.id.loginButton)
     ActionProcessButton mLoginButton;
-    @Bind(R.id.facebook_loginButton)
+    @BindView(R.id.facebook_loginButton)
     ActionProcessButton mFacebookLoginButton;
-    @Bind(R.id.linkedIn_loginButton)
+    @BindView(R.id.linkedIn_loginButton)
     ActionProcessButton mLinkedInLoginButton;
-    @Bind(R.id.twitter_loginButton)
+    @BindView(R.id.twitter_loginButton)
     ActionProcessButton mTwitterLoginButton;
-    @Bind(R.id.link_signup)
+    @BindView(R.id.link_signup)
     TextView mSignupLink;
-    @Bind(R.id.link_forgot_password)
-    TextView mLinkForgotPassword;
-    @Bind(R.id.loginForm)
-    ViewGroup mLoginForm;
 
     private LoginComponent loginComponent;
     private LoginViewState vs;
@@ -164,11 +160,10 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     @Override
     public void showError(String error) {
         vs.setShowError();
-        if (error.equals(SocialError.NO_EMAIL_PROVIDED)){
+        if (error.equals(SocialError.NO_EMAIL_PROVIDED)) {
             // ask user for email
             oAuth1ErrorHandling();
-        }
-        else {
+        } else {
             setFormEnabled(true);
             mLoginButton.setProgress(0);
             mFacebookLoginButton.setProgress(0);
@@ -215,13 +210,14 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
                 ContextCompat.getColor(mContext, R.color.twitterColorDark));
         startActivityForResult(intent, TWITTER_REQUEST);
     }
+
     @Subscribe
     public void onEvent(LoginSuccessfulEvent event) {
         User user = event.getUser();
         // persist user id for fetching from realms
         Hawk.put(Constants.USER_ID, user.getId());
         // persist current user
-        User persistedUser = Writer.persist(user);
+        Writer.persist(user);
     }
 
     @Subscribe
@@ -236,7 +232,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
                 .build();
     }
 
-    private void validate(){
+    private void validate() {
         boolean valid = presenter.validate(mInputEmail, mInputPassword, mContext);
 
         if (!valid) return;
@@ -258,7 +254,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
         presenter.doNormalLogin(mContext, user);
     }
 
-    private void loginWithFacebook(){
+    private void loginWithFacebook() {
         mActiveButton = mFacebookLoginButton;
         mFacebookLoginButton.setProgress(0);
         String url = Constants.getOAuth2LoginURLForFacebook(mContext, R.string.facebook_login_url, Constants.FACEBOOK_APP_ID);
@@ -269,7 +265,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
         startActivityForResult(intent, FACEBOOK_REQUEST);
     }
 
-    private void loginWithLinkedIn(){
+    private void loginWithLinkedIn() {
         mActiveButton = mLinkedInLoginButton;
         mLinkedInLoginButton.setProgress(0);
         String url = Constants.getOAuth2LoginURLForLinkedIn(mContext, R.string.linkedin_login_url, Constants.LINKEDIN_CLIENT_ID);
@@ -280,7 +276,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
         startActivityForResult(intent, LINKEDIN_REQUEST);
     }
 
-    private void loginWithTwitter(){
+    private void loginWithTwitter() {
         mActiveButton = mTwitterLoginButton;
         mTwitterLoginButton.setProgress(0);
         SocialAuth user = new SocialAuth();
@@ -289,7 +285,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
         presenter.doTwitterLogin(mContext, user);
     }
 
-    private void oAuth1ErrorHandling(){
+    private void oAuth1ErrorHandling() {
         new MaterialDialog.Builder(getActivity())
                 .title(R.string.twitter_no_email_title)
                 .content(R.string.twitter_no_email_body)
@@ -314,20 +310,19 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
                     @Override
                     public void onInput(MaterialDialog dialog, CharSequence input) {
                         // Do something
-                        if (validateEmail(input.toString())){
+                        if (validateEmail(input.toString())) {
                             dialog.dismiss();
                             SocialAuth auth = Hawk.get(Constants.TWITTER_USER);
                             auth.setEmail(input.toString());
                             presenter.doOAuthLogin(mContext, auth);
-                        }
-                        else {
+                        } else {
                             Toast.makeText(mContext, mContext.getString(R.string.valid_email_error), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).show();
     }
 
-    private boolean validateEmail(String email){
+    private boolean validateEmail(String email) {
         boolean valid = true;
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             valid = false;

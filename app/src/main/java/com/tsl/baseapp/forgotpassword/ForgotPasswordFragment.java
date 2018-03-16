@@ -19,17 +19,17 @@ import com.tsl.baseapp.model.event.ForgotPasswordEvent;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 import static com.tsl.baseapp.R.string.email;
 
 public class ForgotPasswordFragment extends BaseViewStateFragment<ForgotPasswordView, ForgotPasswordPresenter> implements ForgotPasswordView {
 
-    @Bind(R.id.input_email)
+    @BindView(R.id.input_email)
     EditText mInputEmail;
-    @Bind(R.id.forgot_password_button)
+    @BindView(R.id.forgot_password_button)
     ActionProcessButton mSubmitButton;
-    @Bind(R.id.forgot_password_form)
+    @BindView(R.id.forgot_password_form)
     LinearLayout mForgotPasswordForm;
 
     private Context mContext;

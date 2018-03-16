@@ -13,9 +13,11 @@ import com.tsl.baseapp.R;
 import com.tsl.baseapp.base.BaseAppActivity;
 import com.tsl.baseapp.model.objects.user.User;
 import com.tsl.baseapp.model.objects.user.UserFinder;
+import com.tsl.baseapp.tutorial.TutorialActivity;
 import com.tsl.baseapp.updatepasswordemail.UpdatePasswordAndEmailActivity;
 import com.tsl.baseapp.updatepasswordemail.UpdatePasswordAndEmailFragment;
 import com.tsl.baseapp.utils.Constants;
+import com.tsl.baseapp.utils.Utils;
 import com.tsl.baseapp.webview.WebViewActivity;
 
 /**
@@ -39,6 +41,7 @@ public class SettingsActivity extends BaseAppActivity {
         Preference mFeedback;
         Preference mChangeEmail;
         Preference mChangePassword;
+        Preference mViewTutorial;
         Preference mLogout;
         Preference mVersion;
 
@@ -66,6 +69,9 @@ public class SettingsActivity extends BaseAppActivity {
             if (preference == mChangeEmail){
                 changeEmail();
             }
+            if (preference == mViewTutorial){
+                viewTutorial();
+            }
             if (preference == mLogout){
                 logout();
             }
@@ -77,6 +83,7 @@ public class SettingsActivity extends BaseAppActivity {
             mTerms = findPreference("terms");
             mFeedback = findPreference("feedback");
             mChangePassword = findPreference("change_password");
+            mViewTutorial = findPreference("view_tutorial");
             mLogout = findPreference("logout");
             mChangeEmail = findPreference("change_email");
             mVersion = findPreference("version");
@@ -88,6 +95,7 @@ public class SettingsActivity extends BaseAppActivity {
             mChangePassword.setOnPreferenceClickListener(this);
             mLogout.setOnPreferenceClickListener(this);
             mChangeEmail.setOnPreferenceClickListener(this);
+            mViewTutorial.setOnPreferenceClickListener(this);
         }
 
         void setVersion(){
@@ -135,6 +143,10 @@ public class SettingsActivity extends BaseAppActivity {
             intent.putExtra(UpdatePasswordAndEmailFragment.TYPE, UpdatePasswordAndEmailFragment.CHANGE_PASSWORD);
             startActivity(intent);
             getActivity().overridePendingTransition(0, 0);
+        }
+
+        private void viewTutorial(){
+            Utils.startActivity(getActivity(), TutorialActivity.class, false);
         }
 
         private void logout(){

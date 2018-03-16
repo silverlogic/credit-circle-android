@@ -19,10 +19,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Patterns;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -30,10 +27,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListAdapter;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListItem;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.hannesdorfmann.mosby.mvp.viewstate.ViewState;
 import com.orhanobut.hawk.Hawk;
 import com.rey.material.widget.Button;
@@ -57,27 +50,23 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
+import butterknife.BindView;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import pub.devrel.easypermissions.EasyPermissions;
-import timber.log.Timber;
 
-import static android.R.attr.path;
 import static android.app.Activity.RESULT_OK;
-import static com.tsl.baseapp.R.string.email;
 
 public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, UserDetailsPresenter>
-        implements UserDetailsView, EasyPermissions.PermissionCallbacks {
+        implements UserDetailsView {
 
-    @Bind(R.id.edit_image)
+    @BindView(R.id.edit_image)
     CircleImageView mEditImage;
-    @Bind(R.id.edit_first_name)
+    @BindView(R.id.edit_first_name)
     EditText mEditFirstName;
-    @Bind(R.id.edit_last_name)
+    @BindView(R.id.edit_last_name)
     EditText mEditLastName;
-    @Bind(R.id.confirm_changes_button)
+    @BindView(R.id.confirm_changes_button)
     Button mConfirmChangesButton;
     private Context mContext;
     private UserDetailsViewState vs;
@@ -156,17 +145,9 @@ public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, 
     @Override
     public void showForm() {
         vs.setShowForm();
-        if (Utils.isNetworkAvailable(mContext)){
-            Glide.with(mContext)
-                    .load(mUser.getUserImages().getFull_size())
-                    .into(mEditImage);
-        }
-        else {
-            Glide.with(mContext)
-                    .load(mUser.getUserImages().getFull_size())
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .into(mEditImage);
-        }
+        Glide.with(mContext)
+                .load(mUser.getUserImages().getFull_size())
+                .into(mEditImage);
         mEditFirstName.setText(mUser.getFirst_name());
         mEditLastName.setText(mUser.getLast_name());
     }
@@ -262,7 +243,7 @@ public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, 
         if (valid){
             Drawable drawable = mEditImage.getDrawable();
             if (drawable != null ){
-                Bitmap bitmap = ((GlideBitmapDrawable)drawable.getCurrent()).getBitmap();
+                Bitmap bitmap = ((BitmapDrawable)drawable.getCurrent()).getBitmap();
                 String image = bitmapToBase64(bitmap);
                 UpdateUser user = new UpdateUser(mUser.getId(), first_name, last_name, image);
                 presenter.updateUser(mContext, user);
@@ -363,17 +344,6 @@ public class UserDetailsFragment extends BaseViewStateFragment<UserDetailsView, 
                 break;
         }
     }
-
-    @Override
-    public void onPermissionsGranted(List<String> perms) {
-
-    }
-
-    @Override
-    public void onPermissionsDenied(List<String> perms) {
-
-    }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
