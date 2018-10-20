@@ -24,12 +24,9 @@ import com.orhanobut.hawk.Hawk;
 import com.tsl.money2020.base.BaseApplication;
 import com.tsl.money2020.R;
 import com.tsl.money2020.base.BaseViewStateFragment;
-import com.tsl.money2020.bluetooth.devicescan.ScanActivity;
 import com.tsl.money2020.model.event.UsersEvent;
 import com.tsl.money2020.model.objects.user.User;
 import com.tsl.money2020.tutorial.TutorialActivity;
-import com.tsl.money2020.userdetails.UserDetailsActivity;
-import com.tsl.money2020.userdetails.UserDetailsFragment;
 import com.tsl.money2020.settings.SettingsActivity;
 import com.tsl.money2020.utils.Constants;
 import com.tsl.money2020.utils.EndlessRecyclerOnScrollListener;
@@ -142,23 +139,8 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_bluetooth) {
-            Utils.startActivity(getActivity(), ScanActivity.class, false);
-            return true;
-        }
-
         if (id == R.id.action_settings) {
             Utils.startActivity(getActivity(), SettingsActivity.class, false);
-            return true;
-        }
-
-        if (id == R.id.action_profile) {
-            int userID = Hawk.get(Constants.USER_ID);
-            Intent intent = new Intent(getActivity(), UserDetailsActivity.class);
-            intent.putExtra(UserDetailsFragment.USER_ID, userID);
-            intent.putExtra(UserDetailsFragment.IS_CURRENT_USER, true);
-            startActivity(intent);
-            getActivity().overridePendingTransition(0, 0);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -316,12 +298,12 @@ public class FeedFragment extends BaseViewStateFragment<FeedView, FeedPresenter>
         return new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                User user = mUserList.get(position);
-                Intent intent = new Intent(getActivity(), UserDetailsActivity.class);
-                intent.putExtra(UserDetailsFragment.USER_ID, user.getId());
-                intent.putExtra(UserDetailsFragment.IS_CURRENT_USER, false);
-                getActivity().startActivity(intent);
-                getActivity().overridePendingTransition(0, 0);
+//                User user = mUserList.get(position);
+//                Intent intent = new Intent(getActivity(), UserDetailsActivity.class);
+//                intent.putExtra(UserDetailsFragment.USER_ID, user.getId());
+//                intent.putExtra(UserDetailsFragment.IS_CURRENT_USER, false);
+//                getActivity().startActivity(intent);
+//                getActivity().overridePendingTransition(0, 0);
             }
         };
     }
