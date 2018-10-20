@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.tsl.baseapp">
+          package="com.tsl.money2020">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -11,45 +11,41 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
-    <uses-sdk
-        android:minSdkVersion="18"
-        android:targetSdkVersion="27" />
-
     <application
-        android:name=".base.BaseApplication"
+        android:name="com.tsl.money2020.base.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/baseapp_launcher"
         android:label="@string/app_name"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme"
-        tools:replace="android:icon,android:theme">>
+        tools:replace="android:icon,android:theme">
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="ccdf9e4a5cefcee65e6f1d40cd5dee0c45a38748" />
 
         <activity
-            android:name=".login.OAuth2LoginActivity"
+            android:name="com.tsl.money2020.login.OAuth2LoginActivity"
             android:label="@string/login"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".login.OAuth1LoginActivity"
+            android:name="com.tsl.money2020.login.OAuth1LoginActivity"
             android:label="@string/login"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".login.LoginActivity"
+            android:name="com.tsl.money2020.login.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".forgotpassword.ForgotPasswordActivity"
+            android:name="com.tsl.money2020.forgotpassword.ForgotPasswordActivity"
             android:label="@string/title_activity_forgot_password"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"/>
 
         <activity
-            android:name=".updatepasswordemail.UpdatePasswordAndEmailActivity"
+            android:name="com.tsl.money2020.updatepasswordemail.UpdatePasswordAndEmailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
@@ -78,21 +74,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".signup.SignUpActivity"
+            android:name="com.tsl.money2020.signup.SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".settings.SettingsActivity"
+            android:name="com.tsl.money2020.settings.SettingsActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".webview.WebViewActivity"
+            android:name="com.tsl.money2020.webview.WebViewActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".settings.AboutActivity" />
+        <activity android:name="com.tsl.money2020.settings.AboutActivity" />
         <activity
-            android:name=".feed.FeedActivity"
+            android:name="com.tsl.money2020.feed.FeedActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:launchMode="singleTask"
@@ -104,24 +100,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".userdetails.UserDetailsActivity"
+            android:name="com.tsl.money2020.userdetails.UserDetailsActivity"
             android:label="@string/title_activity_edit_profile"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".bluetooth.bluetoothswitch.BluetoothActivity"
+            android:name="com.tsl.money2020.bluetooth.bluetoothswitch.BluetoothActivity"
             android:label="@string/title_activity_bluetooth"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".bluetooth.devicescan.ScanActivity"
+            android:name="com.tsl.money2020.bluetooth.devicescan.ScanActivity"
             android:label="@string/title_activity_bluetooth"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".baseview.BaseActivity"></activity>
+        <activity android:name="com.tsl.money2020.baseview.BaseActivity"></activity>
 
         <activity
-            android:name=".tutorial.TutorialActivity"
+            android:name="com.tsl.money2020.tutorial.TutorialActivity"
             android:theme="@style/Tutorial" />
 
         <!-- Branch -->

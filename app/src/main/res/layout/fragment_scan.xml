@@ -2,5 +2,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tsl.baseapp.bluetooth.devicescan.ScanFragment">
+    tools:context="com.tsl.money2020.bluetooth.devicescan.ScanFragment">
 </FrameLayout>
