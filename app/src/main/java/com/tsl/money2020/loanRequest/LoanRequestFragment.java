@@ -1,18 +1,22 @@
 package com.tsl.money2020.loanRequest;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kevalpatel2106.rulerpicker.RulerValuePicker;
 import com.kevalpatel2106.rulerpicker.RulerValuePickerListener;
 import com.tsl.money2020.R;
+import com.tsl.money2020.inviteVouchers.InviteVouchersFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class LoanRequestFragment extends Fragment {
@@ -22,6 +26,10 @@ public class LoanRequestFragment extends Fragment {
     @BindView(R.id.picker_amount)
     TextView mPickerAmount;
     Unbinder unbinder;
+    @BindView(R.id.fintech_button)
+    FloatingActionButton mFintechButton;
+    @BindView(R.id.invite_button)
+    FloatingActionButton mInviteButton;
 
     public static LoanRequestFragment newInstance() {
         return new LoanRequestFragment();
@@ -50,12 +58,26 @@ public class LoanRequestFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        setHasOptionsMenu(true);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @OnClick({R.id.fintech_button, R.id.invite_button})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.fintech_button:
+                break;
+            case R.id.invite_button:
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, InviteVouchersFragment.newInstance(), InviteVouchersFragment.INVITE_VOUCHERS_TAG)
+                        .addToBackStack(null)
+                        .commit();
+                break;
+        }
     }
 }

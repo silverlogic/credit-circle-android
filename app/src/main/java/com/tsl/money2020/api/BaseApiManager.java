@@ -29,12 +29,8 @@ public class BaseApiManager {
 
     public BaseApi getAppApi(){
 
-        if (BuildConfig.IS_RELEASE){
-            BASE_URL = Constants.PRODUCTION_URL;
-        }
-        else {
-            BASE_URL = Constants.STAGING_URL;
-        }
+
+        BASE_URL = "http://silverlogic.ngrok.io/api/";
 
         if (mAppApi == null){
 

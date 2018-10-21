@@ -50,13 +50,7 @@ public class Constants {
     public static final UUID SERVICE_UUID = UUID.fromString("aa59768e-0591-436c-bf8e-ccfe879a3929");
 
     public static final String getToken(){
-        if (Hawk.isBuilt() && Hawk.get(TOKEN) != null){
-            return  "Token " + Hawk.get(TOKEN);
-        }
-        else {
-            // we do this to avoid testing hawk during unit testing
-            return "token for testing";
-        }
+        return "token " + "e836b5c3019d6c88148e08504376f136cc7cedb1";
     }
 
     public static final Toast makeToast(Context ctx, int msg){

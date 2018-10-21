@@ -23,14 +23,12 @@ import com.orhanobut.hawk.Hawk;
 import com.tsl.money2020.R;
 import com.tsl.money2020.base.BaseApplication;
 import com.tsl.money2020.base.BaseViewStateFragment;
-import com.tsl.money2020.feed.FeedActivity;
 import com.tsl.money2020.forgotpassword.ForgotPasswordActivity;
 import com.tsl.money2020.model.event.LoginSuccessfulEvent;
 import com.tsl.money2020.model.event.TokenEvent;
 import com.tsl.money2020.model.objects.error.SocialError;
 import com.tsl.money2020.model.objects.user.SocialAuth;
 import com.tsl.money2020.model.objects.user.User;
-import com.tsl.money2020.signup.SignUpActivity;
 import com.tsl.money2020.utils.Constants;
 import com.tsl.money2020.utils.KeyboardUtils;
 import com.tsl.money2020.utils.Utils;
@@ -194,7 +192,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
     @Override
     public void loginSuccessful() {
         mActiveButton.setProgress(100); // We are done
-        Utils.startActivity(getActivity(), FeedActivity.class, true);
+        //Utils.startActivity(getActivity(), FeedActivity.class, true);
         getActivity().finish();
     }
 
@@ -330,7 +328,7 @@ public class LoginFragment extends BaseViewStateFragment<LoginView, LoginPresent
 
     @OnClick(R.id.link_signup)
     public void signUpActivity() {
-        Utils.startActivity(getActivity(), SignUpActivity.class, false);
+        //Utils.startActivity(getActivity(), SignUpActivity.class, false);
     }
 
     @OnClick(R.id.link_forgot_password)
