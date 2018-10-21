@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:weightSum="7">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="@color/colorPrimary">
+
+
+        <com.kevalpatel2106.rulerpicker.RulerValuePicker
+            android:id="@+id/ruler_picker"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:indicator_color="@color/white"
+            app:indicator_interval="10dp"
+            app:indicator_width="2dp"
+            app:max_value="320"
+            app:min_value="35"
+            android:background="@color/colorPrimary"
+            app:notch_color="@color/white"
+            app:ruler_text_size="4sp"/>
+
+        <TextView
+            android:id="@+id/picker_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ruler_picker"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="10dp"
+            android:textColor="@color/white"
+            android:textSize="42sp"
+            tools:text="$200" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+        
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/loan_apply_screenshot"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="22dp"
+            android:backgroundTint="@color/colorAccentGreen"
+            android:src="@drawable/ic_book_open"
+            app:fabSize="normal" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="342dp"
+            android:backgroundTint="@color/colorAccentGreen"
+            android:src="@drawable/ic_add_user"
+            app:fabSize="normal" />
+
+    </RelativeLayout>
+
+</LinearLayout>

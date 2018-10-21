@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.tsl.money2020.R;
 import com.tsl.money2020.home.HomeFragment;
+import com.tsl.money2020.loanRequest.LoanRequestFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     openFragment(null, FIN_EDUCATION_TAG);
                     return true;
                 case R.id.request:
-                    openFragment(null, GET_LOAN_TAG);
+                    openFragment(LoanRequestFragment.newInstance(), GET_LOAN_TAG);
                     return true;
                 case R.id.contacts:
                     openFragment(null, CONTACTS_TAG);
@@ -75,8 +76,6 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.fragment_container, fragment, tag)
                     .addToBackStack(null)
                     .commit();
-
-        Toast.makeText(this, tag, Toast.LENGTH_SHORT).show();
     }
 
     public void setToolbarTitle(int title) {
