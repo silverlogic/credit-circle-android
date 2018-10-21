@@ -20,16 +20,26 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="4dp"
-            android:paddingBottom="10dp"
             android:textColor="@color/white"
             android:textSize="42sp"
             tools:text="$200" />
+
+        <TextView
+            android:id="@+id/approved_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/picker_amount"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:text="Approved for $200" />
 
         <com.kevalpatel2106.rulerpicker.RulerValuePicker
             android:id="@+id/ruler_picker"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_below="@id/picker_amount"
+            android:layout_below="@id/approved_amount"
             app:indicator_color="@color/white"
             app:indicator_interval="10dp"
             app:indicator_width="2dp"
@@ -105,12 +115,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4">
-        
-        <ImageView
+
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:src="@drawable/loan_apply_screenshot"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/vouched_recyclerView"
+            tools:listitem="@layout/vouched_item">
+
+        </android.support.v7.widget.RecyclerView>
 
     </RelativeLayout>
 
@@ -120,16 +132,18 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fintech_button"
-            android:layout_width="wrap_content"
+
+        <android.support.design.button.MaterialButton
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="22dp"
-            android:backgroundTint="@color/colorAccentGreen"
-            android:src="@drawable/ic_book_open"
-            app:fabSize="normal" />
+            android:id="@+id/submit_button"
+            android:text="Submit"
+            android:textColor="@color/colorAccentBlue"
+            android:textStyle="bold"
+            android:backgroundTint="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/invite_button"

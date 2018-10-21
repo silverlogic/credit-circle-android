@@ -1,8 +1,9 @@
-package com.tsl.money2020.loanRequest;
+package com.tsl.money2020.loanProgress;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.design.button.MaterialButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,29 +28,31 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoanRequestFragment extends Fragment {
+public class LoanProgressFragment extends Fragment {
 
     @BindView(R.id.ruler_picker)
     RulerValuePicker mRulerPicker;
     @BindView(R.id.picker_amount)
     TextView mPickerAmount;
     Unbinder unbinder;
-    @BindView(R.id.fintech_button)
-    FloatingActionButton mFintechButton;
-    @BindView(R.id.invite_button)
-    FloatingActionButton mInviteButton;
     @BindView(R.id.repayment_amount)
     TextView mRepaymentAmount;
+    @BindView(R.id.vouched_recyclerView)
+    RecyclerView mVouchedRecyclerView;
+    @BindView(R.id.submit_button)
+    MaterialButton mSubmitButton;
+    @BindView(R.id.approved_amount)
+    TextView mApprovedAmount;
     private int currentValue;
 
-    public static LoanRequestFragment newInstance() {
-        return new LoanRequestFragment();
+    public static LoanProgressFragment newInstance() {
+        return new LoanProgressFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_loan_request, container, false);
+        View view = inflater.inflate(R.layout.fragment_loan_progress, container, false);
         unbinder = ButterKnife.bind(this, view);
 
         mRulerPicker.selectValue(250);
@@ -58,7 +61,7 @@ public class LoanRequestFragment extends Fragment {
             public void onValueChange(int selectedValue) {
                 int remainder = selectedValue % 5;
                 int newNum = selectedValue - remainder;
-                if (selectedValue % 5 > 2){
+                if (selectedValue % 5 > 2) {
                     newNum += 5;
                 }
                 mRulerPicker.selectValue(newNum);
@@ -90,10 +93,9 @@ public class LoanRequestFragment extends Fragment {
     @OnClick({R.id.fintech_button, R.id.invite_button})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.fintech_button:
+            case R.id.submit_button:
                 break;
             case R.id.invite_button:
-                createLoanRequest();
                 break;
         }
     }
@@ -119,4 +121,5 @@ public class LoanRequestFragment extends Fragment {
             }
         });
     }
+
 }
