@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.tsl.creditcircle.R;
+import com.tsl.creditcircle.fintech.FinTechFragment;
 import com.tsl.creditcircle.home.HomeFragment;
 import com.tsl.creditcircle.loanRequest.LoanRequestFragment;
 import com.tsl.creditcircle.utils.pushnotifications.FCMToken;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     openFragment(HomeFragment.newInstance(), HOME_TAG);
                     return true;
                 case R.id.fin_ed:
-                    openFragment(null, FIN_EDUCATION_TAG);
+                    openFragment(FinTechFragment.newInstance(), FIN_EDUCATION_TAG);
                     return true;
                 case R.id.request:
                     openFragment(LoanRequestFragment.newInstance(), GET_LOAN_TAG);

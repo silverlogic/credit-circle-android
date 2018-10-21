@@ -16,6 +16,8 @@ import com.kevalpatel2106.rulerpicker.RulerValuePicker;
 import com.kevalpatel2106.rulerpicker.RulerValuePickerListener;
 import com.orhanobut.hawk.Hawk;
 import com.tsl.creditcircle.R;
+import com.tsl.creditcircle.fintech.FinTechFragment;
+import com.tsl.creditcircle.main.MainActivity;
 import com.tsl.creditcircle.model.event.VouchEvent;
 import com.tsl.creditcircle.model.objects.Friend;
 import com.tsl.creditcircle.model.objects.Loan;
@@ -125,20 +127,25 @@ public class LoanProgressFragment extends Fragment {
                         .commit();
                 break;
             case R.id.invite_button:
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, FinTechFragment.newInstance(), MainActivity.FIN_EDUCATION_TAG)
+                        .addToBackStack(null)
+                        .commit();
                 break;
         }
     }
 
-    private void updateApprovedFor(){
+    private void updateApprovedFor() {
         mApprovedAmount.setText("Approved for $" + getApprovedFor());
     }
 
-    private int getApprovedFor(){
+    private int getApprovedFor() {
         return Hawk.get(Constants.CURRENT_CREDIT, 280) + mFundedByFriends + mVouchedByFriends;
     }
 
     @Subscribe
-    public void onEvent(final VouchEvent event){
+    public void onEvent(final VouchEvent event) {
         mFriendList.add(event.getFriend());
         getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -160,13 +167,12 @@ public class LoanProgressFragment extends Fragment {
     }
 
     @SuppressLint("ResourceAsColor")
-    private void setSubmitEnabled(){
+    private void setSubmitEnabled() {
         boolean enabled = getApprovedFor() >= currentValue;
         mSubmitButton.setEnabled(enabled);
-        if (!enabled){
+        if (!enabled) {
             mSubmitButton.setText("");
-        }
-        else {
+        } else {
             mSubmitButton.setText("SUBMIT");
         }
     }

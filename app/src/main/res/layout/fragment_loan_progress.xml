@@ -154,7 +154,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="342dp"
             android:backgroundTint="@color/colorAccentGreen"
-            android:src="@drawable/ic_add_user"
+            android:src="@drawable/ic_book_open"
             app:fabSize="normal" />
 
     </RelativeLayout>

@@ -170,5 +170,6 @@
     <string name="contacts">Contacts</string>
     <string name="request">Request</string>
     <string name="get_loan">Get Loan</string>
+    <string name="certificate">certificate</string>
 
 </resources>

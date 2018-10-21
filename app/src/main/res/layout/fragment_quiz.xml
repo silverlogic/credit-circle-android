@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rl">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/banner"
+            android:src="@drawable/quiz_banner"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:id="@+id/qone"
+            android:text="If the loan is $1,000 and the interest rate is 5%, what would you owe at the end of the year?"
+            android:layout_below="@id/banner"/>
+
+        <android.support.design.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/qone"
+            android:id="@+id/aone"
+            android:text="A. $1,050"
+            android:gravity="left|center"
+            app:cornerRadius="20dp"
+            android:textColor="@color/colorPrimary"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="10dp" />
+
+        <android.support.design.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/aone"
+            android:id="@+id/atwo"
+            android:text="B. $50"
+            android:gravity="left|center"
+            app:cornerRadius="20dp"
+            android:textColor="@color/colorPrimary"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="10dp" />
+
+        <android.support.design.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/atwo"
+            android:id="@+id/athree"
+            android:text="C. $1,500"
+            android:gravity="left|center"
+            app:cornerRadius="20dp"
+            android:textColor="@color/colorPrimary"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="10dp" />
+
+        <android.support.design.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/athree"
+            android:id="@+id/afour"
+            android:text="D. $1,005"
+            android:gravity="left|center"
+            app:cornerRadius="20dp"
+            android:textColor="@color/colorPrimary"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:id="@+id/qtwo"
+            android:text="What can you do to increase your overall credit loan limit?"
+            android:layout_below="@id/afour"/>
+
+
+        <android.support.design.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/qtwo"
+            android:id="@+id/aaone"
+            android:text="A. Manage several types of credit"
+            android:gravity="left|center"
+            app:cornerRadius="20dp"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="10dp" />
+
+        <android.support.design.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/aaone"
+            android:id="@+id/aatwo"
+            android:text="B. Have a history of late payments"
+            android:gravity="left|center"
+            app:cornerRadius="20dp"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="10dp" />
+
+        <android.support.design.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/aatwo"
+            android:id="@+id/aathree"
+            android:textAllCaps="false"
+            android:text="C. Vouch for more people"
+            android:gravity="left|center"
+            app:cornerRadius="20dp"
+            android:textColor="@color/colorPrimary"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="10dp" />
+
+        <android.support.design.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/aathree"
+            android:id="@+id/aafour"
+            android:text="D. Have additional credit inquiries"
+            android:gravity="left|center"
+            app:cornerRadius="20dp"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="10dp" />
+
+
+        <android.support.design.button.MaterialButton
+            android:id="@+id/submit_button"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/aafour"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/colorAccentBlue"
+            android:text="Submit"
+            app:cornerRadius="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+</ScrollView>
