@@ -115,6 +115,14 @@ public class LoanProgressFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.submit_button:
+                Loan loan = new Loan();
+                loan.setOriginalAmount(currentValue);
+                Hawk.put(Constants.CURRENT_LOAN, currentValue);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, LoanAcceptedFragment.newInstance(), LoanAcceptedFragment.LOAN_ACCEPTED_FRAGMENT_TAG)
+                        .addToBackStack(null)
+                        .commit();
                 break;
             case R.id.invite_button:
                 break;

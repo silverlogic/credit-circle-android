@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
                     openFragment(LoanRequestFragment.newInstance(), GET_LOAN_TAG);
                     return true;
                 case R.id.contacts:
-                    openFragment(null, CONTACTS_TAG);
                     return true;
                 case R.id.pay:
                     openFragment(null, PAY_TAG);

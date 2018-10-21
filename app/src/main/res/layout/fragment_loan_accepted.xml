@@ -9,15 +9,20 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:layout_above="@id/approved_tv"
+        android:layout_marginBottom="4dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/greencloud_check" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/loan_amount_tv"
+        android:id="@+id/approved_tv"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:text="You have been approved for a loan of:"
+        android:layout_marginBottom="20dp"
         android:textColor="@color/white" />
 
     <TextView
@@ -28,5 +33,14 @@
         android:textSize="120sp"
         tools:text="$225"
         android:textColor="@color/white" />
+
+    <ImageView
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/balanceavailable" />
 
 </RelativeLayout>
