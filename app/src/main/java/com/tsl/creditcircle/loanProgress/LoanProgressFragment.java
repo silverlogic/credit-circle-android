@@ -33,6 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import timber.log.Timber;
 
 public class LoanProgressFragment extends Fragment {
 
@@ -146,6 +147,7 @@ public class LoanProgressFragment extends Fragment {
 
     @Subscribe
     public void onEvent(final VouchEvent event) {
+        Timber.d("EVENTTEST = " + event.getFriend().getName());
         mFriendList.add(event.getFriend());
         getActivity().runOnUiThread(new Runnable() {
             @Override

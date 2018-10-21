@@ -7,10 +7,10 @@ public class Vouch {
     @SerializedName("status")
     String status;
 
-    @SerializedName("vouch_amount")
+    @SerializedName("amount")
     int vouchAmount;
 
-    @SerializedName("invest_amount")
+    @SerializedName("investment")
     int investAmount;
 
 

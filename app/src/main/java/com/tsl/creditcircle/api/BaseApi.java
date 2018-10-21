@@ -74,7 +74,7 @@ public interface BaseApi {
     Observable<SocialAuth> socialLoginTwitter(@Body SocialAuth auth);
 
 
-    @GET("users")
+    @GET("users/")
     Call<List<Friend>> getUserList(@Header(Constants.AUTHORIZATION) String token);
 
     @POST("loans/")
@@ -87,11 +87,11 @@ public interface BaseApi {
     Observable<Void> uploadFCMToken(@Header(Constants.AUTHORIZATION) String token,
                                     @Body FCMDeviceBody body);
 
-    @PATCH("devices/{registration_id}")
+    @PATCH("devices/{registration_id}/")
     Observable<Void> updateFCMToken(@Header(Constants.AUTHORIZATION) String token,
                                     @Path("registration_id") String pushToken,
                                     @Body FCMDeviceBody body);
-    @PATCH("vouches/{id}")
+    @PATCH("vouches/{id}/")
     Call<Void> vouch(@Header(Constants.AUTHORIZATION) String token,
                              @Path("id") int vouchId,
                              @Body Vouch vouch);
