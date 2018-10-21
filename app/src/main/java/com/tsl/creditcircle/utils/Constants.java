@@ -48,7 +48,7 @@ public class Constants {
     public static final String FCM_TOKEN = "FCMtoken";
 
     public static final String getToken(){
-        return "token " + "5b14a5a9d3f23f71b5a3d7b80d3b9c4484fb3fee";
+        return "token " + "4b69237fc1d872a28a3afa1ec700ca7f2bdce017";
     }
 
     public static final Toast makeToast(Context ctx, int msg){
