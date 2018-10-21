@@ -49,6 +49,8 @@ public class Constants {
     public static final UUID BLUETOOTH_CHARACTERISTIC = UUID.fromString("eb18c3d6-c156-4c9e-9f89-a7ad886dabb6");
     public static final UUID SERVICE_UUID = UUID.fromString("aa59768e-0591-436c-bf8e-ccfe879a3929");
 
+    public static final String CURRENT_LOAN = "currentLoan";
+
     public static final String getToken(){
         return "token " + "e836b5c3019d6c88148e08504376f136cc7cedb1";
     }

@@ -22,8 +22,8 @@
             app:indicator_color="@color/white"
             app:indicator_interval="10dp"
             app:indicator_width="2dp"
-            app:max_value="320"
-            app:min_value="35"
+            app:max_value="2000"
+            app:min_value="1"
             android:background="@color/colorPrimary"
             app:notch_color="@color/white"
             app:ruler_text_size="4sp"/>

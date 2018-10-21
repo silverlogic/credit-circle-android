@@ -12,12 +12,15 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.orhanobut.hawk.Hawk;
 import com.tsl.money2020.R;
 import com.tsl.money2020.api.BaseApi;
 import com.tsl.money2020.api.BaseApiManager;
 import com.tsl.money2020.api.RetrofitReference;
 import com.tsl.money2020.model.event.BaseEvent;
 import com.tsl.money2020.model.objects.Friend;
+import com.tsl.money2020.model.objects.InviteVouche;
+import com.tsl.money2020.model.objects.Loan;
 import com.tsl.money2020.model.objects.user.User;
 import com.tsl.money2020.utils.Constants;
 import com.tsl.money2020.utils.RetrofitException;
@@ -48,6 +51,8 @@ public class InviteVouchersFragment extends Fragment {
     private boolean inviteByEmailSelected = false;
     private boolean inviteByPhoneSelected = false;
     private List<Friend> mFriendsList;
+    private BaseApi service;
+    private Loan loan;
 
     public static final String INVITE_VOUCHERS_TAG = "inviteVouchersTag";
 
@@ -60,6 +65,8 @@ public class InviteVouchersFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_invite_vouchers, container, false);
         unbinder = ButterKnife.bind(this, view);
+        service = RetrofitReference.getRetrofitInstance().create(BaseApi.class);
+        loan = Hawk.get(Constants.CURRENT_LOAN);
         fetchUsers();
         return view;
     }
@@ -103,7 +110,6 @@ public class InviteVouchersFragment extends Fragment {
     }
 
     private void fetchUsers(){
-        BaseApi service = RetrofitReference.getRetrofitInstance().create(BaseApi.class);
         Call<List<Friend>> call = service.getUserList(Constants.getToken());
         call.enqueue(new Callback<List<Friend>>() {
             @Override
@@ -128,7 +134,22 @@ public class InviteVouchersFragment extends Fragment {
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 mDoneButton.setVisibility(View.VISIBLE);
                 mFriendsList.get(position).setInvited(true);
+                Friend friend = mFriendsList.get(position);
                 mAdapter.notifyDataSetChanged();
+                inviteToVouch(new InviteVouche(friend.getId(), loan.getId()));
+            }
+        });
+    }
+
+    private void inviteToVouch(InviteVouche inviteVouche){
+        Call<InviteVouche> call = service.inviteVouche(Constants.getToken(), inviteVouche);
+        call.enqueue(new Callback<InviteVouche>() {
+            @Override
+            public void onResponse(Call<InviteVouche> voucheCall, Response<InviteVouche> vouch) {
+            }
+
+            @Override
+            public void onFailure(Call<InviteVouche> call, Throwable t) {
             }
         });
     }

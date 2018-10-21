@@ -1,7 +1,10 @@
 package com.tsl.money2020.api;
 
 import com.google.gson.JsonObject;
+import com.tsl.money2020.model.objects.CreateLoan;
 import com.tsl.money2020.model.objects.Friend;
+import com.tsl.money2020.model.objects.InviteVouche;
+import com.tsl.money2020.model.objects.Loan;
 import com.tsl.money2020.model.objects.api.PaginatedResponse;
 import com.tsl.money2020.model.objects.token.Token;
 import com.tsl.money2020.model.objects.user.SocialAuth;
@@ -72,5 +75,11 @@ public interface BaseApi {
 
     @GET("users")
     Call<List<Friend>> getUserList(@Header(Constants.AUTHORIZATION) String token);
+
+    @POST("loans/")
+    Call<Loan> createLoan(@Header(Constants.AUTHORIZATION) String token, @Body CreateLoan loan);
+
+    @POST("vouches/")
+    Call<InviteVouche> inviteVouche(@Header(Constants.AUTHORIZATION) String token, @Body InviteVouche inviteVouche);
 
 }
