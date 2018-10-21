@@ -1,5 +1,6 @@
 package com.tsl.money2020.main;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,9 +12,11 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.tsl.money2020.R;
+import com.tsl.money2020.home.HomeFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,19 +40,19 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.home:
-                    openFragment(HOME_TAG);
+                    openFragment(HomeFragment.newInstance(), HOME_TAG);
                     return true;
                 case R.id.fin_ed:
-                    openFragment(FIN_EDUCATION_TAG);
+                    openFragment(null, FIN_EDUCATION_TAG);
                     return true;
                 case R.id.request:
-                    openFragment(GET_LOAN_TAG);
+                    openFragment(null, GET_LOAN_TAG);
                     return true;
                 case R.id.contacts:
-                    openFragment(CONTACTS_TAG);
+                    openFragment(null, CONTACTS_TAG);
                     return true;
                 case R.id.pay:
-                    openFragment(PAY_TAG);
+                    openFragment(null, PAY_TAG);
                     return true;
             }
             return false;
@@ -66,31 +69,23 @@ public class MainActivity extends AppCompatActivity {
         mBottomNavigation.setSelectedItemId(R.id.home);
     }
 
-    private void openFragment(String tag) {
-//        Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
-//        if (fragment == null) {
-//            fragment = getFragment(tag);
-//        }
-//        if (mCurrentFragment != null
-//                && mCurrentFragment.getTag() != null
-//                && mCurrentFragment.getTag().equals(RECORD_TAG)
-//                && RecordFragment.mFileName != null){
-//            // we are on record fragment. Show dialog
-//            showLeavingDialog(fragment, tag);
-//        }
-//        else {
-//            getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .replace(R.id.fragment_container, fragment, tag)
-//                    .addToBackStack(null)
-//                    .commit();
-//        }
+    private void openFragment(Fragment fragment, String tag) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment, tag)
+                    .addToBackStack(null)
+                    .commit();
 
         Toast.makeText(this, tag, Toast.LENGTH_SHORT).show();
     }
 
     public void setToolbarTitle(int title) {
         mToolbar.setTitle(title);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
 }

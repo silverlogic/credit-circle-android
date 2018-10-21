@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="5"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="@color/colorPrimary"
+        android:layout_weight="2">
+
+        <TextView
+            android:id="@+id/title_textView"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Current Line of Credit"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_textView"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+
+            <TextView
+                android:id="@+id/credit_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textColor="@color/white"
+                android:textSize="100sp"
+                android:gravity="center"
+                android:text="$225"/>
+
+            <View
+                android:id="@+id/divider_line"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/credit_textView"
+                android:background="@color/lightGray" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/score_change_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/white"
+                    android:textSize="30sp"
+                    android:text="50" />
+
+                <ImageView
+                    android:id="@+id/arrow_imageView"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_toEndOf="@id/score_change_textView"
+                    android:src="@drawable/caret_up"
+                    android:backgroundTintMode="@color/colorAccentGreen"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/lightGray"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/completion_textView"
+            android:layout_marginTop="20dp"
+            android:textAllCaps="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="Account Completion"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/check_lines"
+            android:layout_below="@id/completion_textView"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/verify_id_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check_circle"/>
+
+
+            <View
+                android:layout_toRightOf="@id/verify_id_checkbox"
+                android:id="@+id/line1"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:background="@color/colorAccentBlue"
+                android:layout_centerInParent="true"
+                android:layout_width="80dp"
+                android:layout_height="2dp"/>
+
+            <ImageView
+                android:layout_toRightOf="@id/line1"
+                android:id="@+id/verify_id_checkbox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check_circle"/>
+
+            <View
+                android:layout_toRightOf="@id/verify_id_checkbox2"
+                android:id="@+id/line2"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:background="@color/colorAccentBlue"
+                android:layout_centerInParent="true"
+                android:layout_width="80dp"
+                android:layout_height="2dp"/>
+
+            <ImageView
+                android:layout_toRightOf="@id/line2"
+                android:id="@+id/verify_id_checkbox3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check_circle"/>
+
+            <View
+                android:layout_toRightOf="@id/verify_id_checkbox3"
+                android:id="@+id/line3"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:background="@color/colorAccentBlue"
+                android:layout_centerInParent="true"
+                android:layout_width="80dp"
+                android:layout_height="2dp"/>
+
+            <ImageView
+                android:layout_toRightOf="@id/line3"
+                android:id="@+id/verify_id_checkbox4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check_circle"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_below="@id/check_lines">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="Verify ID" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="97dp"
+                android:text="Verify Social"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="224dp"
+                android:text="FinEd"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="328dp"
+                android:text="Invite"
+                android:textColor="@color/colorPrimary" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_weight="2">
+
+        <TextView
+            android:id="@+id/factors_textView"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textAllCaps="true"
+            android:text="Credit Factors"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="2"
+            android:orientation="vertical"
+            android:layout_below="@id/factors_textView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:weightSum="3"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="1">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/synchrony_container"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/synchrony_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="30sp"
+                    android:gravity="center"
+                    android:text="225"/>
+
+                <View
+                    android:id="@+id/divider_line1"
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="11dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@id/synchrony_amount"
+                    android:background="@color/lightGray" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/divider_line1"
+                    android:id="@+id/synchrony_change"
+                    android:text="20"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="11dp"
+                    android:textColor="@color/colorPrimary"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/synchrony_change"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginTop="16dp"
+                    android:id="@+id/synchrony_carot"
+                    android:src="@drawable/caret_up_green"/>
+            </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/synchrony_container"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Synchrony 360"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/vouched_container"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/vouched_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="30sp"
+                        android:gravity="center"
+                        android:text="$20"/>
+
+                    <View
+                        android:id="@+id/divider_line2"
+                        android:layout_width="1dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="11dp"
+                        android:gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/vouched_amount"
+                        android:background="@color/lightGray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/divider_line2"
+                        android:id="@+id/vouch_change"
+                        android:text="12"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="11dp"
+                        android:textColor="@color/colorPrimary"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/vouch_change"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="16dp"
+                        android:id="@+id/vouch_carot"
+                        android:src="@drawable/caret_up_green"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/vouched_container"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Amount Vouched"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/current_loan_container"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/current_loan_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="30sp"
+                        android:gravity="center"
+                        android:text="$175"/>
+
+                    <View
+                        android:id="@+id/divider_line_current_loan"
+                        android:layout_width="1dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="11dp"
+                        android:gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/current_loan_amount"
+                        android:background="@color/lightGray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/divider_line_current_loan"
+                        android:id="@+id/current_loan_change"
+                        android:text="12"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="11dp"
+                        android:textColor="@color/colorPrimary"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/current_loan_change"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="16dp"
+                        android:id="@+id/current_loan_carot"
+                        android:src="@drawable/caret_up_green"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/current_loan_container"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Current Loan Usage"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:weightSum="3"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="1">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/on_time_payments_container"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/on_time_payments_container_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="30sp"
+                        android:gravity="center"
+                        android:text="23"/>
+
+                    <View
+                        android:id="@+id/divider_line_on_time_payments_container"
+                        android:layout_width="1dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="11dp"
+                        android:gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/on_time_payments_container_amount"
+                        android:background="@color/lightGray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/divider_line_on_time_payments_container"
+                        android:id="@+id/on_time_payments_container_change"
+                        android:text="13"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="11dp"
+                        android:textColor="@color/colorPrimary"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/on_time_payments_container_change"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="16dp"
+                        android:id="@+id/on_time_payments_container_carot"
+                        android:src="@drawable/caret_up_green"/>
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/on_time_payments_container"
+                    android:textColor="@color/colorPrimary"
+                    android:text="On-time Payments"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/early_payments_container"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/early_payments_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="30sp"
+                        android:gravity="center"
+                        android:text="3"/>
+
+                    <View
+                        android:id="@+id/divider_line_early_payments"
+                        android:layout_width="1dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="11dp"
+                        android:gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/early_payments_amount"
+                        android:background="@color/lightGray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/divider_line_early_payments"
+                        android:id="@+id/early_payments_change"
+                        android:text="1"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="11dp"
+                        android:textColor="@color/colorPrimary"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/early_payments_change"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="16dp"
+                        android:id="@+id/early_payments_carot"
+                        android:src="@drawable/caret_up_green"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/early_payments_container"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Early Payments"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/late_payments_container"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/late_payments_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="30sp"
+                        android:gravity="center"
+                        android:text="0"/>
+
+                    <View
+                        android:id="@+id/divider_line_late_payments"
+                        android:layout_width="1dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="11dp"
+                        android:gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/late_payments_amount"
+                        android:background="@color/lightGray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/divider_line_late_payments"
+                        android:id="@+id/late_payments_change"
+                        android:text="0"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="11dp"
+                        android:textColor="@color/colorPrimary"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/late_payments_change"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="16dp"
+                        android:id="@+id/late_payments_carot"
+                        android:src="@drawable/caret_up_green"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/late_payments_container"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Late Payments"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

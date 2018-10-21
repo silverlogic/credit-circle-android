@@ -52,7 +52,7 @@ public class BaseApplication extends Application {
         // Add custom font file here
         // Font goes into /assets/fonts folder and replace patch below
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/Roboto-Regular.ttf")
+                .setDefaultFontPath("fonts/MyriadPro-SemiboldSemiCn.otf")
                 .setFontAttrId(R.attr.fontPath)
                 .build());
     }
