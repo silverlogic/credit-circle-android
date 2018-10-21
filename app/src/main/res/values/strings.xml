@@ -37,7 +37,6 @@
     <string name="api_error">Cannot connect to API</string>
     <string name="no_internet">You do not have an internet connection</string>
     <string name="ok">OK</string>
-    <string name="gcm_defaultSenderId">620355883507</string>
 
     <!-- facebook login -->
     <string name="login_facebook">Log in with Facebook</string>

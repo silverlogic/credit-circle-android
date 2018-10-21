@@ -41,7 +41,7 @@ android {
         }
     }
     defaultConfig {
-        applicationId "com.tsl.money2020"
+        applicationId "com.tsl.creditcircle"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -214,6 +214,14 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
 
+    // Firebase (make sure they have the same version as play-services)!!
+    implementation 'com.google.firebase:firebase-core:11.8.0'
+    implementation 'com.google.firebase:firebase-messaging:11.8.0'
+
+    // Parceler
+    implementation 'org.parceler:parceler-api:1.1.6'
+    annotationProcessor 'org.parceler:parceler:1.1.6'
+
     androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-v4'
@@ -232,3 +240,5 @@ dependencies {
     implementation 'com.kevalpatel2106:ruler-picker:1.1'
 
 }
+
+apply plugin: 'com.google.gms.google-services'

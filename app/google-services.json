@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "205454702012",
+    "firebase_url": "https://money2020-silverlogic.firebaseio.com",
+    "project_id": "money2020-silverlogic",
+    "storage_bucket": "money2020-silverlogic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205454702012:android:4b65804bfb4ba0e1",
+        "android_client_info": {
+          "package_name": "com.tsl.creditcircle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205454702012-ioc7l92am5bae35sbs0lou1miktovqtn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD7MMYVaDKx2Q_IeRF4QqeBdb-dq6A-2g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205454702012:android:d08a87b39ec12462",
+        "android_client_info": {
+          "package_name": "com.tsl.creditcircle.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205454702012-ioc7l92am5bae35sbs0lou1miktovqtn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD7MMYVaDKx2Q_IeRF4QqeBdb-dq6A-2g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
