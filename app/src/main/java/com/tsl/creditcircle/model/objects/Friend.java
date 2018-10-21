@@ -17,6 +17,7 @@ public class Friend {
     int stars;
 
     boolean isInvited;
+    int vouchedAmount;
 
     public int getId() {
         return id;
@@ -40,5 +41,17 @@ public class Friend {
 
     public void setInvited(boolean invited) {
         isInvited = invited;
+    }
+
+    public Friend(int id, String name, String job, int stars, int vouchedAmount) {
+        this.id = id;
+        this.name = name;
+        this.job = job;
+        this.stars = stars;
+        this.vouchedAmount = vouchedAmount;
+    }
+
+    public int getVouchedAmount() {
+        return vouchedAmount;
     }
 }

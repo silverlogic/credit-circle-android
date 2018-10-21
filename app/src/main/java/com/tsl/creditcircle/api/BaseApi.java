@@ -5,6 +5,7 @@ import com.tsl.creditcircle.model.objects.CreateLoan;
 import com.tsl.creditcircle.model.objects.Friend;
 import com.tsl.creditcircle.model.objects.InviteVouche;
 import com.tsl.creditcircle.model.objects.Loan;
+import com.tsl.creditcircle.model.objects.Vouch;
 import com.tsl.creditcircle.model.objects.token.Token;
 import com.tsl.creditcircle.model.objects.user.SocialAuth;
 import com.tsl.creditcircle.model.objects.user.UpdateUser;
@@ -90,5 +91,9 @@ public interface BaseApi {
     Observable<Void> updateFCMToken(@Header(Constants.AUTHORIZATION) String token,
                                     @Path("registration_id") String pushToken,
                                     @Body FCMDeviceBody body);
+    @PATCH("vouches/{id}")
+    Call<Void> vouch(@Header(Constants.AUTHORIZATION) String token,
+                             @Path("id") int vouchId,
+                             @Body Vouch vouch);
 
 }

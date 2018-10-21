@@ -45,7 +45,7 @@
                 android:textColor="@color/white"
                 android:textSize="100sp"
                 android:gravity="center"
-                android:text="$225"/>
+                android:text="$280"/>
 
             <View
                 android:id="@+id/divider_line"
@@ -70,16 +70,16 @@
                     android:layout_marginLeft="20dp"
                     android:textColor="@color/white"
                     android:textSize="30sp"
-                    android:text="50" />
+                    android:text="$50" />
 
                 <ImageView
                     android:id="@+id/arrow_imageView"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="12dp"
                     android:layout_toEndOf="@id/score_change_textView"
-                    android:src="@drawable/caret_up"
+                    android:src="@drawable/caret_up_green"
                     android:backgroundTintMode="@color/colorAccentGreen"/>
             </RelativeLayout>
 
@@ -156,7 +156,7 @@
                 android:id="@+id/verify_id_checkbox3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/check_circle"/>
+                android:src="@drawable/circle"/>
 
             <View
                 android:layout_toRightOf="@id/verify_id_checkbox3"
@@ -173,7 +173,7 @@
                 android:id="@+id/verify_id_checkbox4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/check_circle"/>
+                android:src="@drawable/circle"/>
 
         </RelativeLayout>
 
@@ -365,7 +365,7 @@
                         android:layout_marginLeft="6dp"
                         android:layout_marginTop="16dp"
                         android:id="@+id/vouch_carot"
-                        android:src="@drawable/caret_up_green"/>
+                        android:src="@drawable/caret_up_orange"/>
 
                 </RelativeLayout>
 
@@ -428,7 +428,7 @@
                         android:layout_marginLeft="6dp"
                         android:layout_marginTop="16dp"
                         android:id="@+id/current_loan_carot"
-                        android:src="@drawable/caret_up_green"/>
+                        android:src="@drawable/caret_up_orange"/>
 
                 </RelativeLayout>
 

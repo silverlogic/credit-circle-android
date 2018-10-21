@@ -26,6 +26,7 @@ import butterknife.Unbinder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 public class LoanRequestFragment extends Fragment {
 
@@ -106,6 +107,7 @@ public class LoanRequestFragment extends Fragment {
         call.enqueue(new Callback<Loan>() {
             @Override
             public void onResponse(Call<Loan> loanCall, Response<Loan> loanResponse) {
+                //Timber.d("TESTING loan = " + loanResponse.body().getOriginalAmount());
                 Hawk.put(Constants.CURRENT_LOAN, loanResponse.body());
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()

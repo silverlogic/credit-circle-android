@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.orhanobut.hawk.Hawk;
 import com.tsl.creditcircle.R;
+import com.tsl.creditcircle.utils.Constants;
 
 
 public class HomeFragment extends Fragment {
@@ -27,6 +29,7 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         setHasOptionsMenu(true);
+        Hawk.put(Constants.CURRENT_CREDIT, 280);
     }
 
 }

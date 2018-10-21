@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class LoanProgressFragment extends Fragment {
+public class LoanAcceptedFragment extends Fragment {
 
     @BindView(R.id.ruler_picker)
     RulerValuePicker mRulerPicker;
@@ -54,8 +54,8 @@ public class LoanProgressFragment extends Fragment {
     private List<Friend> mFriendList;
     private BaseQuickAdapter mAdapter;
 
-    public static LoanProgressFragment newInstance() {
-        return new LoanProgressFragment();
+    public static LoanAcceptedFragment newInstance() {
+        return new LoanAcceptedFragment();
     }
 
     @Override

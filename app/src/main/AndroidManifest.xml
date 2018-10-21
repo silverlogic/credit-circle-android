@@ -90,5 +90,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".invest.InvestActivity"
+            android:label="Vouch"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 </manifest>

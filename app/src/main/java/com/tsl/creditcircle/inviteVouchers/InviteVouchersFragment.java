@@ -16,6 +16,7 @@ import com.orhanobut.hawk.Hawk;
 import com.tsl.creditcircle.R;
 import com.tsl.creditcircle.api.BaseApi;
 import com.tsl.creditcircle.api.RetrofitReference;
+import com.tsl.creditcircle.loanProgress.LoanProgressFragment;
 import com.tsl.creditcircle.model.objects.Friend;
 import com.tsl.creditcircle.model.objects.InviteVouche;
 import com.tsl.creditcircle.model.objects.Loan;
@@ -79,7 +80,7 @@ public class InviteVouchersFragment extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.email_radio, R.id.phone_radio})
+    @OnClick({R.id.email_radio, R.id.phone_radio, R.id.done_button})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.email_radio:
@@ -99,7 +100,11 @@ public class InviteVouchersFragment extends Fragment {
                 mPhoneRadio.setChecked(true);
                 break;
             case R.id.done_button:
-                Toast.makeText(getActivity(), "done", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, LoanProgressFragment.newInstance(), LoanProgressFragment.LOAN_PROGRESS_FRAGMENT_TAG)
+                        .addToBackStack(null)
+                        .commit();
                 break;
         }
     }
